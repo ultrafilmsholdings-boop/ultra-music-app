@@ -8,166 +8,214 @@
     * {
       box-sizing: border-box;
     }
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #0b0b0b;
+      background: #050505;
       color: white;
     }
+
     .header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(11, 11, 11, 0.95);
-      padding: 20px 24px;
+      padding: 24px;
       border-bottom: 1px solid rgba(255,255,255,0.08);
+      background: #000;
     }
+
     .logo {
-      font-size: 28px;
-      font-weight: bold;
-      letter-spacing: 1px;
       margin: 0;
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: 1px;
     }
+
     .sublogo {
       margin-top: 6px;
       color: #b8b8b8;
       font-size: 14px;
     }
+
     .hero {
-      min-height: 320px;
-      padding: 48px 24px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+      padding: 60px 24px;
       background:
         linear-gradient(to right, rgba(0,0,0,0.82), rgba(0,0,0,0.35)),
-        linear-gradient(135deg, #32104d, #0f2a5d, #121212);
+        linear-gradient(135deg, #1d0036, #001c4a, #050505);
     }
+
     .hero-tag {
       display: inline-block;
-      width: fit-content;
       background: rgba(255,255,255,0.12);
       color: #fff;
-      padding: 8px 12px;
+      padding: 8px 14px;
       border-radius: 999px;
       font-size: 12px;
       letter-spacing: 1px;
       text-transform: uppercase;
-      margin-bottom: 16px;
+      margin-bottom: 18px;
     }
+
     .hero h1 {
       margin: 0 0 12px 0;
-      font-size: 42px;
+      font-size: 56px;
       line-height: 1.05;
-      max-width: 700px;
+      max-width: 760px;
     }
+
     .hero p {
       margin: 0;
-      max-width: 700px;
+      max-width: 760px;
       color: #d7d7d7;
-      font-size: 17px;
+      font-size: 20px;
       line-height: 1.5;
     }
+
+    .player-section,
     .section {
-      padding: 28px 24px 16px 24px;
+      padding: 40px 24px 10px;
     }
-    .section h2 {
-      margin: 0 0 18px 0;
+
+    .section h2,
+    .player-section h2 {
+      margin: 0 0 20px 0;
       font-size: 24px;
-      letter-spacing: 0.4px;
     }
+
+    .player-box {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: #101010;
+      border-radius: 18px;
+      padding: 20px;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .player-box img {
+      width: 110px;
+      height: 110px;
+      object-fit: cover;
+      border-radius: 12px;
+      flex-shrink: 0;
+    }
+
+    .player-info h3 {
+      margin: 0 0 6px 0;
+      font-size: 28px;
+    }
+
+    .player-info p {
+      margin: 0 0 14px 0;
+      color: #b8b8b8;
+      font-size: 16px;
+    }
+
+    .player-info audio {
+      width: min(520px, 100%);
+    }
+
     .scroll-row {
       display: flex;
-      gap: 18px;
+      gap: 20px;
       overflow-x: auto;
-      padding-bottom: 10px;
+      padding-bottom: 14px;
       scroll-behavior: smooth;
     }
+
     .scroll-row::-webkit-scrollbar {
       height: 10px;
     }
+
     .scroll-row::-webkit-scrollbar-thumb {
-      background: #333;
+      background: #2c2c2c;
       border-radius: 999px;
     }
+
     .card {
-      flex: 0 0 240px;
-      background: #151515;
-      border-radius: 16px;
+      flex: 0 0 260px;
+      background: #101010;
+      border-radius: 18px;
       overflow: hidden;
-      text-decoration: none;
-      color: white;
-      transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+      border: 1px solid rgba(255,255,255,0.05);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.28);
     }
-    .card:hover {
-      transform: translateY(-4px) scale(1.02);
-      background: #1d1d1d;
-      box-shadow: 0 14px 28px rgba(0,0,0,0.35);
-    }
+
     .card img {
       width: 100%;
       aspect-ratio: 1 / 1;
       object-fit: cover;
       display: block;
-      background: #222;
+      background: #1e1e1e;
     }
+
     .card-body {
-      padding: 14px;
+      padding: 16px;
     }
+
     .card-title {
-      font-size: 18px;
-      font-weight: bold;
-      line-height: 1.25;
       margin: 0 0 6px 0;
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.25;
     }
+
     .card-subtitle {
-      margin: 0 0 10px 0;
-      color: #b9b9b9;
+      margin: 0 0 14px 0;
+      color: #b8b8b8;
       font-size: 14px;
       line-height: 1.35;
+      min-height: 36px;
     }
+
     .links {
-      margin-top: 10px;
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
+      gap: 8px;
     }
+
     .links a {
-      font-size: 12px;
-      padding: 5px 9px;
-      background: #2a2a2a;
-      border-radius: 6px;
       text-decoration: none;
       color: white;
-      transition: background 0.2s ease;
+      background: #232323;
+      padding: 8px 10px;
+      border-radius: 10px;
+      font-size: 12px;
+      line-height: 1;
+      display: inline-block;
     }
-    .links a:hover {
-      background: #444;
-    }
+
     .footer {
-      padding: 40px 24px;
-      color: #9d9d9d;
+      padding: 40px 24px 60px;
+      color: #8f8f8f;
       font-size: 13px;
     }
-    @media (max-width: 700px) {
+
+    @media (max-width: 900px) {
       .hero h1 {
-        font-size: 32px;
+        font-size: 42px;
       }
+
       .hero p {
-        font-size: 15px;
+        font-size: 17px;
       }
-      .card {
-        flex: 0 0 200px;
+
+      .player-box {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .player-info audio {
+        width: 100%;
       }
     }
   </style>
 </head>
 <body>
+
   <div class="header">
     <h1 class="logo">ULTRA MUSIC GROUP</h1>
     <div class="sublogo">Official artist roster</div>
   </div>
+
   <section class="hero">
     <div class="hero-tag">Now Streaming Worldwide</div>
     <h1>Discover the Ultra Music Group roster</h1>
@@ -176,491 +224,339 @@
       followed by the full roster and current worldwide releases.
     </p>
   </section>
+
+  <section class="player-section">
+    <h2>Now Playing</h2>
+    <div class="player-box">
+      <img src="juan.jpg" alt="Juan Pablo">
+      <div class="player-info">
+        <h3>Hearts on the Highway</h3>
+        <p>Juan Pablo</p>
+        <audio controls>
+          <source src="juan.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+    </div>
+  </section>
+
   <section class="section">
     <h2>Featured Artists</h2>
     <div class="scroll-row">
-      <a class="card" href="#">
-        <img src="juan.jpg" alt="Juan Pablo cover" />
+
+      <div class="card">
+        <img src="juan.jpg" alt="Juan Pablo">
         <div class="card-body">
           <div class="card-title">Juan Pablo</div>
-          <p class="card-subtitle">Hearts on the Highway</p>
+          <div class="card-subtitle">Hearts on the Highway</div>
           <div class="links">
-            <a href="#" target="_blank">Audiomack</a>
-            <a href="#" target="_blank">Spotify</a>
-            <a href="#" target="_blank">YouTube</a>
-            <a href="#" target="_blank">Apple</a>
-            <a href="#" target="_blank">Amazon</a>
+            <a href="#">Audiomack</a>
+            <a href="#">Spotify</a>
+            <a href="#">YouTube</a>
+            <a href="#">Apple</a>
+            <a href="#">Amazon</a>
           </div>
         </div>
-      </a>
-      <a class="card" href="#">
-        <img src="aria.jpg" alt="Aria Nova cover" />
+      </div>
+
+      <div class="card">
+        <img src="aria.jpg" alt="Aria Nova">
         <div class="card-body">
           <div class="card-title">Aria Nova</div>
-          <p class="card-subtitle">Hearts on the Highway</p>
+          <div class="card-subtitle">Hearts on the Highway</div>
           <div class="links">
-            <a href="#" target="_blank">Audiomack</a>
-            <a href="#" target="_blank">Spotify</a>
-            <a href="#" target="_blank">YouTube</a>
-            <a href="#" target="_blank">Apple</a>
-            <a href="#" target="_blank">Amazon</a>
+            <a href="#">Audiomack</a>
+            <a href="#">Spotify</a>
+            <a href="#">YouTube</a>
+            <a href="#">Apple</a>
+            <a href="#">Amazon</a>
           </div>
         </div>
-      </a>
-      <a class="card" href="#">
-        <img src="lily.jpg" alt="Lily Hart cover" />
+      </div>
+
+      <div class="card">
+        <img src="lily.jpg" alt="Lily Hart">
         <div class="card-body">
           <div class="card-title">Lily Hart</div>
-          <p class="card-subtitle">Cherry Soda</p>
+          <div class="card-subtitle">Cherry Soda</div>
           <div class="links">
-            <a href="#" target="_blank">Audiomack</a>
-            <a href="#" target="_blank">Spotify</a>
-            <a href="#" target="_blank">YouTube</a>
-            <a href="#" target="_blank">Apple</a>
-            <a href="#" target="_blank">Amazon</a>
+            <a href="#">Audiomack</a>
+            <a href="#">Spotify</a>
+            <a href="#">YouTube</a>
+            <a href="#">Apple</a>
+            <a href="#">Amazon</a>
           </div>
         </div>
-      </a>
-      <a class="card" href="#">
-        <img src="elena.jpg" alt="Elena Star cover" />
+      </div>
+
+      <div class="card">
+        <img src="elena.jpg" alt="Elena Star">
         <div class="card-body">
           <div class="card-title">Elena Star</div>
-          <p class="card-subtitle">Ángel de Neón</p>
+          <div class="card-subtitle">Ángel de Neón</div>
           <div class="links">
-            <a href="#" target="_blank">Audiomack</a>
-            <a href="#" target="_blank">Spotify</a>
-            <a href="#" target="_blank">YouTube</a>
-            <a href="#" target="_blank">Apple</a>
-            <a href="#" target="_blank">Amazon</a>
+            <a href="#">Audiomack</a>
+            <a href="#">Spotify</a>
+            <a href="#">YouTube</a>
+            <a href="#">Apple</a>
+            <a href="#">Amazon</a>
           </div>
         </div>
-      </a>
-      <a class="card" href="#">
-        <img src="favian.jpg" alt="Favian Rey cover" />
+      </div>
+
+      <div class="card">
+        <img src="favian.jpg" alt="Favian Rey">
         <div class="card-body">
           <div class="card-title">Favian Rey</div>
-          <p class="card-subtitle">Baila Conmigo</p>
+          <div class="card-subtitle">Baila Conmigo</div>
           <div class="links">
-            <a href="#" target="_blank">Audiomack</a>
-            <a href="#" target="_blank">Spotify</a>
-            <a href="#" target="_blank">YouTube</a>
-            <a href="#" target="_blank">Apple</a>
-            <a href="#" target="_blank">Amazon</a>
+            <a href="#">Audiomack</a>
+            <a href="#">Spotify</a>
+            <a href="#">YouTube</a>
+            <a href="#">Apple</a>
+            <a href="#">Amazon</a>
           </div>
         </div>
-      </a>
-      <a class="card" href="#">
-        <img src="angel.jpg" alt="Ángel Valentín cover" />
+      </div>
+
+      <div class="card">
+        <img src="angel.jpg" alt="Ángel Valentín">
         <div class="card-body">
           <div class="card-title">Ángel Valentín</div>
-          <p class="card-subtitle">Corazón de Acero</p>
+          <div class="card-subtitle">Corazón de Acero</div>
           <div class="links">
-            <a href="#" target="_blank">Audiomack</a>
-            <a href="#" target="_blank">Spotify</a>
-            <a href="#" target="_blank">YouTube</a>
-            <a href="#" target="_blank">Apple</a>
-            <a href="#" target="_blank">Amazon</a>
+            <a href="#">Audiomack</a>
+            <a href="#">Spotify</a>
+            <a href="#">YouTube</a>
+            <a href="#">Apple</a>
+            <a href="#">Amazon</a>
           </div>
         </div>
-      </a>
-      <a class="card" href="#">
-        <img src="luca.jpg" alt="Luca Valley cover" />
+      </div>
+
+      <div class="card">
+        <img src="luca.jpg" alt="Luca Valley">
         <div class="card-body">
           <div class="card-title">Luca Valley</div>
-          <p class="card-subtitle">When We Say I Do</p>
+          <div class="card-subtitle">When We Say I Do</div>
           <div class="links">
-            <a href="#" target="_blank">Audiomack</a>
-            <a href="#" target="_blank">Spotify</a>
-            <a href="#" target="_blank">YouTube</a>
-            <a href="#" target="_blank">Apple</a>
-            <a href="#" target="_blank">Amazon</a>
+            <a href="#">Audiomack</a>
+            <a href="#">Spotify</a>
+            <a href="#">YouTube</a>
+            <a href="#">Apple</a>
+            <a href="#">Amazon</a>
           </div>
         </div>
-      </a>
-      <a class="card" href="#">
-        <img src="niko.jpg" alt="Niko Sol cover" />
+      </div>
+
+      <div class="card">
+        <img src="niko.jpg" alt="Niko Sol">
         <div class="card-body">
           <div class="card-title">Niko Sol</div>
-          <p class="card-subtitle">Global Heartbeat</p>
+          <div class="card-subtitle">Global Heartbeat</div>
           <div class="links">
-            <a href="#" target="_blank">Audiomack</a>
-            <a href="#" target="_blank">Spotify</a>
-            <a href="#" target="_blank">YouTube</a>
-            <a href="#" target="_blank">Apple</a>
-            <a href="#" target="_blank">Amazon</a>
+            <a href="#">Audiomack</a>
+            <a href="#">Spotify</a>
+            <a href="#">YouTube</a>
+            <a href="#">Apple</a>
+            <a href="#">Amazon</a>
           </div>
         </div>
-      </a>
-      <a class="card" href="#">
-        <img src="jax.jpg" alt="Jax Monroe cover" />
+      </div>
+
+      <div class="card">
+        <img src="jax.jpg" alt="Jax Monroe">
         <div class="card-body">
           <div class="card-title">Jax Monroe</div>
-          <p class="card-subtitle">Electric Blue Heart</p>
+          <div class="card-subtitle">Electric Blue Heart</div>
           <div class="links">
-            <a href="#" target="_blank">Audiomack</a>
-            <a href="#" target="_blank">Spotify</a>
-            <a href="#" target="_blank">YouTube</a>
-            <a href="#" target="_blank">Apple</a>
-            <a href="#" target="_blank">Amazon</a>
+            <a href="#">Audiomack</a>
+            <a href="#">Spotify</a>
+            <a href="#">YouTube</a>
+            <a href="#">Apple</a>
+            <a href="#">Amazon</a>
           </div>
         </div>
-      </a>
-      <a class="card" href="#">
-        <img src="neon.jpg" alt="Neon Euphoria cover" />
+      </div>
+
+      <div class="card">
+        <img src="neon.jpg" alt="Neon Euphoria">
         <div class="card-body">
           <div class="card-title">Neon Euphoria</div>
-          <p class="card-subtitle">Electric Afterglow</p>
+          <div class="card-subtitle">Electric Afterglow</div>
           <div class="links">
-            <a href="#" target="_blank">Audiomack</a>
-            <a href="#" target="_blank">Spotify</a>
-            <a href="#" target="_blank">YouTube</a>
-            <a href="#" target="_blank">Apple</a>
-            <a href="#" target="_blank">Amazon</a>
+            <a href="#">Audiomack</a>
+            <a href="#">Spotify</a>
+            <a href="#">YouTube</a>
+            <a href="#">Apple</a>
+            <a href="#">Amazon</a>
           </div>
         </div>
-      </a>
+      </div>
+
     </div>
   </section>
+
   <section class="section">
     <h2>Latest Releases</h2>
     <div class="scroll-row">
-      <a class="card" href="#">
-        <img src="juan-single.jpg" alt="Hearts on the Highway by Juan Pablo" />
+
+      <div class="card">
+        <img src="juan-single.jpg" alt="Hearts on the Highway">
         <div class="card-body">
           <div class="card-title">Hearts on the Highway</div>
-          <p class="card-subtitle">Juan Pablo</p>
+          <div class="card-subtitle">Juan Pablo</div>
           <div class="links">
-            <a href="#" target="_blank">Audiomack</a>
-            <a href="#" target="_blank">Spotify</a>
-            <a href="#" target="_blank">YouTube</a>
-            <a href="#" target="_blank">Apple</a>
-            <a href="#" target="_blank">Amazon</a>
+            <a href="#">Audiomack</a>
+            <a href="#">Spotify</a>
+            <a href="#">YouTube</a>
+            <a href="#">Apple</a>
+            <a href="#">Amazon</a>
           </div>
         </div>
-      </a>
-      <a class="card" href="#">
-        <img src="aria-single.jpg" alt="Hearts on the Highway by Aria Nova" />
+      </div>
+
+      <div class="card">
+        <img src="aria-single.jpg" alt="Hearts on the Highway">
         <div class="card-body">
           <div class="card-title">Hearts on the Highway</div>
-          <p class="card-subtitle">Aria Nova</p>
+          <div class="card-subtitle">Aria Nova</div>
           <div class="links">
-            <a href="#" target="_blank">Audiomack</a>
-            <a href="#" target="_blank">Spotify</a>
-            <a href="#" target="_blank">YouTube</a>
-            <a href="#" target="_blank">Apple</a>
-            <a href="#" target="_blank">Amazon</a>
+            <a href="#">Audiomack</a>
+            <a href="#">Spotify</a>
+            <a href="#">YouTube</a>
+            <a href="#">Apple</a>
+            <a href="#">Amazon</a>
           </div>
         </div>
-      </a>
-      <a class="card" href="#">
-        <img src="lily-single.jpg" alt="Cherry Soda by Lily Hart" />
+      </div>
+
+      <div class="card">
+        <img src="lily-single.jpg" alt="Cherry Soda">
         <div class="card-body">
           <div class="card-title">Cherry Soda</div>
-          <p class="card-subtitle">Lily Hart</p>
+          <div class="card-subtitle">Lily Hart</div>
           <div class="links">
-            <a href="#" target="_blank">Audiomack</a>
-            <a href="#" target="_blank">Spotify</a>
-            <a href="#" target="_blank">YouTube</a>
-            <a href="#" target="_blank">Apple</a>
-            <a href="#" target="_blank">Amazon</a>
+            <a href="#">Audiomack</a>
+            <a href="#">Spotify</a>
+            <a href="#">YouTube</a>
+            <a href="#">Apple</a>
+            <a href="#">Amazon</a>
           </div>
         </div>
-      </a>
-      <a class="card" href="#">
-        <img src="elena-single.jpg" alt="Ángel de Neón by Elena Star" />
+      </div>
+
+      <div class="card">
+        <img src="elena-single.jpg" alt="Ángel de Neón">
         <div class="card-body">
           <div class="card-title">Ángel de Neón</div>
-          <p class="card-subtitle">Elena Star</p>
+          <div class="card-subtitle">Elena Star</div>
           <div class="links">
-            <a href="#" target="_blank">Audiomack</a>
-            <a href="#" target="_blank">Spotify</a>
-            <a href="#" target="_blank">YouTube</a>
-            <a href="#" target="_blank">Apple</a>
-            <a href="#" target="_blank">Amazon</a>
+            <a href="#">Audiomack</a>
+            <a href="#">Spotify</a>
+            <a href="#">YouTube</a>
+            <a href="#">Apple</a>
+            <a href="#">Amazon</a>
           </div>
         </div>
-      </a>
-      <a class="card" href="#">
-        <img src="favian-single.jpg" alt="Baila Conmigo by Favian Rey" />
+      </div>
+
+      <div class="card">
+        <img src="favian-single.jpg" alt="Baila Conmigo">
         <div class="card-body">
           <div class="card-title">Baila Conmigo</div>
-          <p class="card-subtitle">Favian Rey</p>
+          <div class="card-subtitle">Favian Rey</div>
           <div class="links">
-            <a href="#" target="_blank">Audiomack</a>
-            <a href="#" target="_blank">Spotify</a>
-            <a href="#" target="_blank">YouTube</a>
-            <a href="#" target="_blank">Apple</a>
-            <a href="#" target="_blank">Amazon</a>
+            <a href="#">Audiomack</a>
+            <a href="#">Spotify</a>
+            <a href="#">YouTube</a>
+            <a href="#">Apple</a>
+            <a href="#">Amazon</a>
           </div>
         </div>
-      </a>
-      <a class="card" href="#">
-        <img src="angel-single.jpg" alt="Corazón de Acero by Ángel Valentín" />
+      </div>
+
+      <div class="card">
+        <img src="angel-single.jpg" alt="Corazón de Acero">
         <div class="card-body">
           <div class="card-title">Corazón de Acero</div>
-          <p class="card-subtitle">Ángel Valentín</p>
+          <div class="card-subtitle">Ángel Valentín</div>
           <div class="links">
-            <a href="#" target="_blank">Audiomack</a>
-            <a href="#" target="_blank">Spotify</a>
-            <a href="#" target="_blank">YouTube</a>
-            <a href="#" target="_blank">Apple</a>
-            <a href="#" target="_blank">Amazon</a>
+            <a href="#">Audiomack</a>
+            <a href="#">Spotify</a>
+            <a href="#">YouTube</a>
+            <a href="#">Apple</a>
+            <a href="#">Amazon</a>
           </div>
         </div>
-      </a>
-      <a class="card" href="#">
-        <img src="luca-single.jpg" alt="When We Say I Do by Luca Valley" />
+      </div>
+
+      <div class="card">
+        <img src="luca-single.jpg" alt="When We Say I Do">
         <div class="card-body">
           <div class="card-title">When We Say I Do</div>
-          <p class="card-subtitle">Luca Valley</p>
+          <div class="card-subtitle">Luca Valley</div>
           <div class="links">
-            <a href="#" target="_blank">Audiomack</a>
-            <a href="#" target="_blank">Spotify</a>
-            <a href="#" target="_blank">YouTube</a>
-            <a href="#" target="_blank">Apple</a>
-            <a href="#" target="_blank">Amazon</a>
+            <a href="#">Audiomack</a>
+            <a href="#">Spotify</a>
+            <a href="#">YouTube</a>
+            <a href="#">Apple</a>
+            <a href="#">Amazon</a>
           </div>
         </div>
-      </a>
-      <a class="card" href="#">
-        <img src="niko-single.jpg" alt="Global Heartbeat by Niko Sol" />
+      </div>
+
+      <div class="card">
+        <img src="niko-single.jpg" alt="Global Heartbeat">
         <div class="card-body">
           <div class="card-title">Global Heartbeat</div>
-          <p class="card-subtitle">Niko Sol</p>
+          <div class="card-subtitle">Niko Sol</div>
           <div class="links">
-            <a href="#" target="_blank">Audiomack</a>
-            <a href="#" target="_blank">Spotify</a>
-            <a href="#" target="_blank">YouTube</a>
-            <a href="#" target="_blank">Apple</a>
-            <a href="#" target="_blank">Amazon</a>
+            <a href="#">Audiomack</a>
+            <a href="#">Spotify</a>
+            <a href="#">YouTube</a>
+            <a href="#">Apple</a>
+            <a href="#">Amazon</a>
           </div>
         </div>
-      </a>
-      <a class="card" href="#">
-        <img src="jax-single.jpg" alt="Electric Blue Heart by Jax Monroe" />
+      </div>
+
+      <div class="card">
+        <img src="jax-single.jpg" alt="Electric Blue Heart">
         <div class="card-body">
           <div class="card-title">Electric Blue Heart</div>
-          <p class="card-subtitle">Jax Monroe</p>
+          <div class="card-subtitle">Jax Monroe</div>
           <div class="links">
-            <a href="#" target="_blank">Audiomack</a>
-            <a href="#" target="_blank">Spotify</a>
-            <a href="#" target="_blank">YouTube</a>
-            <a href="#" target="_blank">Apple</a>
-            <a href="#" target="_blank">Amazon</a>
+            <a href="#">Audiomack</a>
+            <a href="#">Spotify</a>
+            <a href="#">YouTube</a>
+            <a href="#">Apple</a>
+            <a href="#">Amazon</a>
           </div>
         </div>
-      </a>
-      <a class="card" href="#">
-        <img src="neon-single.jpg" alt="Electric Afterglow by Neon Euphoria" />
+      </div>
+
+      <div class="card">
+        <img src="neon-single.jpg" alt="Electric Afterglow">
         <div class="card-body">
           <div class="card-title">Electric Afterglow</div>
-          <p class="card-subtitle">Neon Euphoria</p>
+          <div class="card-subtitle">Neon Euphoria</div>
           <div class="links">
-            <a href="#" target="_blank">Audiomack</a>
-            <a href="#" target="_blank">Spotify</a>
-            <a href="#" target="_blank">YouTube</a>
-            <a href="#" target="_blank">Apple</a>
-            <a href="#" target="_blank">Amazon</a>
+            <a href="#">Audiomack</a>
+            <a href="#">Spotify</a>
+            <a href="#">YouTube</a>
+            <a href="#">Apple</a>
+            <a href="#">Amazon</a>
           </div>
         </div>
-      </a>
+      </div>
+
     </div>
   </section>
+
   <div class="footer">
     Ultra Music Group © 2026
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ultra Music Group</title>
-
-<style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #0b0b0b;
-  color: white;
-}
-
-/* HEADER */
-.header {
-  padding: 20px;
-  font-size: 24px;
-  font-weight: bold;
-}
-
-/* HERO */
-.hero {
-  padding: 40px;
-  background: linear-gradient(to right, #0b0b0b, #0d1b2a);
-}
-
-/* PLAYER */
-.player-section {
-  padding: 40px;
-}
-
-.player {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  background: #111;
-  padding: 20px;
-  border-radius: 12px;
-}
-
-.player img {
-  width: 120px;
-  height: 120px;
-  border-radius: 12px;
-  object-fit: cover;
-}
-
-.player-info h3 {
-  margin: 0;
-}
-
-.player-info p {
-  margin: 5px 0 10px;
-  color: gray;
-}
-
-audio {
-  width: 300px;
-}
-
-/* GRID */
-.section {
-  padding: 40px;
-}
-
-.grid {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-.card {
-  background: #111;
-  border-radius: 12px;
-  overflow: hidden;
-  width: 220px;
-}
-
-.card img {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-}
-
-.card-body {
-  padding: 15px;
-}
-
-.artist {
-  font-weight: bold;
-}
-
-.song {
-  color: gray;
-  margin-bottom: 10px;
-}
-
-.buttons button {
-  display: block;
-  margin: 5px 0;
-  width: 100%;
-  border: none;
-  padding: 8px;
-  border-radius: 8px;
-  background: #222;
-  color: white;
-  cursor: pointer;
-}
-</style>
-</head>
-
-<body>
-
-<div class="header">ULTRA MUSIC GROUP</div>
-
-<div class="hero">
-  <h1>Discover the Ultra Music Group roster</h1>
-  <p>Official artists and worldwide releases</p>
-</div>
-
-<!-- 🎧 PLAYER -->
-<section class="player-section">
-  <h2>Now Playing</h2>
-
-  <div class="player">
-    <img src="juan.jpg">
-    <div class="player-info">
-      <h3>Hearts on the Highway</h3>
-      <p>Juan Pablo</p>
-
-      <audio controls>
-        <source src="juan.mp3" type="audio/mpeg">
-      </audio>
-    </div>
   </div>
-</section>
 
-<!-- FEATURED -->
-<div class="section">
-  <h2>Featured Artists</h2>
-
-  <div class="grid">
-
-    <div class="card">
-      <img src="juan.jpg">
-      <div class="card-body">
-        <div class="artist">Juan Pablo</div>
-        <div class="song">Hearts on the Highway</div>
-        <div class="buttons">
-          <button>Audiomack</button>
-          <button>Spotify</button>
-          <button>YouTube</button>
-          <button>Apple</button>
-          <button>Amazon</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="aria.jpg">
-      <div class="card-body">
-        <div class="artist">Aria Nova</div>
-        <div class="song">Hearts on the Highway</div>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="lily.jpg">
-      <div class="card-body">
-        <div class="artist">Lily Hart</div>
-        <div class="song">Cherry Soda</div>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="elena.jpg">
-      <div class="card-body">
-        <div class="artist">Elena Star</div>
-        <div class="song">Ángel de Neón</div>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<!-- FOOTER -->
-<div class="section">
-  Ultra Music Group © 2026
-    
-  </div>
 </body>
 </html>
-

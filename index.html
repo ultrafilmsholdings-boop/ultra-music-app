@@ -7,12 +7,13 @@
   <link rel="icon" type="image/png" href="logo.png">
   <link rel="apple-touch-icon" href="logo.png">
   <meta name="theme-color" content="#000000">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
     html {
       scroll-behavior: smooth;
+      background: #050505;
     }
     body {
       margin: 0;
@@ -23,6 +24,7 @@
     a {
       color: inherit;
     }
+
     .header {
       display: flex;
       align-items: center;
@@ -58,6 +60,7 @@
       font-size: 14px;
       line-height: 1.2;
     }
+
     .hero {
       padding: 56px 24px;
       text-align: center;
@@ -97,6 +100,7 @@
       font-size: 20px;
       line-height: 1.5;
     }
+
     .about-section,
     .player-section,
     .section,
@@ -111,6 +115,7 @@
       font-size: 24px;
       letter-spacing: 0.3px;
     }
+
     .about-box,
     .mission-box {
       max-width: 1040px;
@@ -137,37 +142,71 @@
       color: #9b9b9b;
       font-size: 14px;
     }
-    .mission-list {
-      margin: 0 0 18px 0;
-      padding-left: 22px;
-      color: #c8c8c8;
-    }
-    .mission-list li {
-      margin-bottom: 14px;
-      line-height: 1.7;
-    }
+
     .player-shell {
       max-width: 1040px;
       margin: 0 auto;
-      background: #101010;
+      background:
+        linear-gradient(180deg, rgba(26,26,26,0.98), rgba(12,12,12,0.98));
       border-radius: 20px;
       padding: 22px;
       border: 1px solid rgba(255,255,255,0.05);
-      box-shadow: 0 10px 24px rgba(0,0,0,0.28);
+      box-shadow:
+        0 12px 30px rgba(0,0,0,0.35),
+        0 0 26px rgba(215,185,109,0.10);
     }
+
     .player-box {
       display: flex;
       align-items: center;
       gap: 22px;
     }
+
+    .player-cover-wrap {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      flex-shrink: 0;
+      border-radius: 14px;
+    }
+    .player-cover-wrap::before {
+      content: "";
+      position: absolute;
+      inset: -8px;
+      border-radius: 18px;
+      background: radial-gradient(circle, rgba(215,185,109,0.26) 0%, rgba(215,185,109,0.10) 42%, rgba(215,185,109,0) 72%);
+      filter: blur(10px);
+      z-index: 0;
+      opacity: 0.85;
+      transition: opacity 0.25s ease;
+    }
+    .player-cover-wrap.playing::before {
+      opacity: 1;
+      animation: glowPulse 1.8s infinite ease-in-out;
+    }
+    @keyframes glowPulse {
+      0%, 100% {
+        transform: scale(0.98);
+        opacity: 0.72;
+      }
+      50% {
+        transform: scale(1.03);
+        opacity: 1;
+      }
+    }
+
     .player-box img {
+      position: relative;
+      z-index: 1;
       width: 120px;
       height: 120px;
       object-fit: cover;
       border-radius: 14px;
       flex-shrink: 0;
       background: #1e1e1e;
+      display: block;
     }
+
     .player-info {
       width: 100%;
     }
@@ -193,20 +232,22 @@
       min-width: 95px;
       text-align: right;
     }
+
     .visualizer {
       display: flex;
       align-items: end;
       gap: 4px;
-      height: 28px;
+      height: 32px;
       margin-bottom: 12px;
     }
     .bar {
       width: 6px;
       height: 8px;
       border-radius: 999px;
-      background: #d3b05d;
-      opacity: 0.85;
+      background: linear-gradient(to top, #9e7b2d, #d7b96d);
+      opacity: 0.92;
       transform-origin: bottom;
+      box-shadow: 0 0 10px rgba(215,185,109,0.15);
     }
     .visualizer.playing .bar:nth-child(1) { animation: bounce 0.9s infinite ease-in-out; }
     .visualizer.playing .bar:nth-child(2) { animation: bounce 0.7s infinite ease-in-out; }
@@ -220,8 +261,9 @@
     .visualizer.playing .bar:nth-child(10){ animation: bounce 0.95s infinite ease-in-out; }
     @keyframes bounce {
       0%, 100% { transform: scaleY(0.45); }
-      50% { transform: scaleY(2.2); }
+      50% { transform: scaleY(2.7); }
     }
+
     .progress-wrap {
       width: 100%;
       margin-bottom: 14px;
@@ -240,7 +282,9 @@
       height: 100%;
       background: linear-gradient(to right, #9e7b2d, #d7b96d);
       border-radius: 999px;
+      box-shadow: 0 0 12px rgba(215,185,109,0.22);
     }
+
     .player-controls {
       display: flex;
       flex-wrap: wrap;
@@ -260,6 +304,7 @@
     .player-btn:hover {
       background: #2b2b2b;
     }
+
     .now-playing-list {
       margin-top: 18px;
       padding-top: 18px;
@@ -290,7 +335,9 @@
     .playlist-chip.active {
       background: #2c2410;
       border-color: rgba(215,185,109,0.4);
+      box-shadow: 0 0 10px rgba(215,185,109,0.08);
     }
+
     .scroll-row {
       display: flex;
       gap: 20px;
@@ -307,6 +354,7 @@
       background: #2c2c2c;
       border-radius: 999px;
     }
+
     .card {
       flex: 0 0 260px;
       min-width: 260px;
@@ -375,6 +423,7 @@
       font-weight: 600;
       background: #2b2411 !important;
     }
+
     .modal-overlay {
       position: fixed;
       inset: 0;
@@ -441,6 +490,7 @@
       cursor: pointer;
       font-size: 14px;
     }
+
     .footer {
       padding: 40px 24px 60px;
       color: #8f8f8f;
@@ -448,6 +498,7 @@
       text-align: center;
       line-height: 1.7;
     }
+
     @media (max-width: 900px) {
       .hero h1 {
         font-size: 42px;
@@ -533,7 +584,9 @@
     <h2>Now Playing</h2>
     <div class="player-shell">
       <div class="player-box">
-        <img id="player-cover" src="juan.jpg" alt="Now Playing Cover">
+        <div class="player-cover-wrap" id="player-cover-wrap">
+          <img id="player-cover" src="juan.jpg" alt="Now Playing Cover">
+        </div>
         <div class="player-info">
           <div class="player-topline">
             <div>
@@ -583,12 +636,7 @@
           <div class="links">
             <button class="play-button" onclick="selectTrack(0, true)">Play Here</button>
             <button class="about-button" onclick="openBio(0)">About Artist</button>
-            <a href="#">Audiomack</a>
-            <a href="#">Spotify</a>
-            <a href="#">YouTube</a>
-            <a href="#">Apple</a>
-            <a href="#">Amazon</a>
-            <a href="#">Pandora</a>
+            <a href="#">Audiomack</a><a href="#">Spotify</a><a href="#">YouTube</a><a href="#">Apple</a><a href="#">Amazon</a><a href="#">Pandora</a>
           </div>
         </div>
       </div>
@@ -601,12 +649,7 @@
           <div class="links">
             <button class="play-button" onclick="selectTrack(1, true)">Play Here</button>
             <button class="about-button" onclick="openBio(1)">About Artist</button>
-            <a href="#">Audiomack</a>
-            <a href="#">Spotify</a>
-            <a href="#">YouTube</a>
-            <a href="#">Apple</a>
-            <a href="#">Amazon</a>
-            <a href="#">Pandora</a>
+            <a href="#">Audiomack</a><a href="#">Spotify</a><a href="#">YouTube</a><a href="#">Apple</a><a href="#">Amazon</a><a href="#">Pandora</a>
           </div>
         </div>
       </div>
@@ -619,12 +662,7 @@
           <div class="links">
             <button class="play-button" onclick="selectTrack(2, true)">Play Here</button>
             <button class="about-button" onclick="openBio(2)">About Artist</button>
-            <a href="#">Audiomack</a>
-            <a href="#">Spotify</a>
-            <a href="#">YouTube</a>
-            <a href="#">Apple</a>
-            <a href="#">Amazon</a>
-            <a href="#">Pandora</a>
+            <a href="#">Audiomack</a><a href="#">Spotify</a><a href="#">YouTube</a><a href="#">Apple</a><a href="#">Amazon</a><a href="#">Pandora</a>
           </div>
         </div>
       </div>
@@ -637,12 +675,7 @@
           <div class="links">
             <button class="play-button" onclick="selectTrack(3, true)">Play Here</button>
             <button class="about-button" onclick="openBio(3)">About Artist</button>
-            <a href="#">Audiomack</a>
-            <a href="#">Spotify</a>
-            <a href="#">YouTube</a>
-            <a href="#">Apple</a>
-            <a href="#">Amazon</a>
-            <a href="#">Pandora</a>
+            <a href="#">Audiomack</a><a href="#">Spotify</a><a href="#">YouTube</a><a href="#">Apple</a><a href="#">Amazon</a><a href="#">Pandora</a>
           </div>
         </div>
       </div>
@@ -655,12 +688,7 @@
           <div class="links">
             <button class="play-button" onclick="selectTrack(4, true)">Play Here</button>
             <button class="about-button" onclick="openBio(4)">About Artist</button>
-            <a href="#">Audiomack</a>
-            <a href="#">Spotify</a>
-            <a href="#">YouTube</a>
-            <a href="#">Apple</a>
-            <a href="#">Amazon</a>
-            <a href="#">Pandora</a>
+            <a href="#">Audiomack</a><a href="#">Spotify</a><a href="#">YouTube</a><a href="#">Apple</a><a href="#">Amazon</a><a href="#">Pandora</a>
           </div>
         </div>
       </div>
@@ -673,12 +701,7 @@
           <div class="links">
             <button class="play-button" onclick="selectTrack(5, true)">Play Here</button>
             <button class="about-button" onclick="openBio(5)">About Artist</button>
-            <a href="#">Audiomack</a>
-            <a href="#">Spotify</a>
-            <a href="#">YouTube</a>
-            <a href="#">Apple</a>
-            <a href="#">Amazon</a>
-            <a href="#">Pandora</a>
+            <a href="#">Audiomack</a><a href="#">Spotify</a><a href="#">YouTube</a><a href="#">Apple</a><a href="#">Amazon</a><a href="#">Pandora</a>
           </div>
         </div>
       </div>
@@ -691,12 +714,7 @@
           <div class="links">
             <button class="play-button" onclick="selectTrack(6, true)">Play Here</button>
             <button class="about-button" onclick="openBio(6)">About Artist</button>
-            <a href="#">Audiomack</a>
-            <a href="#">Spotify</a>
-            <a href="#">YouTube</a>
-            <a href="#">Apple</a>
-            <a href="#">Amazon</a>
-            <a href="#">Pandora</a>
+            <a href="#">Audiomack</a><a href="#">Spotify</a><a href="#">YouTube</a><a href="#">Apple</a><a href="#">Amazon</a><a href="#">Pandora</a>
           </div>
         </div>
       </div>
@@ -709,12 +727,7 @@
           <div class="links">
             <button class="play-button" onclick="selectTrack(7, true)">Play Here</button>
             <button class="about-button" onclick="openBio(7)">About Artist</button>
-            <a href="#">Audiomack</a>
-            <a href="#">Spotify</a>
-            <a href="#">YouTube</a>
-            <a href="#">Apple</a>
-            <a href="#">Amazon</a>
-            <a href="#">Pandora</a>
+            <a href="#">Audiomack</a><a href="#">Spotify</a><a href="#">YouTube</a><a href="#">Apple</a><a href="#">Amazon</a><a href="#">Pandora</a>
           </div>
         </div>
       </div>
@@ -727,12 +740,7 @@
           <div class="links">
             <button class="play-button" onclick="selectTrack(8, true)">Play Here</button>
             <button class="about-button" onclick="openBio(8)">About Artist</button>
-            <a href="#">Audiomack</a>
-            <a href="#">Spotify</a>
-            <a href="#">YouTube</a>
-            <a href="#">Apple</a>
-            <a href="#">Amazon</a>
-            <a href="#">Pandora</a>
+            <a href="#">Audiomack</a><a href="#">Spotify</a><a href="#">YouTube</a><a href="#">Apple</a><a href="#">Amazon</a><a href="#">Pandora</a>
           </div>
         </div>
       </div>
@@ -745,12 +753,7 @@
           <div class="links">
             <button class="play-button" onclick="selectTrack(9, true)">Play Here</button>
             <button class="about-button" onclick="openBio(9)">About Artist</button>
-            <a href="#">Audiomack</a>
-            <a href="#">Spotify</a>
-            <a href="#">YouTube</a>
-            <a href="#">Apple</a>
-            <a href="#">Amazon</a>
-            <a href="#">Pandora</a>
+            <a href="#">Audiomack</a><a href="#">Spotify</a><a href="#">YouTube</a><a href="#">Apple</a><a href="#">Amazon</a><a href="#">Pandora</a>
           </div>
         </div>
       </div>
@@ -760,145 +763,30 @@
   <section class="section">
     <h2>Latest Releases</h2>
     <div class="scroll-row">
-      <div class="card">
-        <img src="juan-single.jpg" alt="Hearts on the Highway">
-        <div class="card-body">
-          <div class="card-title">Hearts on the Highway</div>
-          <div class="card-subtitle">Juan Pablo</div>
-          <div class="links">
-            <a href="#">Audiomack</a><a href="#">Spotify</a><a href="#">YouTube</a><a href="#">Apple</a><a href="#">Amazon</a><a href="#">Pandora</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="aria-single.jpg" alt="Hearts on the Highway">
-        <div class="card-body">
-          <div class="card-title">Hearts on the Highway</div>
-          <div class="card-subtitle">Aria Nova</div>
-          <div class="links">
-            <a href="#">Audiomack</a><a href="#">Spotify</a><a href="#">YouTube</a><a href="#">Apple</a><a href="#">Amazon</a><a href="#">Pandora</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="lily-single.jpg" alt="Cherry Soda">
-        <div class="card-body">
-          <div class="card-title">Cherry Soda</div>
-          <div class="card-subtitle">Lily Hart</div>
-          <div class="links">
-            <a href="#">Audiomack</a><a href="#">Spotify</a><a href="#">YouTube</a><a href="#">Apple</a><a href="#">Amazon</a><a href="#">Pandora</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="elena-single.jpg" alt="Ángel de Neón">
-        <div class="card-body">
-          <div class="card-title">Ángel de Neón</div>
-          <div class="card-subtitle">Elena Star</div>
-          <div class="links">
-            <a href="#">Audiomack</a><a href="#">Spotify</a><a href="#">YouTube</a><a href="#">Apple</a><a href="#">Amazon</a><a href="#">Pandora</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="favian-single.jpg" alt="Baila Conmigo">
-        <div class="card-body">
-          <div class="card-title">Baila Conmigo</div>
-          <div class="card-subtitle">Favian Rey</div>
-          <div class="links">
-            <a href="#">Audiomack</a><a href="#">Spotify</a><a href="#">YouTube</a><a href="#">Apple</a><a href="#">Amazon</a><a href="#">Pandora</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="angel-single.jpg" alt="Corazón de Acero">
-        <div class="card-body">
-          <div class="card-title">Corazón de Acero</div>
-          <div class="card-subtitle">Ángel Valentín</div>
-          <div class="links">
-            <a href="#">Audiomack</a><a href="#">Spotify</a><a href="#">YouTube</a><a href="#">Apple</a><a href="#">Amazon</a><a href="#">Pandora</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="luca-single.jpg" alt="When We Say I Do">
-        <div class="card-body">
-          <div class="card-title">When We Say I Do</div>
-          <div class="card-subtitle">Luca Valley</div>
-          <div class="links">
-            <a href="#">Audiomack</a><a href="#">Spotify</a><a href="#">YouTube</a><a href="#">Apple</a><a href="#">Amazon</a><a href="#">Pandora</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="niko-single.jpg" alt="Global Heartbeat">
-        <div class="card-body">
-          <div class="card-title">Global Heartbeat</div>
-          <div class="card-subtitle">Niko Sol</div>
-          <div class="links">
-            <a href="#">Audiomack</a><a href="#">Spotify</a><a href="#">YouTube</a><a href="#">Apple</a><a href="#">Amazon</a><a href="#">Pandora</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="jax-single.jpg" alt="Electric Blue Heart">
-        <div class="card-body">
-          <div class="card-title">Electric Blue Heart</div>
-          <div class="card-subtitle">Jax Monroe</div>
-          <div class="links">
-            <a href="#">Audiomack</a><a href="#">Spotify</a><a href="#">YouTube</a><a href="#">Apple</a><a href="#">Amazon</a><a href="#">Pandora</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="neon-single.jpg" alt="Electric Afterglow">
-        <div class="card-body">
-          <div class="card-title">Electric Afterglow</div>
-          <div class="card-subtitle">Neon Euphoria</div>
-          <div class="links">
-            <a href="#">Audiomack</a><a href="#">Spotify</a><a href="#">YouTube</a><a href="#">Apple</a><a href="#">Amazon</a><a href="#">Pandora</a>
-          </div>
-        </div>
-      </div>
+      <div class="card"><img src="juan-single.jpg" alt="Hearts on the Highway"><div class="card-body"><div class="card-title">Hearts on the Highway</div><div class="card-subtitle">Juan Pablo</div><div class="links"><a href="#">Audiomack</a><a href="#">Spotify</a><a href="#">YouTube</a><a href="#">Apple</a><a href="#">Amazon</a><a href="#">Pandora</a></div></div></div>
+      <div class="card"><img src="aria-single.jpg" alt="Hearts on the Highway"><div class="card-body"><div class="card-title">Hearts on the Highway</div><div class="card-subtitle">Aria Nova</div><div class="links"><a href="#">Audiomack</a><a href="#">Spotify</a><a href="#">YouTube</a><a href="#">Apple</a><a href="#">Amazon</a><a href="#">Pandora</a></div></div></div>
+      <div class="card"><img src="lily-single.jpg" alt="Cherry Soda"><div class="card-body"><div class="card-title">Cherry Soda</div><div class="card-subtitle">Lily Hart</div><div class="links"><a href="#">Audiomack</a><a href="#">Spotify</a><a href="#">YouTube</a><a href="#">Apple</a><a href="#">Amazon</a><a href="#">Pandora</a></div></div></div>
+      <div class="card"><img src="elena-single.jpg" alt="Ángel de Neón"><div class="card-body"><div class="card-title">Ángel de Neón</div><div class="card-subtitle">Elena Star</div><div class="links"><a href="#">Audiomack</a><a href="#">Spotify</a><a href="#">YouTube</a><a href="#">Apple</a><a href="#">Amazon</a><a href="#">Pandora</a></div></div></div>
+      <div class="card"><img src="favian-single.jpg" alt="Baila Conmigo"><div class="card-body"><div class="card-title">Baila Conmigo</div><div class="card-subtitle">Favian Rey</div><div class="links"><a href="#">Audiomack</a><a href="#">Spotify</a><a href="#">YouTube</a><a href="#">Apple</a><a href="#">Amazon</a><a href="#">Pandora</a></div></div></div>
+      <div class="card"><img src="angel-single.jpg" alt="Corazón de Acero"><div class="card-body"><div class="card-title">Corazón de Acero</div><div class="card-subtitle">Ángel Valentín</div><div class="links"><a href="#">Audiomack</a><a href="#">Spotify</a><a href="#">YouTube</a><a href="#">Apple</a><a href="#">Amazon</a><a href="#">Pandora</a></div></div></div>
+      <div class="card"><img src="luca-single.jpg" alt="When We Say I Do"><div class="card-body"><div class="card-title">When We Say I Do</div><div class="card-subtitle">Luca Valley</div><div class="links"><a href="#">Audiomack</a><a href="#">Spotify</a><a href="#">YouTube</a><a href="#">Apple</a><a href="#">Amazon</a><a href="#">Pandora</a></div></div></div>
+      <div class="card"><img src="niko-single.jpg" alt="Global Heartbeat"><div class="card-body"><div class="card-title">Global Heartbeat</div><div class="card-subtitle">Niko Sol</div><div class="links"><a href="#">Audiomack</a><a href="#">Spotify</a><a href="#">YouTube</a><a href="#">Apple</a><a href="#">Amazon</a><a href="#">Pandora</a></div></div></div>
+      <div class="card"><img src="jax-single.jpg" alt="Electric Blue Heart"><div class="card-body"><div class="card-title">Electric Blue Heart</div><div class="card-subtitle">Jax Monroe</div><div class="links"><a href="#">Audiomack</a><a href="#">Spotify</a><a href="#">YouTube</a><a href="#">Apple</a><a href="#">Amazon</a><a href="#">Pandora</a></div></div></div>
+      <div class="card"><img src="neon-single.jpg" alt="Electric Afterglow"><div class="card-body"><div class="card-title">Electric Afterglow</div><div class="card-subtitle">Neon Euphoria</div><div class="links"><a href="#">Audiomack</a><a href="#">Spotify</a><a href="#">YouTube</a><a href="#">Apple</a><a href="#">Amazon</a><a href="#">Pandora</a></div></div></div>
     </div>
   </section>
 
   <section class="mission-section">
     <div class="mission-box">
       <h2>ULTRA MUSIC GROUP™ — Mission Statement</h2>
-      <p>
-        Ultra Music Group is an independent creative music label founded by Juan Pablo Ochoa, a songwriter, creator, and developer dedicated to building a new generation of musical storytelling through virtual artists and digital performers.
-      </p>
-      <p>
-        At Ultra Music Group, every artist begins as an idea — a character, a personality, and a world.
-      </p>
-      <p>
-        From concept to creation, Juan Pablo develops each project from the ground up: writing the music, shaping the identity of the artist, designing the visual universe, and building a catalog of songs that express emotion, movement, and imagination.
-      </p>
-      <p>
-        Transparency, creativity, and artistic experimentation are core values of Ultra Music Group.
-      </p>
-      <p>
-        Some Ultra Music Group productions use AI-assisted vocal technology and digital performance tools, and we openly share that process with our audience. Technology is simply a creative instrument — just like a synthesizer, microphone, or studio.
-      </p>
-      <p>
-        What defines Ultra Music Group is not the technology behind the music, but the heart behind the creation.
-      </p>
-      <p>
-        Every song, every artist, and every project released by Ultra Music Group is part of a larger vision — a creative universe where characters, music, and imagination come together to form something greater than any single song.
-      </p>
-      <p>
-        At the center of that vision is one guiding belief:
-      </p>
+      <p>Ultra Music Group is an independent creative music label founded by Juan Pablo Ochoa, a songwriter, creator, and developer dedicated to building a new generation of musical storytelling through virtual artists and digital performers.</p>
+      <p>At Ultra Music Group, every artist begins as an idea — a character, a personality, and a world.</p>
+      <p>From concept to creation, Juan Pablo develops each project from the ground up: writing the music, shaping the identity of the artist, designing the visual universe, and building a catalog of songs that express emotion, movement, and imagination.</p>
+      <p>Transparency, creativity, and artistic experimentation are core values of Ultra Music Group.</p>
+      <p>Some Ultra Music Group productions use AI-assisted vocal technology and digital performance tools, and we openly share that process with our audience. Technology is simply a creative instrument — just like a synthesizer, microphone, or studio.</p>
+      <p>What defines Ultra Music Group is not the technology behind the music, but the heart behind the creation.</p>
+      <p>Every song, every artist, and every project released by Ultra Music Group is part of a larger vision — a creative universe where characters, music, and imagination come together to form something greater than any single song.</p>
+      <p>At the center of that vision is one guiding belief:</p>
       <p><strong>Music Should Inspire People to Feel Alive.</strong></p>
       <p class="mission-closing">Founded by Juan Pablo Ochoa</p>
     </div>
@@ -1026,6 +914,7 @@
     const durationTimeEl = document.getElementById('duration-time');
     const visualizer = document.getElementById('visualizer');
     const playlistRow = document.getElementById('playlist-row');
+    const playerCoverWrap = document.getElementById('player-cover-wrap');
 
     let currentTrack = 0;
 
@@ -1060,9 +949,11 @@
       if (player.paused) {
         playPauseBtn.textContent = 'Play';
         visualizer.classList.remove('playing');
+        playerCoverWrap.classList.remove('playing');
       } else {
         playPauseBtn.textContent = 'Pause';
         visualizer.classList.add('playing');
+        playerCoverWrap.classList.add('playing');
       }
     }
 
@@ -1148,3 +1039,4 @@
   </script>
 </body>
 </html>
+

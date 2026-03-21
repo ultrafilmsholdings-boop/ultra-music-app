@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ultra Music Group V2</title>
+<style>
+body {
+  margin: 0;
+  background: #050505;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+.header {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.header img {
+  width: 50px;
+}
+.hero {
+  padding: 60px 20px;
+  text-align: center;
+  background: linear-gradient(135deg,#0d0d0d,#1a0033,#000);
+}
+.hero h1 {
+  font-size: 48px;
+  margin: 0;
+}
+.hero p {
+  color: #bbb;
+}
+.section {
+  padding: 30px 20px;
+}
+.scroll-row {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+}
+.card {
+  background: #111;
+  border-radius: 16px;
+  width: 260px;
+  flex-shrink: 0;
+  padding-bottom: 10px;
+}
+.card img {
+  width: 100%;
+  border-radius: 16px 16px 0 0;
+}
+.card-body {
+  padding: 14px;
+}
+.card-title {
+  font-weight: bold;
+}
+.card-sub {
+  color: #aaa;
+  font-size: 14px;
+}
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+.links button, .links a {
+  background: #222;
+  color: white;
+  border: none;
+  padding: 6px 8px;
+  border-radius: 8px;
+  font-size: 12px;
+  cursor: pointer;
+}
+.newsletter {
+  padding: 40px;
+  text-align: center;
+  background: #0d0d0d;
+}
+input, select {
+  padding: 10px;
+  margin: 6px;
+  border-radius: 6px;
+  border: none;
+}
+button.submit {
+  background: gold;
+  color: black;
+  padding: 10px 16px;
+}
+</style>
+</head>
+<body>
+<div class="header">
+<img src="logo.png">
+<h2>ULTRA MUSIC GROUP</h2>
+</div>
+<section class="hero">
+<h1>Ultra Music Group</h1>
+<p>Artist-driven music experience</p>
+</section>
+<!-- ROW 1 -->
+<section class="section">
+<h2>Featured Artists</h2>
+<div class="scroll-row">
+<!-- JUAN -->
+<div class="card">
+<img src="juan.jpg">
+<div class="card-body">
+<div class="card-title">Juan Pablo</div>
+<div class="card-sub">Hearts on the Highway</div>
+<div class="links">
+<button>Play Here</button>
+<button>About Artist</button>
+<a>Spotify</a>
+<a>Apple</a>
+<a>YouTube</a>
+<a>Audiomack</a>
+<a>Amazon</a>
+<a>Pandora</a>
+</div>
+</div>
+</div>
+<!-- ARIA -->
+<div class="card">
+<img src="aria.jpg">
+<div class="card-body">
+<div class="card-title">Aria Nova</div>
+<div class="card-sub">Hearts on the Highway</div>
+<div class="links">
+<button>Play Here</button>
+<button>About Artist</button>
+<a>Spotify</a>
+<a>Apple</a>
+<a>YouTube</a>
+<a>Audiomack</a>
+<a>Amazon</a>
+<a>Pandora</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ROW 2 -->
+<section class="section">
+<h2>Now Streaming</h2>
+<div class="scroll-row">
+<div class="card">
+<img src="juan-single.jpg">
+<div class="card-body">
+<div class="card-title">Hearts on the Highway</div>
+<div class="card-sub">Juan Pablo</div>
+<div class="links">
+<a>Spotify</a>
+<a>Apple</a>
+<a>YouTube</a>
+<a>Audiomack</a>
+<a>Amazon</a>
+<a>Pandora</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- MAILING LIST -->
+<section class="newsletter">
+<h2>Join Ultra Music Group</h2>
+<input type="email" placeholder="Email">
+<select>
+<option>Select Favorite Artist</option>
+<option>Juan Pablo</option>
+<option>Aria Nova</option>
+<option>Lily Hart</option>
+<option>Elena Star</option>
+</select>
+<br>
+<button class="submit">Join</button>
+</section>
+</body>
+</html>
+

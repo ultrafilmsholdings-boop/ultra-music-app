@@ -132,6 +132,8 @@
 
     .card {
       flex: 0 0 260px;
+      min-width: 260px;
+      max-width: 260px;
       background: #101010;
       border-radius: 18px;
       overflow: hidden;
@@ -172,7 +174,8 @@
       gap: 8px;
     }
 
-    .links a {
+    .links a,
+    .links button {
       text-decoration: none;
       color: white;
       background: #232323;
@@ -181,6 +184,15 @@
       font-size: 12px;
       line-height: 1;
       display: inline-block;
+      border: none;
+      cursor: pointer;
+    }
+
+    .play-button {
+      margin-bottom: 10px;
+      width: 100%;
+      text-align: center;
+      font-weight: 600;
     }
 
     .footer {
@@ -228,12 +240,12 @@
   <section class="player-section">
     <h2>Now Playing</h2>
     <div class="player-box">
-      <img src="juan.jpg" alt="Juan Pablo">
+      <img id="player-cover" src="juan.jpg" alt="Now Playing Cover">
       <div class="player-info">
-        <h3>Hearts on the Highway</h3>
-        <p>Juan Pablo</p>
-        <audio controls>
-          <source src="juan.mp3" type="audio/mpeg">
+        <h3 id="player-title">Hearts on the Highway</h3>
+        <p id="player-artist">Juan Pablo</p>
+        <audio id="main-player" controls>
+          <source id="player-source" src="juan.mp3" type="audio/mpeg">
           Your browser does not support the audio element.
         </audio>
       </div>
@@ -250,6 +262,7 @@
           <div class="card-title">Juan Pablo</div>
           <div class="card-subtitle">Hearts on the Highway</div>
           <div class="links">
+            <button class="play-button" onclick="changeSong('juan.jpg','Hearts on the Highway','Juan Pablo','juan.mp3')">Play Here</button>
             <a href="#">Audiomack</a>
             <a href="#">Spotify</a>
             <a href="#">YouTube</a>
@@ -265,6 +278,7 @@
           <div class="card-title">Aria Nova</div>
           <div class="card-subtitle">Hearts on the Highway</div>
           <div class="links">
+            <button class="play-button" onclick="changeSong('aria.jpg','Hearts on the Highway','Aria Nova','aria.mp3')">Play Here</button>
             <a href="#">Audiomack</a>
             <a href="#">Spotify</a>
             <a href="#">YouTube</a>
@@ -280,6 +294,7 @@
           <div class="card-title">Lily Hart</div>
           <div class="card-subtitle">Cherry Soda</div>
           <div class="links">
+            <button class="play-button" onclick="changeSong('lily.jpg','Cherry Soda','Lily Hart','lily.mp3')">Play Here</button>
             <a href="#">Audiomack</a>
             <a href="#">Spotify</a>
             <a href="#">YouTube</a>
@@ -295,6 +310,7 @@
           <div class="card-title">Elena Star</div>
           <div class="card-subtitle">Ángel de Neón</div>
           <div class="links">
+            <button class="play-button" onclick="changeSong('elena.jpg','Ángel de Neón','Elena Star','elena.mp3')">Play Here</button>
             <a href="#">Audiomack</a>
             <a href="#">Spotify</a>
             <a href="#">YouTube</a>
@@ -310,6 +326,7 @@
           <div class="card-title">Favian Rey</div>
           <div class="card-subtitle">Baila Conmigo</div>
           <div class="links">
+            <button class="play-button" onclick="changeSong('favian.jpg','Baila Conmigo','Favian Rey','favian.mp3')">Play Here</button>
             <a href="#">Audiomack</a>
             <a href="#">Spotify</a>
             <a href="#">YouTube</a>
@@ -325,6 +342,7 @@
           <div class="card-title">Ángel Valentín</div>
           <div class="card-subtitle">Corazón de Acero</div>
           <div class="links">
+            <button class="play-button" onclick="changeSong('angel.jpg','Corazón de Acero','Ángel Valentín','angel.mp3')">Play Here</button>
             <a href="#">Audiomack</a>
             <a href="#">Spotify</a>
             <a href="#">YouTube</a>
@@ -340,6 +358,7 @@
           <div class="card-title">Luca Valley</div>
           <div class="card-subtitle">When We Say I Do</div>
           <div class="links">
+            <button class="play-button" onclick="changeSong('luca.jpg','When We Say I Do','Luca Valley','luca.mp3')">Play Here</button>
             <a href="#">Audiomack</a>
             <a href="#">Spotify</a>
             <a href="#">YouTube</a>
@@ -355,6 +374,7 @@
           <div class="card-title">Niko Sol</div>
           <div class="card-subtitle">Global Heartbeat</div>
           <div class="links">
+            <button class="play-button" onclick="changeSong('niko.jpg','Global Heartbeat','Niko Sol','niko.mp3')">Play Here</button>
             <a href="#">Audiomack</a>
             <a href="#">Spotify</a>
             <a href="#">YouTube</a>
@@ -370,6 +390,7 @@
           <div class="card-title">Jax Monroe</div>
           <div class="card-subtitle">Electric Blue Heart</div>
           <div class="links">
+            <button class="play-button" onclick="changeSong('jax.jpg','Electric Blue Heart','Jax Monroe','jax.mp3')">Play Here</button>
             <a href="#">Audiomack</a>
             <a href="#">Spotify</a>
             <a href="#">YouTube</a>
@@ -385,6 +406,7 @@
           <div class="card-title">Neon Euphoria</div>
           <div class="card-subtitle">Electric Afterglow</div>
           <div class="links">
+            <button class="play-button" onclick="changeSong('neon.jpg','Electric Afterglow','Neon Euphoria','neon.mp3')">Play Here</button>
             <a href="#">Audiomack</a>
             <a href="#">Spotify</a>
             <a href="#">YouTube</a>
@@ -557,6 +579,24 @@
   <div class="footer">
     Ultra Music Group © 2026
   </div>
+
+  <script>
+    function changeSong(cover, title, artist, mp3) {
+      const playerCover = document.getElementById('player-cover');
+      const playerTitle = document.getElementById('player-title');
+      const playerArtist = document.getElementById('player-artist');
+      const player = document.getElementById('main-player');
+      const source = document.getElementById('player-source');
+
+      playerCover.src = cover;
+      playerTitle.textContent = title;
+      playerArtist.textContent = artist;
+      source.src = mp3;
+
+      player.load();
+      player.play();
+    }
+  </script>
 
 </body>
 </html>

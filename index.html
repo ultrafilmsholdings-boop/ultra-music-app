@@ -1,192 +1,651 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ultra Music Group</title>
-<style>
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #050505;
-  color: white;
-}
-/* HEADER */
-.header {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 18px 24px;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-  background: #000;
-}
-.header-logo {
-  width: 56px;
-  height: 56px;
-  border-radius: 10px;
-}
-/* HERO */
-.hero {
-  padding: 56px 24px;
-  text-align: center;
-  background: linear-gradient(135deg,#1d0036,#001c4a,#050505);
-}
-.hero-logo {
-  width: 200px;
-  margin-bottom: 20px;
-}
-/* SECTIONS */
-.section {
-  padding: 40px 24px;
-}
-/* PLAYER */
-.player-box {
-  display: flex;
-  gap: 20px;
-  background: #101010;
-  padding: 20px;
-  border-radius: 18px;
-}
-/* SCROLL ROW */
-.scroll-row {
-  display: flex;
-  gap: 20px;
-  overflow-x: auto;
-}
-/* CARDS */
-.card {
-  min-width: 260px;
-  background: #101010;
-  border-radius: 18px;
-  overflow: hidden;
-}
-.card img {
-  width: 100%;
-}
-.card-body {
-  padding: 12px;
-}
-/* BUTTON */
-.play-button {
-  margin-top: 10px;
-  width: 100%;
-  background: #222;
-  padding: 8px;
-  border-radius: 10px;
-  border: none;
-  color: white;
-  cursor: pointer;
-}
-/* ABOUT + MISSION */
-.box {
-  max-width: 900px;
-  margin: auto;
-  background: #101010;
-  padding: 25px;
-  border-radius: 18px;
-}
-/* FOOTER */
-.footer {
-  text-align: center;
-  padding: 40px;
-  color: #888;
-  line-height: 1.6;
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ultra Music Group</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #050505;
+      color: white;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 18px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      background: #000;
+    }
+    .header-logo {
+      width: 56px;
+      height: 56px;
+      object-fit: contain;
+      border-radius: 10px;
+      flex-shrink: 0;
+    }
+    .logo {
+      margin: 0;
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    .sublogo {
+      margin-top: 4px;
+      color: #b8b8b8;
+      font-size: 14px;
+    }
+    .hero {
+      padding: 56px 24px;
+      text-align: center;
+      background:
+        linear-gradient(to right, rgba(0,0,0,0.82), rgba(0,0,0,0.35)),
+        linear-gradient(135deg, #1d0036, #001c4a, #050505);
+    }
+    .hero-logo {
+      width: min(320px, 80%);
+      display: block;
+      margin: 0 auto 24px auto;
+      object-fit: contain;
+    }
+    .hero-tag {
+      display: inline-block;
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+    .hero h1 {
+      margin: 0 0 12px 0;
+      font-size: 56px;
+      line-height: 1.05;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero p {
+      margin: 0 auto;
+      max-width: 820px;
+      color: #d7d7d7;
+      font-size: 20px;
+      line-height: 1.5;
+    }
+    .about-section,
+    .player-section,
+    .section,
+    .mission-section {
+      padding: 40px 24px 10px;
+    }
+    .section h2,
+    .player-section h2,
+    .about-section h2,
+    .mission-section h2 {
+      margin: 0 0 20px 0;
+      font-size: 24px;
+    }
+    .about-box,
+    .mission-box {
+      max-width: 980px;
+      margin: 0 auto;
+      background: #101010;
+      border-radius: 18px;
+      padding: 28px;
+      border: 1px solid rgba(255,255,255,0.05);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.28);
+    }
+    .about-box p,
+    .mission-box p {
+      margin: 0 0 16px 0;
+      color: #c8c8c8;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+    .about-box p:last-child,
+    .mission-box p:last-child {
+      margin-bottom: 0;
+    }
+    .about-credit,
+    .mission-closing {
+      color: #9b9b9b;
+      font-size: 14px;
+    }
+    .mission-list {
+      margin: 0 0 18px 0;
+      padding-left: 22px;
+      color: #c8c8c8;
+    }
+    .mission-list li {
+      margin-bottom: 14px;
+      line-height: 1.7;
+    }
+    .player-box {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: #101010;
+      border-radius: 18px;
+      padding: 20px;
+      border: 1px solid rgba(255,255,255,0.05);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.28);
+    }
+    .player-box img {
+      width: 110px;
+      height: 110px;
+      object-fit: cover;
+      border-radius: 12px;
+      flex-shrink: 0;
+    }
+    .player-info h3 {
+      margin: 0 0 6px 0;
+      font-size: 28px;
+    }
+    .player-info p {
+      margin: 0 0 14px 0;
+      color: #b8b8b8;
+      font-size: 16px;
+    }
+    .player-info audio {
+      width: min(520px, 100%);
+    }
+    .scroll-row {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      padding-bottom: 14px;
+      scroll-behavior: smooth;
+    }
+    .scroll-row::-webkit-scrollbar {
+      height: 10px;
+    }
+    .scroll-row::-webkit-scrollbar-thumb {
+      background: #2c2c2c;
+      border-radius: 999px;
+    }
+    .card {
+      flex: 0 0 260px;
+      min-width: 260px;
+      max-width: 260px;
+      background: #101010;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.05);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.28);
+    }
+    .card img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      display: block;
+      background: #1e1e1e;
+    }
+    .card-body {
+      padding: 16px;
+    }
+    .card-title {
+      margin: 0 0 6px 0;
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+    .card-subtitle {
+      margin: 0 0 14px 0;
+      color: #b8b8b8;
+      font-size: 14px;
+      line-height: 1.35;
+      min-height: 36px;
+    }
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .links a,
+    .links button {
+      text-decoration: none;
+      color: white;
+      background: #232323;
+      padding: 8px 10px;
+      border-radius: 10px;
+      font-size: 12px;
+      line-height: 1;
+      display: inline-block;
+      border: none;
+      cursor: pointer;
+    }
+    .play-button {
+      margin-bottom: 10px;
+      width: 100%;
+      text-align: center;
+      font-weight: 600;
+    }
+    .footer {
+      padding: 40px 24px 60px;
+      color: #8f8f8f;
+      font-size: 13px;
+      text-align: center;
+      line-height: 1.7;
+    }
+    @media (max-width: 900px) {
+      .hero h1 {
+        font-size: 42px;
+      }
+      .hero p {
+        font-size: 17px;
+      }
+      .player-box {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .player-info audio {
+        width: 100%;
+      }
+      .header {
+        align-items: flex-start;
+      }
+      .header-logo {
+        width: 48px;
+        height: 48px;
+      }
+    }
+  </style>
 </head>
 <body>
-<!-- HEADER -->
-<div class="header">
-  <img src="logo.png" class="header-logo">
-  <h2>ULTRA MUSIC GROUP</h2>
-</div>
-<!-- HERO -->
-<div class="hero">
-  <img src="logo.png" class="hero-logo">
-  <h1>Discover the Ultra Music Group roster</h1>
-</div>
-<!-- PLAYER -->
-<div class="section">
-  <h2>Now Playing</h2>
-  <div class="player-box">
-    <img id="player-cover" src="juan.jpg" width="100">
+  <div class="header">
+    <img src="logo.png" alt="Ultra Music Group Logo" class="header-logo">
     <div>
-      <h3 id="player-title">Hearts on the Highway</h3>
-      <p id="player-artist">Juan Pablo</p>
-      <audio id="main-player" controls>
-        <source id="player-source" src="juan.mp3">
-      </audio>
+      <h1 class="logo">ULTRA MUSIC GROUP</h1>
+      <div class="sublogo">Official artist roster</div>
     </div>
   </div>
-</div>
-<!-- FEATURED ARTISTS -->
-<div class="section">
-  <h2>Featured Artists</h2>
-  <div class="scroll-row">
-    <!-- ALL 10 ARTISTS -->
-    <div class="card"><img src="juan.jpg"><div class="card-body"><b>Juan Pablo</b><br>Hearts on the Highway<button class="play-button" onclick="changeSong('juan.jpg','Hearts on the Highway','Juan Pablo','juan.mp3')">Play</button></div></div>
-    <div class="card"><img src="aria.jpg"><div class="card-body"><b>Aria Nova</b><br>Hearts on the Highway<button class="play-button" onclick="changeSong('aria.jpg','Hearts on the Highway','Aria Nova','aria.mp3')">Play</button></div></div>
-    <div class="card"><img src="lily.jpg"><div class="card-body"><b>Lily Hart</b><br>Cherry Soda<button class="play-button" onclick="changeSong('lily.jpg','Cherry Soda','Lily Hart','lily.mp3')">Play</button></div></div>
-    <div class="card"><img src="elena.jpg"><div class="card-body"><b>Elena Star</b><br>Ángel de Neón<button class="play-button" onclick="changeSong('elena.jpg','Ángel de Neón','Elena Star','elena.mp3')">Play</button></div></div>
-    <div class="card"><img src="favian.jpg"><div class="card-body"><b>Favian Rey</b><br>Baila Conmigo<button class="play-button" onclick="changeSong('favian.jpg','Baila Conmigo','Favian Rey','favian.mp3')">Play</button></div></div>
-    <div class="card"><img src="angel.jpg"><div class="card-body"><b>Ángel Valentín</b><br>Corazón de Acero<button class="play-button" onclick="changeSong('angel.jpg','Corazón de Acero','Ángel Valentín','angel.mp3')">Play</button></div></div>
-    <div class="card"><img src="luca.jpg"><div class="card-body"><b>Luca Valley</b><br>When We Say I Do<button class="play-button" onclick="changeSong('luca.jpg','When We Say I Do','Luca Valley','luca.mp3')">Play</button></div></div>
-    <div class="card"><img src="niko.jpg"><div class="card-body"><b>Niko Sol</b><br>Global Heartbeat<button class="play-button" onclick="changeSong('niko.jpg','Global Heartbeat','Niko Sol','niko.mp3')">Play</button></div></div>
-    <div class="card"><img src="jax.jpg"><div class="card-body"><b>Jax Monroe</b><br>Electric Blue Heart<button class="play-button" onclick="changeSong('jax.jpg','Electric Blue Heart','Jax Monroe','jax.mp3')">Play</button></div></div>
-    <div class="card"><img src="neon.jpg"><div class="card-body"><b>Neon Euphoria</b><br>Electric Afterglow<button class="play-button" onclick="changeSong('neon.jpg','Electric Afterglow','Neon Euphoria','neon.mp3')">Play</button></div></div>
+  <section class="hero">
+    <img src="logo.png" alt="Ultra Music Group Logo" class="hero-logo">
+    <div class="hero-tag">Now Streaming Worldwide</div>
+    <h1>Discover the Ultra Music Group roster</h1>
+    <p>
+      Explore the official lineup, starting with flagship artist Juan Pablo,
+      followed by the full roster and current worldwide releases.
+    </p>
+  </section>
+  <section class="about-section">
+    <div class="about-box">
+      <h2>About Ultra Music Group</h2>
+      <p>
+        Ultra Music Group is an independent creative music label founded by Juan Pablo Ochoa and built from the ground up to develop original artists, release new music, and create a unified world of sound, visuals, and identity.
+      </p>
+      <p>
+        The label brings together a growing roster across pop, Latin, electronic, and crossover music, with a focus on strong songwriting, memorable characters, cinematic presentation, and long-term world-building.
+      </p>
+      <p>
+        Every release is part of a larger creative vision — from the music itself to the visuals, artist development, branding, and digital experience. Ultra Music Group is designed as a next-generation independent label built on creativity, consistency, innovation, and emotional storytelling.
+      </p>
+      <p class="about-credit">
+        Independent label concept, music development, and creative direction by Juan Pablo Ochoa.
+      </p>
+    </div>
+  </section>
+  <section class="player-section">
+    <h2>Now Playing</h2>
+    <div class="player-box">
+      <img id="player-cover" src="juan.jpg" alt="Now Playing Cover">
+      <div class="player-info">
+        <h3 id="player-title">Hearts on the Highway</h3>
+        <p id="player-artist">Juan Pablo</p>
+        <audio id="main-player" controls>
+          <source id="player-source" src="juan.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <h2>Featured Artists</h2>
+    <div class="scroll-row">
+      <div class="card">
+        <img src="juan.jpg" alt="Juan Pablo">
+        <div class="card-body">
+          <div class="card-title">Juan Pablo</div>
+          <div class="card-subtitle">Hearts on the Highway</div>
+          <div class="links">
+            <button class="play-button" onclick="changeSong('juan.jpg','Hearts on the Highway','Juan Pablo','juan.mp3')">Play Here</button>
+            <a href="#">Audiomack</a>
+            <a href="#">Spotify</a>
+            <a href="#">YouTube</a>
+            <a href="#">Apple</a>
+            <a href="#">Amazon</a>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <img src="aria.jpg" alt="Aria Nova">
+        <div class="card-body">
+          <div class="card-title">Aria Nova</div>
+          <div class="card-subtitle">Hearts on the Highway</div>
+          <div class="links">
+            <button class="play-button" onclick="changeSong('aria.jpg','Hearts on the Highway','Aria Nova','aria.mp3')">Play Here</button>
+            <a href="#">Audiomack</a>
+            <a href="#">Spotify</a>
+            <a href="#">YouTube</a>
+            <a href="#">Apple</a>
+            <a href="#">Amazon</a>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <img src="lily.jpg" alt="Lily Hart">
+        <div class="card-body">
+          <div class="card-title">Lily Hart</div>
+          <div class="card-subtitle">Cherry Soda</div>
+          <div class="links">
+            <button class="play-button" onclick="changeSong('lily.jpg','Cherry Soda','Lily Hart','lily.mp3')">Play Here</button>
+            <a href="#">Audiomack</a>
+            <a href="#">Spotify</a>
+            <a href="#">YouTube</a>
+            <a href="#">Apple</a>
+            <a href="#">Amazon</a>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <img src="elena.jpg" alt="Elena Star">
+        <div class="card-body">
+          <div class="card-title">Elena Star</div>
+          <div class="card-subtitle">Ángel de Neón</div>
+          <div class="links">
+            <button class="play-button" onclick="changeSong('elena.jpg','Ángel de Neón','Elena Star','elena.mp3')">Play Here</button>
+            <a href="#">Audiomack</a>
+            <a href="#">Spotify</a>
+            <a href="#">YouTube</a>
+            <a href="#">Apple</a>
+            <a href="#">Amazon</a>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <img src="favian.jpg" alt="Favian Rey">
+        <div class="card-body">
+          <div class="card-title">Favian Rey</div>
+          <div class="card-subtitle">Baila Conmigo</div>
+          <div class="links">
+            <button class="play-button" onclick="changeSong('favian.jpg','Baila Conmigo','Favian Rey','favian.mp3')">Play Here</button>
+            <a href="#">Audiomack</a>
+            <a href="#">Spotify</a>
+            <a href="#">YouTube</a>
+            <a href="#">Apple</a>
+            <a href="#">Amazon</a>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <img src="angel.jpg" alt="Ángel Valentín">
+        <div class="card-body">
+          <div class="card-title">Ángel Valentín</div>
+          <div class="card-subtitle">Corazón de Acero</div>
+          <div class="links">
+            <button class="play-button" onclick="changeSong('angel.jpg','Corazón de Acero','Ángel Valentín','angel.mp3')">Play Here</button>
+            <a href="#">Audiomack</a>
+            <a href="#">Spotify</a>
+            <a href="#">YouTube</a>
+            <a href="#">Apple</a>
+            <a href="#">Amazon</a>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <img src="luca.jpg" alt="Luca Valley">
+        <div class="card-body">
+          <div class="card-title">Luca Valley</div>
+          <div class="card-subtitle">When We Say I Do</div>
+          <div class="links">
+            <button class="play-button" onclick="changeSong('luca.jpg','When We Say I Do','Luca Valley','luca.mp3')">Play Here</button>
+            <a href="#">Audiomack</a>
+            <a href="#">Spotify</a>
+            <a href="#">YouTube</a>
+            <a href="#">Apple</a>
+            <a href="#">Amazon</a>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <img src="niko.jpg" alt="Niko Sol">
+        <div class="card-body">
+          <div class="card-title">Niko Sol</div>
+          <div class="card-subtitle">Global Heartbeat</div>
+          <div class="links">
+            <button class="play-button" onclick="changeSong('niko.jpg','Global Heartbeat','Niko Sol','niko.mp3')">Play Here</button>
+            <a href="#">Audiomack</a>
+            <a href="#">Spotify</a>
+            <a href="#">YouTube</a>
+            <a href="#">Apple</a>
+            <a href="#">Amazon</a>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <img src="jax.jpg" alt="Jax Monroe">
+        <div class="card-body">
+          <div class="card-title">Jax Monroe</div>
+          <div class="card-subtitle">Electric Blue Heart</div>
+          <div class="links">
+            <button class="play-button" onclick="changeSong('jax.jpg','Electric Blue Heart','Jax Monroe','jax.mp3')">Play Here</button>
+            <a href="#">Audiomack</a>
+            <a href="#">Spotify</a>
+            <a href="#">YouTube</a>
+            <a href="#">Apple</a>
+            <a href="#">Amazon</a>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <img src="neon.jpg" alt="Neon Euphoria">
+        <div class="card-body">
+          <div class="card-title">Neon Euphoria</div>
+          <div class="card-subtitle">Electric Afterglow</div>
+          <div class="links">
+            <button class="play-button" onclick="changeSong('neon.jpg','Electric Afterglow','Neon Euphoria','neon.mp3')">Play Here</button>
+            <a href="#">Audiomack</a>
+            <a href="#">Spotify</a>
+            <a href="#">YouTube</a>
+            <a href="#">Apple</a>
+            <a href="#">Amazon</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <h2>Latest Releases</h2>
+    <div class="scroll-row">
+      <div class="card">
+        <img src="juan-single.jpg" alt="Hearts on the Highway">
+        <div class="card-body">
+          <div class="card-title">Hearts on the Highway</div>
+          <div class="card-subtitle">Juan Pablo</div>
+          <div class="links">
+            <a href="#">Audiomack</a>
+            <a href="#">Spotify</a>
+            <a href="#">YouTube</a>
+            <a href="#">Apple</a>
+            <a href="#">Amazon</a>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <img src="aria-single.jpg" alt="Hearts on the Highway">
+        <div class="card-body">
+          <div class="card-title">Hearts on the Highway</div>
+          <div class="card-subtitle">Aria Nova</div>
+          <div class="links">
+            <a href="#">Audiomack</a>
+            <a href="#">Spotify</a>
+            <a href="#">YouTube</a>
+            <a href="#">Apple</a>
+            <a href="#">Amazon</a>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <img src="lily-single.jpg" alt="Cherry Soda">
+        <div class="card-body">
+          <div class="card-title">Cherry Soda</div>
+          <div class="card-subtitle">Lily Hart</div>
+          <div class="links">
+            <a href="#">Audiomack</a>
+            <a href="#">Spotify</a>
+            <a href="#">YouTube</a>
+            <a href="#">Apple</a>
+            <a href="#">Amazon</a>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <img src="elena-single.jpg" alt="Ángel de Neón">
+        <div class="card-body">
+          <div class="card-title">Ángel de Neón</div>
+          <div class="card-subtitle">Elena Star</div>
+          <div class="links">
+            <a href="#">Audiomack</a>
+            <a href="#">Spotify</a>
+            <a href="#">YouTube</a>
+            <a href="#">Apple</a>
+            <a href="#">Amazon</a>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <img src="favian-single.jpg" alt="Baila Conmigo">
+        <div class="card-body">
+          <div class="card-title">Baila Conmigo</div>
+          <div class="card-subtitle">Favian Rey</div>
+          <div class="links">
+            <a href="#">Audiomack</a>
+            <a href="#">Spotify</a>
+            <a href="#">YouTube</a>
+            <a href="#">Apple</a>
+            <a href="#">Amazon</a>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <img src="angel-single.jpg" alt="Corazón de Acero">
+        <div class="card-body">
+          <div class="card-title">Corazón de Acero</div>
+          <div class="card-subtitle">Ángel Valentín</div>
+          <div class="links">
+            <a href="#">Audiomack</a>
+            <a href="#">Spotify</a>
+            <a href="#">YouTube</a>
+            <a href="#">Apple</a>
+            <a href="#">Amazon</a>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <img src="luca-single.jpg" alt="When We Say I Do">
+        <div class="card-body">
+          <div class="card-title">When We Say I Do</div>
+          <div class="card-subtitle">Luca Valley</div>
+          <div class="links">
+            <a href="#">Audiomack</a>
+            <a href="#">Spotify</a>
+            <a href="#">YouTube</a>
+            <a href="#">Apple</a>
+            <a href="#">Amazon</a>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <img src="niko-single.jpg" alt="Global Heartbeat">
+        <div class="card-body">
+          <div class="card-title">Global Heartbeat</div>
+          <div class="card-subtitle">Niko Sol</div>
+          <div class="links">
+            <a href="#">Audiomack</a>
+            <a href="#">Spotify</a>
+            <a href="#">YouTube</a>
+            <a href="#">Apple</a>
+            <a href="#">Amazon</a>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <img src="jax-single.jpg" alt="Electric Blue Heart">
+        <div class="card-body">
+          <div class="card-title">Electric Blue Heart</div>
+          <div class="card-subtitle">Jax Monroe</div>
+          <div class="links">
+            <a href="#">Audiomack</a>
+            <a href="#">Spotify</a>
+            <a href="#">YouTube</a>
+            <a href="#">Apple</a>
+            <a href="#">Amazon</a>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <img src="neon-single.jpg" alt="Electric Afterglow">
+        <div class="card-body">
+          <div class="card-title">Electric Afterglow</div>
+          <div class="card-subtitle">Neon Euphoria</div>
+          <div class="links">
+            <a href="#">Audiomack</a>
+            <a href="#">Spotify</a>
+            <a href="#">YouTube</a>
+            <a href="#">Apple</a>
+            <a href="#">Amazon</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="mission-section">
+    <div class="mission-box">
+      <h2>Mission Statement</h2>
+      <p>
+        Ultra Music Group is an independent creative music label founded by Juan Pablo Ochoa, a songwriter, creator, and developer dedicated to building a new generation of musical storytelling through virtual artists and digital performers.
+      </p>
+      <ul class="mission-list">
+        <li>At Ultra Music Group, every artist begins as an idea — a character, a personality, and a world.</li>
+        <li>From concept to creation, Juan Pablo develops each project from the ground up: writing the music, shaping the identity of the artist, designing the visual universe, and building a catalog of songs that express emotion, movement, and imagination.</li>
+        <li>Transparency, creativity, and artistic experimentation are central to the label’s foundation.</li>
+        <li>Some Ultra Music Group productions use AI-assisted vocal technology and digital performance tools, and that process is shared openly with the audience. Technology is treated as a creative instrument — just like a synthesizer, microphone, or studio.</li>
+      </ul>
+      <p>
+        What defines Ultra Music Group is not the technology behind the music, but the heart behind the creation.
+      </p>
+      <p>
+        Every song, every artist, and every project released by Ultra Music Group is part of a larger vision — a creative universe where characters, music, and imagination come together to form something greater than any single song.
+      </p>
+      <p class="mission-closing">Founded by Juan Pablo Ochoa.</p>
+    </div>
+  </section>
+  <div class="footer">
+    Ultra Music Group © 2026<br><br>
+    For inquiries, collaborations, and business:<br>
+    <strong>ultramusicgroup@gmail.com</strong><br><br>
+    Private catalog available for labels, artists, and industry professionals upon request.
   </div>
-</div>
-<!-- LATEST RELEASES -->
-<div class="section">
-  <h2>Latest Releases</h2>
-  <div class="scroll-row">
-    <div class="card"><img src="juan-single.jpg"><div class="card-body">Hearts on the Highway<br>Juan Pablo</div></div>
-    <div class="card"><img src="aria-single.jpg"><div class="card-body">Hearts on the Highway<br>Aria Nova</div></div>
-    <div class="card"><img src="lily-single.jpg"><div class="card-body">Cherry Soda<br>Lily Hart</div></div>
-    <div class="card"><img src="elena-single.jpg"><div class="card-body">Ángel de Neón<br>Elena Star</div></div>
-    <div class="card"><img src="favian-single.jpg"><div class="card-body">Baila Conmigo<br>Favian Rey</div></div>
-    <div class="card"><img src="angel-single.jpg"><div class="card-body">Corazón de Acero<br>Ángel Valentín</div></div>
-    <div class="card"><img src="luca-single.jpg"><div class="card-body">When We Say I Do<br>Luca Valley</div></div>
-    <div class="card"><img src="niko-single.jpg"><div class="card-body">Global Heartbeat<br>Niko Sol</div></div>
-    <div class="card"><img src="jax-single.jpg"><div class="card-body">Electric Blue Heart<br>Jax Monroe</div></div>
-    <div class="card"><img src="neon-single.jpg"><div class="card-body">Electric Afterglow<br>Neon Euphoria</div></div>
-  </div>
-</div>
-<!-- ABOUT -->
-<div class="section">
-  <div class="box">
-    <h2>About Ultra Music Group</h2>
-    <p>Ultra Music Group is an independent record label founded by Juan Pablo Ochoa, built to create original music, develop artists, and build a unified creative universe.</p>
-  </div>
-</div>
-<!-- MISSION -->
-<div class="section">
-  <div class="box">
-    <h2>Mission Statement</h2>
-    <p>Every artist begins as a concept — a character, a world, a vision. Music, visuals, and identity are all created together as one experience.</p>
-    <p>Founded by Juan Pablo Ochoa.</p>
-  </div>
-</div>
-<!-- FOOTER -->
-<div class="footer">
-  Ultra Music Group © 2026<br><br>
-  For inquiries, collaborations, and business:<br>
-  ultramusicgroup@gmail.com<br><br>
-  Private catalog available for labels, artists, and industry professionals upon request.
-</div>
-<script>
-function changeSong(cover, title, artist, mp3) {
-  document.getElementById('player-cover').src = cover;
-  document.getElementById('player-title').innerText = title;
-  document.getElementById('player-artist').innerText = artist;
-  document.getElementById('player-source').src = mp3;
-  let player = document.getElementById('main-player');
-  player.load();
-  player.play();
-}
-</script>
+  <script>
+    function changeSong(cover, title, artist, mp3) {
+      const playerCover = document.getElementById('player-cover');
+      const playerTitle = document.getElementById('player-title');
+      const playerArtist = document.getElementById('player-artist');
+      const player = document.getElementById('main-player');
+      const source = document.getElementById('player-source');
+      playerCover.src = cover;
+      playerTitle.textContent = title;
+      playerArtist.textContent = artist;
+      source.src = mp3;
+      player.load();
+      player.play();
+    }
+  </script>
 </body>
 </html>
-
 

@@ -1,1755 +1,3167 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ultra Music Group</title>
-  <meta name="description" content="Ultra Music Group official artist showcase." />
-
   <style>
-    /* =========================================================
-       ULTRA MUSIC GROUP
-       FULL SINGLE-FILE PUBLIC-FACING SITE
-       ========================================================= */
-
-    :root {
-      --bg: #070809;
-      --bg-2: #0d1014;
-      --bg-3: #12161b;
-      --panel: rgba(255,255,255,0.05);
-      --panel-2: rgba(255,255,255,0.07);
-      --line: rgba(255,255,255,0.08);
-      --line-2: rgba(255,255,255,0.14);
-      --text: #f6f8fb;
-      --muted: #b7c0cb;
-      --muted-2: #8f99a6;
-      --white: #ffffff;
-      --black: #000000;
-      --success: #8af1aa;
-      --danger: #ff9b9b;
-      --shadow: 0 18px 60px rgba(0,0,0,0.35);
-      --radius-xl: 30px;
-      --radius-lg: 24px;
-      --radius-md: 18px;
-      --radius-sm: 14px;
-      --max: 1460px;
-      --nav-h: 84px;
+    :root{
+      --bg:#070708;
+      --bg2:#0d0f12;
+      --panel:#121418;
+      --panel2:#171a20;
+      --line:rgba(255,255,255,.08);
+      --line2:rgba(255,255,255,.14);
+      --text:#ffffff;
+      --muted:#b8c0cb;
+      --soft:#dce2ea;
+      --shadow:0 16px 40px rgba(0,0,0,.35);
+      --radius:24px;
+      --radius-sm:16px;
+      --max:1380px;
     }
 
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      color: var(--text);
-      font-family: Arial, Helvetica, sans-serif;
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      color:var(--text);
       background:
-        radial-gradient(circle at top left, rgba(255,255,255,0.05), transparent 20%),
-        radial-gradient(circle at top right, rgba(255,255,255,0.04), transparent 18%),
-        linear-gradient(180deg, #0a0b0d 0%, #060708 100%);
+        radial-gradient(circle at top left, rgba(255,255,255,.05), transparent 22%),
+        radial-gradient(circle at top right, rgba(255,255,255,.04), transparent 20%),
+        linear-gradient(180deg, #080809 0%, #060607 100%);
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
+    a{color:inherit;text-decoration:none}
+    button,input,select,textarea{font:inherit}
+    .hidden{display:none !important}
+
+    .wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:0 22px;
     }
 
-    button,
-    input,
-    textarea,
-    select {
-      font: inherit;
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      backdrop-filter:blur(18px);
+      background:rgba(7,7,8,.84);
+      border-bottom:1px solid var(--line);
     }
 
-    img {
-      max-width: 100%;
-      display: block;
+    .topbar-inner{
+      min-height:82px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      flex-wrap:wrap;
     }
 
-    .hidden {
-      display: none !important;
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      min-width:0;
     }
 
-    .site-shell {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+    .brand-mark{
+      width:44px;
+      height:44px;
+      border-radius:14px;
+      display:grid;
+      place-items:center;
+      color:#000;
+      background:linear-gradient(135deg,#fff 0%,#bfc6cf 100%);
+      font-weight:700;
+      letter-spacing:.08em;
+      box-shadow:var(--shadow);
+      flex:0 0 auto;
     }
 
-    .wrap {
-      width: min(100%, var(--max));
-      margin: 0 auto;
-      padding: 0 22px;
+    .brand-copy{min-width:0}
+    .brand-title{
+      font-size:18px;
+      font-weight:700;
+      letter-spacing:.12em;
+      white-space:nowrap;
+    }
+    .brand-sub{
+      font-size:12px;
+      color:var(--muted);
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      margin-top:3px;
     }
 
-    /* =========================================================
-       TOPBAR
-       ========================================================= */
-
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      backdrop-filter: blur(18px);
-      background: rgba(8, 9, 11, 0.84);
-      border-bottom: 1px solid var(--line);
+    .nav{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
     }
 
-    .topbar-inner {
-      min-height: var(--nav-h);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      flex-wrap: wrap;
+    .nav a,
+    .nav button{
+      border:none;
+      background:transparent;
+      color:#eef2f6;
+      padding:10px 14px;
+      border-radius:999px;
+      cursor:pointer;
+      transition:.2s ease;
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      min-width: 0;
+    .nav a:hover,
+    .nav button:hover{
+      background:rgba(255,255,255,.05);
     }
 
-    .brand-mark {
-      width: 48px;
-      height: 48px;
-      border-radius: 16px;
-      display: grid;
-      place-items: center;
-      background: linear-gradient(135deg, #ffffff 0%, #ced5de 100%);
-      color: #050505;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      font-size: 18px;
-      flex: 0 0 auto;
-      box-shadow: var(--shadow);
-      overflow: hidden;
+    .nav .cta{
+      background:#fff;
+      color:#000;
+      font-weight:700;
     }
 
-    .brand-mark img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    .nav .cta:hover{
+      background:#e9edf2;
     }
 
-    .brand-copy {
-      min-width: 0;
+    .screen{
+      display:none;
+      padding:28px 0 56px;
+      animation:fadeIn .22s ease;
     }
 
-    .brand-title {
-      margin: 0;
-      font-size: 18px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      white-space: nowrap;
+    .screen.active{display:block}
+
+    @keyframes fadeIn{
+      from{opacity:0;transform:translateY(6px)}
+      to{opacity:1;transform:translateY(0)}
     }
 
-    .brand-sub {
-      margin: 4px 0 0;
-      font-size: 12px;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      white-space: nowrap;
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    .nav-link {
-      padding: 10px 14px;
-      border-radius: 999px;
-      border: 1px solid transparent;
-      color: #ecf1f6;
-      transition: 0.2s ease;
-      background: transparent;
-      cursor: pointer;
-    }
-
-    .nav-link:hover {
-      background: rgba(255,255,255,0.04);
-      border-color: var(--line);
-    }
-
-    .nav-btn {
-      border: none;
-      padding: 11px 16px;
-      border-radius: 999px;
-      font-weight: 700;
-      background: var(--white);
-      color: var(--black);
-      transition: 0.2s ease;
-      cursor: pointer;
-    }
-
-    .nav-btn:hover {
-      background: #eef2f6;
-      transform: translateY(-1px);
-    }
-
-    /* =========================================================
-       MAIN SCREENS
-       ========================================================= */
-
-    .screen {
-      display: none;
-      padding: 28px 0 60px;
-      animation: fadeIn 0.22s ease;
-    }
-
-    .screen.active {
-      display: block;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(6px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* =========================================================
-       HERO
-       ========================================================= */
-
-    .hero {
-      position: relative;
-      min-height: 640px;
-      border-radius: var(--radius-xl);
-      overflow: hidden;
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow);
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 24px;
+    .hero{
+      position:relative;
+      min-height:560px;
+      border-radius:32px;
+      overflow:hidden;
       background:
-        linear-gradient(104deg, rgba(0,0,0,0.84) 0%, rgba(0,0,0,0.58) 42%, rgba(0,0,0,0.20) 100%),
-        linear-gradient(135deg, #212731 0%, #11141a 42%, #26303c 100%);
+        linear-gradient(105deg, rgba(0,0,0,.84) 0%, rgba(0,0,0,.58) 42%, rgba(0,0,0,.18) 100%),
+        linear-gradient(135deg, #1e232c 0%, #0f1116 44%, #27303b 100%);
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:22px;
+      align-items:stretch;
     }
 
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
+    .hero:after{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
       background:
-        radial-gradient(circle at 82% 16%, rgba(255,255,255,0.13), transparent 18%),
-        radial-gradient(circle at 76% 70%, rgba(255,255,255,0.08), transparent 22%);
+        radial-gradient(circle at 82% 16%, rgba(255,255,255,.14), transparent 18%),
+        radial-gradient(circle at 72% 72%, rgba(255,255,255,.10), transparent 26%);
     }
 
-    .hero-left {
-      position: relative;
-      z-index: 2;
-      padding: 58px 40px 40px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
+    .hero-left{
+      position:relative;
+      z-index:2;
+      padding:54px 38px 38px;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-end;
     }
 
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      width: max-content;
-      padding: 10px 14px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.08);
-      color: #eef3f8;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.13em;
-      margin-bottom: 18px;
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      width:max-content;
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:999px;
+      padding:10px 14px;
+      font-size:12px;
+      color:#eff4f8;
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      margin-bottom:18px;
     }
 
-    .eyebrow-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #ffffff;
+    .hero h1{
+      margin:0 0 16px;
+      font-size:clamp(40px,6vw,82px);
+      line-height:.94;
+      letter-spacing:-.05em;
+      max-width:780px;
     }
 
-    .hero-title {
-      margin: 0 0 16px;
-      font-size: clamp(44px, 6vw, 88px);
-      line-height: 0.92;
-      letter-spacing: -0.05em;
-      max-width: 780px;
+    .hero p{
+      margin:0 0 26px;
+      color:#d7dde5;
+      line-height:1.7;
+      font-size:18px;
+      max-width:700px;
     }
 
-    .hero-text {
-      margin: 0 0 28px;
-      max-width: 720px;
-      color: #d8dfe7;
-      font-size: 18px;
-      line-height: 1.74;
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+      margin-bottom:26px;
     }
 
-    .hero-actions {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-      margin-bottom: 28px;
+    .btn{
+      border:none;
+      border-radius:999px;
+      padding:14px 20px;
+      font-weight:700;
+      cursor:pointer;
+      transition:.2s ease;
     }
 
-    .btn {
-      border: none;
-      border-radius: 999px;
-      padding: 14px 20px;
-      font-weight: 700;
-      transition: 0.2s ease;
-      cursor: pointer;
+    .btn.primary{
+      background:#fff;
+      color:#000;
     }
 
-    .btn-light {
-      background: #ffffff;
-      color: #000000;
+    .btn.secondary{
+      background:rgba(255,255,255,.08);
+      color:#fff;
+      border:1px solid rgba(255,255,255,.08);
     }
 
-    .btn-light:hover {
-      background: #edf1f5;
-      transform: translateY(-1px);
+    .btn:hover{transform:translateY(-1px)}
+
+    .hero-stats{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:12px;
     }
 
-    .btn-dark {
-      background: rgba(255,255,255,0.08);
-      color: #ffffff;
-      border: 1px solid rgba(255,255,255,0.08);
+    .stat{
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:18px;
+      padding:16px;
+      min-height:94px;
     }
 
-    .btn-dark:hover {
-      background: rgba(255,255,255,0.12);
-      transform: translateY(-1px);
+    .stat-label{
+      color:#c9d1db;
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      margin-bottom:8px;
     }
 
-    .hero-stats {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
-      gap: 12px;
+    .stat-value{
+      font-size:20px;
+      font-weight:700;
+      line-height:1.25;
     }
 
-    .hero-stat {
-      min-height: 98px;
-      border-radius: var(--radius-md);
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.08);
-      padding: 16px;
+    .hero-right{
+      position:relative;
+      z-index:2;
+      padding:28px 28px 28px 0;
+      display:flex;
+      align-items:flex-end;
     }
 
-    .hero-stat-label {
-      margin-bottom: 8px;
-      color: #cad2db;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
+    .hero-stack{
+      width:100%;
+      display:grid;
+      gap:14px;
     }
 
-    .hero-stat-value {
-      font-size: 21px;
-      font-weight: 700;
-      line-height: 1.25;
+    .stack-card{
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:20px;
+      padding:18px;
+      backdrop-filter:blur(8px);
     }
 
-    .hero-right {
-      position: relative;
-      z-index: 2;
-      padding: 30px 30px 30px 0;
-      display: flex;
-      align-items: flex-end;
+    .stack-kicker{
+      color:#cfd6de;
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      margin-bottom:8px;
     }
 
-    .hero-stack {
-      width: 100%;
-      display: grid;
-      gap: 14px;
+    .stack-card strong{
+      display:block;
+      font-size:22px;
+      margin-bottom:8px;
     }
 
-    .stack-card {
-      border-radius: 22px;
-      padding: 18px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.08);
-      backdrop-filter: blur(8px);
+    .stack-card p{
+      margin:0;
+      font-size:14px;
+      color:#d4dbe3;
+      line-height:1.6;
     }
 
-    .stack-kicker {
-      color: #cfd7e0;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      margin-bottom: 8px;
+    .section{
+      margin-top:34px;
     }
 
-    .stack-card strong {
-      display: block;
-      font-size: 22px;
-      margin-bottom: 8px;
+    .section-head{
+      display:flex;
+      align-items:end;
+      justify-content:space-between;
+      gap:18px;
+      margin-bottom:18px;
+      flex-wrap:wrap;
     }
 
-    .stack-card p {
-      margin: 0;
-      color: #d7dee7;
-      line-height: 1.6;
-      font-size: 14px;
+    .section-head h2{
+      margin:0;
+      font-size:30px;
+      letter-spacing:-.04em;
     }
 
-    /* =========================================================
-       GENERIC SECTIONS
-       ========================================================= */
-
-    .section {
-      margin-top: 36px;
+    .section-head p{
+      margin:8px 0 0;
+      color:var(--muted);
+      line-height:1.65;
+      max-width:760px;
+      font-size:15px;
     }
 
-    .section-head {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 18px;
-      flex-wrap: wrap;
-      margin-bottom: 18px;
+    .chip{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      border-radius:999px;
+      padding:10px 14px;
+      color:#e4ebf2;
+      font-size:13px;
+      white-space:nowrap;
     }
 
-    .section-title {
-      margin: 0;
-      font-size: 30px;
-      letter-spacing: -0.04em;
+    .artist-grid{
+      display:grid;
+      grid-template-columns:repeat(5,minmax(0,1fr));
+      gap:16px;
     }
 
-    .section-copy {
-      margin: 8px 0 0;
-      max-width: 780px;
-      color: var(--muted);
-      font-size: 15px;
-      line-height: 1.7;
+    .artist-card{
+      border:1px solid var(--line);
+      background:linear-gradient(180deg,#171a20 0%, #101216 100%);
+      border-radius:24px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      cursor:pointer;
+      transition:.25s ease;
+      min-height:332px;
     }
 
-    .chip {
-      white-space: nowrap;
-      padding: 10px 14px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.04);
-      color: #edf2f7;
-      font-size: 13px;
+    .artist-card:hover{
+      transform:translateY(-5px);
+      border-color:var(--line2);
     }
 
-    /* =========================================================
-       ROSTER GRID
-       ========================================================= */
-
-    .artist-grid {
-      display: grid;
-      grid-template-columns: repeat(5, minmax(0,1fr));
-      gap: 16px;
-    }
-
-    .artist-card {
-      min-height: 334px;
-      border-radius: 24px;
-      overflow: hidden;
-      background: linear-gradient(180deg, #171b21 0%, #101216 100%);
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow);
-      cursor: pointer;
-      transition: 0.24s ease;
-    }
-
-    .artist-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--line-2);
-    }
-
-    .artist-visual {
-      height: 220px;
-      border-bottom: 1px solid var(--line);
-      position: relative;
-      display: flex;
-      align-items: flex-end;
-      justify-content: flex-start;
-      padding: 18px;
+    .artist-visual{
+      height:220px;
+      position:relative;
       background:
-        radial-gradient(circle at top right, rgba(255,255,255,0.17), transparent 24%),
-        linear-gradient(135deg, #2a313c 0%, #171b23 50%, #11141a 100%);
+        radial-gradient(circle at top right, rgba(255,255,255,.18), transparent 24%),
+        linear-gradient(135deg, #2a303a 0%, #171b22 48%, #101217 100%);
+      border-bottom:1px solid var(--line);
+      display:flex;
+      align-items:flex-end;
+      justify-content:flex-start;
+      padding:18px;
     }
 
-    .artist-tag {
-      position: absolute;
-      top: 14px;
-      left: 14px;
-      padding: 8px 10px;
-      border-radius: 999px;
-      background: rgba(0,0,0,0.34);
-      border: 1px solid rgba(255,255,255,0.08);
-      color: #eef3f8;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
+    .artist-initial{
+      width:58px;
+      height:58px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.10);
+      font-size:19px;
+      font-weight:700;
+      color:#fff;
     }
 
-    .artist-initial {
-      width: 58px;
-      height: 58px;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      background: rgba(255,255,255,0.10);
-      border: 1px solid rgba(255,255,255,0.10);
-      color: #ffffff;
-      font-size: 19px;
-      font-weight: 700;
+    .artist-tag{
+      position:absolute;
+      top:14px;
+      left:14px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(0,0,0,.34);
+      color:#eef3f8;
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.12em;
     }
 
-    .artist-body {
-      padding: 16px;
+    .artist-body{
+      padding:16px;
     }
 
-    .artist-body h3 {
-      margin: 0 0 8px;
-      font-size: 22px;
-      letter-spacing: -0.03em;
+    .artist-body h3{
+      margin:0 0 8px;
+      font-size:22px;
+      letter-spacing:-.03em;
     }
 
-    .artist-body p {
-      margin: 0;
-      color: #ccd5df;
-      line-height: 1.62;
-      font-size: 14px;
+    .artist-body p{
+      margin:0;
+      color:#ccd5df;
+      line-height:1.6;
+      font-size:14px;
     }
 
-    /* =========================================================
-       RELEASE GRID
-       ========================================================= */
-
-    .release-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0,1fr));
-      gap: 16px;
+    .release-grid{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:16px;
     }
 
-    .release-card {
-      border-radius: 24px;
-      overflow: hidden;
-      background: linear-gradient(180deg, #171a20 0%, #101216 100%);
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow);
-      transition: 0.24s ease;
+    .release-card{
+      border:1px solid var(--line);
+      border-radius:24px;
+      overflow:hidden;
+      background:linear-gradient(180deg,#16191e 0%,#0f1114 100%);
+      box-shadow:var(--shadow);
+      transition:.25s ease;
     }
 
-    .release-card:hover {
-      transform: translateY(-4px);
-      border-color: var(--line-2);
+    .release-card:hover{
+      transform:translateY(-4px);
+      border-color:var(--line2);
     }
 
-    .release-cover {
-      height: 250px;
-      border-bottom: 1px solid var(--line);
-      display: grid;
-      place-items: center;
-      text-align: center;
-      padding: 18px;
-      font-size: 30px;
-      font-weight: 700;
-      letter-spacing: 0.10em;
+    .release-cover{
+      height:250px;
+      border-bottom:1px solid var(--line);
+      display:grid;
+      place-items:center;
+      text-align:center;
+      font-size:28px;
+      font-weight:700;
+      letter-spacing:.10em;
+      padding:18px;
       background:
-        radial-gradient(circle at top right, rgba(255,255,255,0.15), transparent 22%),
-        linear-gradient(135deg, #29313b 0%, #151821 52%, #1d2129 100%);
+        radial-gradient(circle at top right, rgba(255,255,255,.16), transparent 22%),
+        linear-gradient(135deg,#27303a 0%, #13171d 55%, #1b1f27 100%);
     }
 
-    .release-body {
-      padding: 16px;
+    .release-body{
+      padding:16px;
     }
 
-    .release-body h3 {
-      margin: 0 0 8px;
-      font-size: 24px;
-      letter-spacing: -0.03em;
+    .release-body h3{
+      margin:0 0 8px;
+      font-size:23px;
+      letter-spacing:-.03em;
     }
 
-    .release-meta {
-      margin-bottom: 10px;
-      color: #d5dce5;
-      font-size: 14px;
+    .release-meta{
+      color:#d6dde5;
+      font-size:14px;
+      margin-bottom:10px;
     }
 
-    .release-body p {
-      margin: 0 0 14px;
-      color: var(--muted);
-      line-height: 1.64;
-      font-size: 14px;
+    .release-body p{
+      margin:0 0 14px;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:14px;
     }
 
-    .release-actions {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
+    .release-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
     }
 
-    .mini-btn {
-      border: none;
-      padding: 10px 14px;
-      border-radius: 999px;
-      font-weight: 700;
-      cursor: pointer;
+    .mini{
+      border:none;
+      border-radius:999px;
+      padding:10px 14px;
+      cursor:pointer;
+      font-weight:700;
     }
 
-    .mini-btn.light {
-      background: #ffffff;
-      color: #000000;
+    .mini.light{
+      background:#fff;
+      color:#000;
     }
 
-    .mini-btn.dark {
-      background: rgba(255,255,255,0.08);
-      color: #ffffff;
-      border: 1px solid rgba(255,255,255,0.08);
+    .mini.dark{
+      background:rgba(255,255,255,.08);
+      color:#fff;
+      border:1px solid rgba(255,255,255,.08);
     }
 
-    /* =========================================================
-       BOTTOM STRIP
-       ========================================================= */
-
-    .cta-strip {
-      margin-top: 34px;
-      border-radius: 28px;
-      border: 1px solid var(--line);
-      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
-      box-shadow: var(--shadow);
-      padding: 28px;
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 22px;
-      align-items: center;
+    .two-col{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:18px;
+      margin-top:18px;
     }
 
-    .cta-copy h3 {
-      margin: 0 0 10px;
-      font-size: 34px;
-      letter-spacing: -0.04em;
+    .panel{
+      border:1px solid var(--line);
+      border-radius:26px;
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      box-shadow:var(--shadow);
+      padding:24px;
     }
 
-    .cta-copy p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.74;
-      max-width: 720px;
-      font-size: 15px;
+    .panel h3{
+      margin:0 0 10px;
+      font-size:28px;
+      letter-spacing:-.03em;
     }
 
-    .cta-actions {
-      display: flex;
-      justify-content: flex-end;
-      gap: 12px;
-      flex-wrap: wrap;
+    .panel p{
+      margin:0 0 16px;
+      color:var(--muted);
+      line-height:1.7;
+      font-size:15px;
     }
 
-    /* =========================================================
-       ARTIST DETAIL PAGE
-       ========================================================= */
-
-    .artist-page {
-      display: none;
-      padding: 28px 0 60px;
-      animation: fadeIn 0.22s ease;
+    .feature-list{
+      display:grid;
+      gap:12px;
+      margin-top:18px;
     }
 
-    .artist-page.active {
-      display: block;
+    .feature{
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:rgba(255,255,255,.04);
+      padding:14px;
     }
 
-    .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 18px;
-      padding: 10px 14px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid var(--line);
-      color: #edf2f7;
-      cursor: pointer;
+    .feature strong{
+      display:block;
+      margin-bottom:6px;
+      font-size:16px;
     }
 
-    .artist-layout {
-      display: grid;
-      grid-template-columns: 0.95fr 1.05fr;
-      gap: 20px;
-      align-items: start;
+    .feature span{
+      color:#ccd4de;
+      font-size:14px;
+      line-height:1.6;
     }
 
-    .artist-hero {
-      min-height: 590px;
-      border-radius: 30px;
-      overflow: hidden;
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow);
-      position: relative;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)),
-        linear-gradient(135deg, #2a313b 0%, #141821 58%, #1e242d 100%);
+    form{
+      display:grid;
+      gap:12px;
     }
 
-    .artist-hero.jp {
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)),
-        linear-gradient(135deg, #2b323d 0%, #141820 58%, #1c232c 100%);
+    .form-row{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
     }
 
-    .artist-hero.lh {
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)),
-        linear-gradient(135deg, #3c2d37 0%, #18131a 58%, #241921 100%);
+    .field{
+      display:grid;
+      gap:7px;
     }
 
-    .artist-hero.ne {
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)),
-        linear-gradient(135deg, #24354d 0%, #111722 58%, #172133 100%);
-    }
-
-    .artist-hero.av {
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)),
-        linear-gradient(135deg, #4b351f 0%, #18120d 58%, #291d12 100%);
-    }
-
-    .artist-hero.es {
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)),
-        linear-gradient(135deg, #4a2742 0%, #1b1020 58%, #2b1827 100%);
-    }
-
-    .artist-hero.ns {
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)),
-        linear-gradient(135deg, #22343b 0%, #11181c 58%, #19252a 100%);
-    }
-
-    .artist-hero.fr {
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)),
-        linear-gradient(135deg, #303045 0%, #12131b 58%, #1d1e2b 100%);
-    }
-
-    .artist-hero.vh {
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)),
-        linear-gradient(135deg, #392e4a 0%, #171220 58%, #241930 100%);
-    }
-
-    .artist-hero.mr {
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)),
-        linear-gradient(135deg, #443423 0%, #19140d 58%, #271d13 100%);
-    }
-
-    .artist-hero.as {
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)),
-        linear-gradient(135deg, #42262c 0%, #191014 58%, #2a181d 100%);
-    }
-
-    .artist-hero-inner {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 28px;
-      background: linear-gradient(180deg, rgba(0,0,0,0.06), rgba(0,0,0,0.58) 72%, rgba(0,0,0,0.79) 100%);
-    }
-
-    .artist-badge {
-      display: inline-flex;
-      width: max-content;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.10);
-      border: 1px solid rgba(255,255,255,0.10);
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      margin-bottom: 16px;
-    }
-
-    .artist-hero h1 {
-      margin: 0 0 10px;
-      font-size: 60px;
-      line-height: 0.93;
-      letter-spacing: -0.05em;
-    }
-
-    .artist-hero p {
-      margin: 0;
-      color: #e1e7ed;
-      line-height: 1.74;
-      font-size: 17px;
-      max-width: 520px;
-    }
-
-    .artist-content {
-      border-radius: 30px;
-      border: 1px solid var(--line);
-      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
-      box-shadow: var(--shadow);
-      padding: 26px;
-    }
-
-    .artist-content h2 {
-      margin: 0 0 14px;
-      font-size: 34px;
-      letter-spacing: -0.03em;
-    }
-
-    .artist-content p {
-      margin: 0 0 18px;
-      color: #d9e0e8;
-      line-height: 1.84;
-      font-size: 16px;
-    }
-
-    .artist-meta {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
-      gap: 12px;
-      margin-top: 18px;
-    }
-
-    .artist-box {
-      border-radius: 18px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.04);
-      padding: 16px;
-    }
-
-    .artist-box small {
-      display: block;
-      margin-bottom: 8px;
-      color: #c8d0da;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-    }
-
-    .artist-box strong {
-      display: block;
-      font-size: 20px;
-      line-height: 1.3;
-    }
-
-    .artist-actions {
-      margin-top: 20px;
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    /* =========================================================
-       MODAL
-       ========================================================= */
-
-    .modal-shell {
-      position: fixed;
-      inset: 0;
-      z-index: 1200;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 18px;
-      background: rgba(0,0,0,0.72);
-      backdrop-filter: blur(10px);
-    }
-
-    .modal-shell.open {
-      display: flex;
-    }
-
-    .modal {
-      width: min(100%, 760px);
-      border-radius: 26px;
-      overflow: hidden;
-      border: 1px solid var(--line);
-      background: #0d1014;
-      box-shadow: var(--shadow);
-    }
-
-    .modal-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 18px 20px;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .modal-head h3 {
-      margin: 0;
-      font-size: 24px;
-      letter-spacing: -0.03em;
-    }
-
-    .modal-close {
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.04);
-      color: var(--white);
-      border-radius: 999px;
-      padding: 10px 14px;
-      cursor: pointer;
-    }
-
-    .modal-body {
-      padding: 20px;
-    }
-
-    .modal-copy {
-      margin: 0 0 16px;
-      color: var(--muted);
-      line-height: 1.7;
-      font-size: 15px;
-    }
-
-    .form-grid {
-      display: grid;
-      gap: 12px;
-    }
-
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    .field {
-      display: grid;
-      gap: 7px;
-    }
-
-    .field label {
-      font-size: 13px;
-      color: #edf2f7;
-      font-weight: 700;
+    .field label{
+      font-size:13px;
+      color:#e8edf2;
+      font-weight:700;
     }
 
     .field input,
     .field select,
-    .field textarea {
-      width: 100%;
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      background: rgba(255,255,255,0.05);
-      color: var(--white);
-      padding: 14px;
-      outline: none;
+    .field textarea{
+      width:100%;
+      border:1px solid var(--line);
+      border-radius:16px;
+      background:rgba(255,255,255,.05);
+      color:#fff;
+      padding:14px 14px;
+      outline:none;
     }
 
-    .field textarea {
-      resize: vertical;
-      min-height: 120px;
+    .field textarea{
+      min-height:110px;
+      resize:vertical;
     }
 
     .field input::placeholder,
-    .field textarea::placeholder {
-      color: var(--muted-2);
+    .field textarea::placeholder{
+      color:#97a1ad;
     }
 
-    .status {
-      font-size: 13px;
-      line-height: 1.5;
-      color: var(--muted);
-      margin-top: 4px;
+    .status{
+      font-size:13px;
+      color:var(--muted);
+      line-height:1.5;
+      margin-top:4px;
     }
 
-    .status.success {
-      color: var(--success);
+    .status.success{color:#8df0ab}
+    .status.error{color:#ff9e9e}
+
+    .saved-list{
+      display:grid;
+      gap:10px;
+      margin-top:12px;
     }
 
-    .status.error {
-      color: var(--danger);
+    .saved-item{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      border:1px solid var(--line);
+      border-radius:16px;
+      background:rgba(255,255,255,.04);
+      padding:12px 14px;
     }
 
-    /* =========================================================
-       FOOTER
-       ========================================================= */
-
-    .footer {
-      margin-top: auto;
-      border-top: 1px solid var(--line);
-      color: #a8b2bd;
-      font-size: 13px;
-      padding: 18px 0 30px;
+    .saved-item span{
+      color:#f0f5fa;
+      font-size:14px;
     }
 
-    .footer-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      flex-wrap: wrap;
+    .artist-page{
+      display:none;
+      padding:28px 0 56px;
+      animation:fadeIn .22s ease;
     }
 
-    /* =========================================================
-       RESPONSIVE
-       ========================================================= */
+    .artist-page.active{display:block}
 
-    @media (max-width: 1220px) {
-      .hero,
+    .back-link{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      border-radius:999px;
+      color:#edf2f7;
+      cursor:pointer;
+      margin-bottom:18px;
+    }
+
+    .artist-layout{
+      display:grid;
+      grid-template-columns:.95fr 1.05fr;
+      gap:20px;
+      align-items:start;
+    }
+
+    .artist-hero{
+      min-height:580px;
+      border:1px solid var(--line);
+      border-radius:30px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      position:relative;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)),
+        linear-gradient(135deg,#28303a 0%, #13171e 58%, #1b2129 100%);
+    }
+
+    .artist-hero.jp{background:
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)),
+        linear-gradient(135deg,#2b323d 0%, #14181f 58%, #1d232c 100%);}
+    .artist-hero.lh{background:
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)),
+        linear-gradient(135deg,#3d2d37 0%, #17131a 58%, #231821 100%);}
+    .artist-hero.ne{background:
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)),
+        linear-gradient(135deg,#243349 0%, #111722 58%, #172132 100%);}
+    .artist-hero.av{background:
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)),
+        linear-gradient(135deg,#4a351f 0%, #18120d 58%, #291d12 100%);}
+    .artist-hero.es{background:
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)),
+        linear-gradient(135deg,#4b2742 0%, #1c1020 58%, #2a1827 100%);}
+    .artist-hero.ns{background:
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)),
+        linear-gradient(135deg,#21333b 0%, #11181c 58%, #18252a 100%);}
+    .artist-hero.fr{background:
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)),
+        linear-gradient(135deg,#2e2f44 0%, #12131a 58%, #1d1e2b 100%);}
+    .artist-hero.vh{background:
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)),
+        linear-gradient(135deg,#392d4a 0%, #171220 58%, #24192f 100%);}
+    .artist-hero.mr{background:
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)),
+        linear-gradient(135deg,#433423 0%, #19140e 58%, #271d13 100%);}
+    .artist-hero.as{background:
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)),
+        linear-gradient(135deg,#41262b 0%, #181013 58%, #2a181c 100%);}
+
+    .artist-hero-inner{
+      position:absolute;
+      inset:0;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-end;
+      padding:28px;
+      background:linear-gradient(180deg, rgba(0,0,0,.06), rgba(0,0,0,.58) 72%, rgba(0,0,0,.78) 100%);
+    }
+
+    .artist-badge{
+      display:inline-flex;
+      width:max-content;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.10);
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      margin-bottom:16px;
+    }
+
+    .artist-hero h1{
+      margin:0 0 10px;
+      font-size:58px;
+      line-height:.94;
+      letter-spacing:-.05em;
+    }
+
+    .artist-hero p{
+      margin:0;
+      color:#e0e6ec;
+      line-height:1.7;
+      font-size:17px;
+      max-width:520px;
+    }
+
+    .artist-content{
+      border:1px solid var(--line);
+      border-radius:30px;
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      box-shadow:var(--shadow);
+      padding:26px;
+    }
+
+    .artist-content h2{
+      margin:0 0 14px;
+      font-size:34px;
+      letter-spacing:-.03em;
+    }
+
+    .artist-content p{
+      margin:0 0 18px;
+      color:#d8e0e8;
+      line-height:1.85;
+      font-size:16px;
+    }
+
+    .artist-meta{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:12px;
+      margin-top:18px;
+    }
+
+    .artist-meta .box{
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:rgba(255,255,255,.04);
+      padding:16px;
+    }
+
+    .artist-meta .box small{
+      display:block;
+      color:#c8d0da;
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      margin-bottom:8px;
+    }
+
+    .artist-meta .box strong{
+      display:block;
+      font-size:20px;
+      line-height:1.3;
+    }
+
+    .artist-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:20px;
+    }
+
+    .footer{
+      border-top:1px solid var(--line);
+      padding:18px 0 30px;
+      color:#a8b2bd;
+      font-size:13px;
+    }
+
+    .footer-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    @media (max-width:1220px){
+      .artist-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+      .release-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .two-col,
       .artist-layout,
-      .cta-strip {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-right {
-        padding: 0 24px 24px;
-      }
-
-      .artist-grid {
-        grid-template-columns: repeat(3, minmax(0,1fr));
-      }
-
-      .release-grid {
-        grid-template-columns: repeat(2, minmax(0,1fr));
-      }
-
-      .cta-actions {
-        justify-content: flex-start;
-      }
+      .hero{grid-template-columns:1fr}
+      .hero-right{padding:0 24px 24px}
     }
 
-    @media (max-width: 760px) {
-      .wrap {
-        padding: 0 14px;
-      }
-
-      .topbar-inner {
-        min-height: auto;
-        padding: 14px 0;
-      }
-
-      .hero-left {
-        padding: 36px 18px 22px;
-      }
-
-      .hero-title {
-        font-size: 44px;
-      }
-
-      .hero-text {
-        font-size: 16px;
-      }
-
+    @media (max-width:760px){
+      .wrap{padding:0 14px}
+      .hero-left{padding:34px 18px 20px}
+      .hero h1{font-size:44px}
+      .hero p{font-size:16px}
       .hero-stats,
       .artist-meta,
-      .form-row {
-        grid-template-columns: 1fr;
-      }
-
+      .form-row{grid-template-columns:1fr}
       .artist-grid,
-      .release-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .section-title {
-        font-size: 26px;
-      }
-
-      .artist-hero h1 {
-        font-size: 42px;
-      }
-
-      .artist-content,
-      .modal-body {
-        padding: 18px;
-      }
-
-      .cta-strip {
-        padding: 20px;
-      }
-
-      .brand-title {
-        font-size: 16px;
-      }
+      .release-grid{grid-template-columns:1fr}
+      .artist-hero h1{font-size:42px}
+      .panel,
+      .artist-content{padding:18px}
+      .section-head h2{font-size:26px}
     }
   </style>
 </head>
 <body>
-  <div class="site-shell">
-    <!-- =====================================================
-         TOPBAR
-         ===================================================== -->
-    <header class="topbar">
-      <div class="wrap topbar-inner">
-        <div class="brand">
-          <div class="brand-mark" id="brandMark">UM</div>
-          <div class="brand-copy">
-            <div class="brand-title">ULTRA MUSIC GROUP</div>
-            <div class="brand-sub">Official Artist Showcase</div>
-          </div>
-        </div>
-
-        <nav class="nav">
-          <button class="nav-link" type="button" onclick="goHome()">Home</button>
-          <button class="nav-link" type="button" onclick="goHome(); scrollToId('artists')">Artists</button>
-          <button class="nav-link" type="button" onclick="goHome(); scrollToId('releases')">Releases</button>
-          <button class="nav-btn" type="button" onclick="openModal()">Follow Ultra</button>
-        </nav>
-      </div>
-    </header>
-
-    <!-- =====================================================
-         HOME SCREEN
-         ===================================================== -->
-    <main id="homeScreen" class="screen active">
-      <div class="wrap">
-        <!-- HERO -->
-        <section class="hero">
-          <div class="hero-left">
-            <div class="eyebrow">
-              <span class="eyebrow-dot"></span>
-              A New Era of Independent Music
-            </div>
-
-            <h1 class="hero-title">The home of Ultra Music Group</h1>
-
-            <p class="hero-text">
-              A premium label experience built around artist discovery, strong presentation, featured releases, and a clean public-facing identity that feels cinematic, polished, and easy to explore.
-            </p>
-
-            <div class="hero-actions">
-              <button class="btn btn-light" type="button" onclick="scrollToId('artists')">Explore Artists</button>
-              <button class="btn btn-dark" type="button" onclick="scrollToId('releases')">Featured Releases</button>
-            </div>
-
-            <div class="hero-stats">
-              <div class="hero-stat">
-                <div class="hero-stat-label">Roster</div>
-                <div class="hero-stat-value">10 Artists</div>
-              </div>
-              <div class="hero-stat">
-                <div class="hero-stat-label">Purpose</div>
-                <div class="hero-stat-value">Discovery + Brand Presentation</div>
-              </div>
-              <div class="hero-stat">
-                <div class="hero-stat-label">Build</div>
-                <div class="hero-stat-value">Clean Public-Facing Homepage</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="hero-right">
-            <div class="hero-stack">
-              <div class="stack-card">
-                <div class="stack-kicker">Artist Pages</div>
-                <strong>Long-form artist bios</strong>
-                <p>Each artist opens into a dedicated page with a premium header, complete biography, and a cleaner public-facing feel.</p>
-              </div>
-
-              <div class="stack-card">
-                <div class="stack-kicker">Featured Releases</div>
-                <strong>Release-forward layout</strong>
-                <p>Showcase the music first and use this as the visual home base while your listening links can point outward later.</p>
-              </div>
-
-              <div class="stack-card">
-                <div class="stack-kicker">Brand First</div>
-                <strong>No dashboard feel</strong>
-                <p>This version keeps the homepage focused on the label, the artists, and the music instead of looking like a tool.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- ARTISTS -->
-        <section class="section" id="artists">
-          <div class="section-head">
-            <div>
-              <h2 class="section-title">Artists</h2>
-              <p class="section-copy">
-                Tap any card to open the artist page. This keeps the homepage clean while still giving each artist a full biography and their own dedicated section.
-              </p>
-            </div>
-            <div class="chip">10 artist roster</div>
-          </div>
-
-          <div class="artist-grid" id="artistGrid"></div>
-        </section>
-
-        <!-- RELEASES -->
-        <section class="section" id="releases">
-          <div class="section-head">
-            <div>
-              <h2 class="section-title">Featured Releases</h2>
-              <p class="section-copy">
-                Use this section to spotlight the core music and keep the homepage focused on discovery, visuals, and artist presentation.
-              </p>
-            </div>
-            <div class="chip">Release-forward homepage</div>
-          </div>
-
-          <div class="release-grid" id="releaseGrid"></div>
-        </section>
-
-        <!-- BOTTOM STRIP -->
-        <section class="cta-strip" id="ctaStrip">
-          <div class="cta-copy">
-            <h3>Keep the homepage brand-first</h3>
-            <p>
-              This version keeps the site focused on the label, the artists, and the music. It is built to look public-facing and polished, while still leaving room for your real logo, real images, real release links, and any future features you want later.
-            </p>
-          </div>
-
-          <div class="cta-actions">
-            <button class="btn btn-light" type="button" onclick="scrollToId('artists')">Browse Artists</button>
-            <button class="btn btn-dark" type="button" onclick="openModal()">Follow Ultra</button>
-          </div>
-        </section>
-      </div>
-    </main>
-
-    <!-- =====================================================
-         ARTIST DETAIL CONTAINER
-         ===================================================== -->
-    <section id="artistScreen" class="artist-page">
-      <div class="wrap">
-        <div class="back-link" onclick="goHome()">← Back to home</div>
-
-        <div class="artist-layout">
-          <div class="artist-hero" id="detailHero">
-            <div class="artist-hero-inner">
-              <div class="artist-badge" id="detailBadge">Artist</div>
-              <h1 id="detailName">Artist Name</h1>
-              <p id="detailTagline">Artist tagline.</p>
-            </div>
-          </div>
-
-          <div class="artist-content">
-            <h2>Artist Bio</h2>
-
-            <div id="detailBio"></div>
-
-            <div class="artist-meta">
-              <div class="artist-box">
-                <small>Role</small>
-                <strong id="detailRole">Artist</strong>
-              </div>
-              <div class="artist-box">
-                <small>Sound</small>
-                <strong id="detailSound">Pop</strong>
-              </div>
-              <div class="artist-box">
-                <small>Focus</small>
-                <strong id="detailFocus">Identity + Music</strong>
-              </div>
-            </div>
-
-            <div class="artist-actions">
-              <button class="btn btn-light" type="button" onclick="goHome(); scrollToId('releases')">Featured Releases</button>
-              <button class="btn btn-dark" type="button" onclick="goHome()">Back to Homepage</button>
-            </div>
-          </div>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <div class="brand">
+        <div class="brand-mark">UM</div>
+        <div class="brand-copy">
+          <div class="brand-title">ULTRA MUSIC GROUP</div>
+          <div class="brand-sub">Premium Fan Experience</div>
         </div>
       </div>
-    </section>
 
-    <!-- =====================================================
-         MODAL
-         ===================================================== -->
-    <div class="modal-shell" id="followModal">
-      <div class="modal">
-        <div class="modal-head">
-          <h3>Follow Ultra Music Group</h3>
-          <button class="modal-close" type="button" onclick="closeModal()">Close</button>
-        </div>
+      <nav class="nav">
+        <a href="#" onclick="goHome(); return false;">Home</a>
+        <a href="#" onclick="goHome(); setTimeout(()=>document.getElementById('artists').scrollIntoView({behavior:'smooth'}),60); return false;">Artists</a>
+        <a href="#" onclick="goHome(); setTimeout(()=>document.getElementById('releases').scrollIntoView({behavior:'smooth'}),60); return false;">Releases</a>
+        <a href="#" onclick="goHome(); setTimeout(()=>document.getElementById('fanhub').scrollIntoView({behavior:'smooth'}),60); return false;">Fan Hub</a>
+        <button class="cta" type="button" onclick="goHome(); setTimeout(()=>document.getElementById('emailInput').focus(),60)">Join Email List</button>
+      </nav>
+    </div>
+  </header>
 
-        <div class="modal-body">
-          <p class="modal-copy">
-            This is a clean placeholder form for your public-facing site. Later, connect it to your real email platform or website system.
+  <main id="homeScreen" class="screen active">
+    <div class="wrap">
+      <section class="hero">
+        <div class="hero-left">
+          <div class="eyebrow">A New Era of Independent Music</div>
+          <h1>The home of Ultra Music Group</h1>
+          <p>
+            This is a clean premium label app experience: artist discovery, release highlights, fan sign-up, saved favorites, and artist pages that feel cinematic and polished without trying to rebuild Spotify.
           </p>
+          <div class="hero-actions">
+            <button class="btn primary" type="button" onclick="document.getElementById('artists').scrollIntoView({behavior:'smooth'})">Explore Artists</button>
+            <button class="btn secondary" type="button" onclick="document.getElementById('emailInput').focus()">Get Early Access</button>
+          </div>
+          <div class="hero-stats">
+            <div class="stat">
+              <div class="stat-label">Roster</div>
+              <div class="stat-value">10 Artists</div>
+            </div>
+            <div class="stat">
+              <div class="stat-label">Purpose</div>
+              <div class="stat-value">Discovery + Fan Connection</div>
+            </div>
+            <div class="stat">
+              <div class="stat-label">Build</div>
+              <div class="stat-value">Premium MVP Foundation</div>
+            </div>
+          </div>
+        </div>
 
-          <form id="followForm" class="form-grid">
-            <div class="form-row">
-              <div class="field">
-                <label for="followName">Name</label>
-                <input id="followName" type="text" placeholder="Your name" />
-              </div>
+        <div class="hero-right">
+          <div class="hero-stack">
+            <div class="stack-card">
+              <div class="stack-kicker">Artist Pages</div>
+              <strong>Full long-form bios</strong>
+              <p>Every artist has a dedicated page with a premium header, complete biography, and quick actions.</p>
+            </div>
+            <div class="stack-card">
+              <div class="stack-kicker">Fan Hub</div>
+              <strong>Email capture and favorites</strong>
+              <p>Fans can join the email list now and save favorite artists locally for a more app-like experience.</p>
+            </div>
+            <div class="stack-card">
+              <div class="stack-kicker">Release Forward</div>
+              <strong>Built to link out</strong>
+              <p>Use this as the home base while Spotify, Apple Music, and YouTube keep handling playback.</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-              <div class="field">
-                <label for="followEmail">Email</label>
-                <input id="followEmail" type="email" placeholder="Your email address" />
+      <section class="section" id="artists">
+        <div class="section-head">
+          <div>
+            <h2>Artists</h2>
+            <p>Tap any card to open the artist page. This keeps the premium layout while giving each artist their own long-form section.</p>
+          </div>
+          <div class="chip">10 artist roster</div>
+        </div>
+
+        <div class="artist-grid">
+          <article class="artist-card" onclick="openArtist('juan-pablo')">
+            <div class="artist-visual"><div class="artist-tag">Founder / Pop</div><div class="artist-initial">JP</div></div>
+            <div class="artist-body"><h3>Juan Pablo</h3><p>Founder, songwriter, producer, and central creative force behind the Ultra Music Group vision.</p></div>
+          </article>
+
+          <article class="artist-card" onclick="openArtist('lily-heart')">
+            <div class="artist-visual"><div class="artist-tag">Pop</div><div class="artist-initial">LH</div></div>
+            <div class="artist-body"><h3>Lily Heart</h3><p>Emotion-forward pop with warmth, melody, vulnerability, and polished presentation.</p></div>
+          </article>
+
+          <article class="artist-card" onclick="openArtist('neon-euphoria')">
+            <div class="artist-visual"><div class="artist-tag">Electronic / Pop</div><div class="artist-initial">NE</div></div>
+            <div class="artist-body"><h3>Neon Euphoria</h3><p>High-energy color, movement, atmosphere, and bold electronic identity.</p></div>
+          </article>
+
+          <article class="artist-card" onclick="openArtist('angel-valentin')">
+            <div class="artist-visual"><div class="artist-tag">Regional Mexican</div><div class="artist-initial">AV</div></div>
+            <div class="artist-body"><h3>Ángel Valentín</h3><p>Tradition, strength, and emotional storytelling with regional force and character.</p></div>
+          </article>
+
+          <article class="artist-card" onclick="openArtist('elena-star')">
+            <div class="artist-visual"><div class="artist-tag">Pop</div><div class="artist-initial">ES</div></div>
+            <div class="artist-body"><h3>Elena Star</h3><p>Bright pop energy with a glamorous image, strong hooks, and wide-audience appeal.</p></div>
+          </article>
+
+          <article class="artist-card" onclick="openArtist('niko-soul')">
+            <div class="artist-visual"><div class="artist-tag">Soul / Pop</div><div class="artist-initial">NS</div></div>
+            <div class="artist-body"><h3>Niko Soul</h3><p>Soulful delivery, emotional resonance, and polished modern production.</p></div>
+          </article>
+
+          <article class="artist-card" onclick="openArtist('fabian-ray')">
+            <div class="artist-visual"><div class="artist-tag">Pop</div><div class="artist-initial">FR</div></div>
+            <div class="artist-body"><h3>Fabian Ray</h3><p>Charisma, performance energy, and clean pop presentation tied to strong identity.</p></div>
+          </article>
+
+          <article class="artist-card" onclick="openArtist('v-heart')">
+            <div class="artist-visual"><div class="artist-tag">Pop</div><div class="artist-initial">VH</div></div>
+            <div class="artist-body"><h3>V Heart</h3><p>Melodic pop emotion with softness, intimacy, and replay value.</p></div>
+          </article>
+
+          <article class="artist-card" onclick="openArtist('midnight-romance')">
+            <div class="artist-visual"><div class="artist-tag">Pop / Mood</div><div class="artist-initial">MR</div></div>
+            <div class="artist-body"><h3>Midnight Romance</h3><p>Night-driven mood, romance, atmosphere, and cinematic emotional texture.</p></div>
+          </article>
+
+          <article class="artist-card" onclick="openArtist('aura-skye')">
+            <div class="artist-visual"><div class="artist-tag">Pop / Dance</div><div class="artist-initial">AS</div></div>
+            <div class="artist-body"><h3>Aura Skye</h3><p>Confident, elevated pop energy designed to feel glossy, modern, and immediate.</p></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="releases">
+        <div class="section-head">
+          <div>
+            <h2>Featured Releases</h2>
+            <p>This section holds key singles and can later point directly to Spotify, Apple Music, YouTube, or anywhere else you want fans to go.</p>
+          </div>
+          <div class="chip">Release-forward MVP</div>
+        </div>
+
+        <div class="release-grid">
+          <article class="release-card">
+            <div class="release-cover">HEARTS ON<br>THE HIGHWAY</div>
+            <div class="release-body">
+              <h3>Hearts on the Highway</h3>
+              <div class="release-meta">Juan Pablo • Pop Single</div>
+              <p>A polished pop statement built around movement, ambition, melody, and cinematic scale.</p>
+              <div class="release-actions">
+                <button class="mini light" type="button" onclick="placeholderLink()">Listen</button>
+                <button class="mini dark" type="button" onclick="openArtist('juan-pablo')">Artist Page</button>
               </div>
             </div>
+          </article>
 
-            <div class="form-row">
-              <div class="field">
-                <label for="followArtist">Favorite Artist</label>
-                <select id="followArtist"></select>
+          <article class="release-card">
+            <div class="release-cover">SATURDAY<br>MORNING CRUSH</div>
+            <div class="release-body">
+              <h3>Saturday Morning Crush</h3>
+              <div class="release-meta">Lily Heart • Pop Single</div>
+              <p>Warm melodic pop built around softness, memory, emotional clarity, and listener connection.</p>
+              <div class="release-actions">
+                <button class="mini light" type="button" onclick="placeholderLink()">Listen</button>
+                <button class="mini dark" type="button" onclick="openArtist('lily-heart')">Artist Page</button>
               </div>
+            </div>
+          </article>
 
+          <article class="release-card">
+            <div class="release-cover">CORAZÓN<br>DE ACERO</div>
+            <div class="release-body">
+              <h3>Corazón de Acero</h3>
+              <div class="release-meta">Ángel Valentín • Regional Mexican</div>
+              <p>A bold emotional record driven by resilience, strength, and powerful vocal character.</p>
+              <div class="release-actions">
+                <button class="mini light" type="button" onclick="placeholderLink()">Listen</button>
+                <button class="mini dark" type="button" onclick="openArtist('angel-valentin')">Artist Page</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="release-card">
+            <div class="release-cover">ANGEL OF<br>THE NIGHT</div>
+            <div class="release-body">
+              <h3>Angel of the Night</h3>
+              <div class="release-meta">Elena Star • Pop Single</div>
+              <p>Glamorous pop energy with shine, motion, and a bold visual identity built for attention.</p>
+              <div class="release-actions">
+                <button class="mini light" type="button" onclick="placeholderLink()">Listen</button>
+                <button class="mini dark" type="button" onclick="openArtist('elena-star')">Artist Page</button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="fanhub">
+        <div class="two-col">
+          <div class="panel">
+            <h3>Fan Hub</h3>
+            <p>This gives the app interactivity right now without needing a full backend first.</p>
+            <div class="feature-list">
+              <div class="feature"><strong>Email list capture</strong><span>Collect names and emails now, then connect it to a real email service later.</span></div>
+              <div class="feature"><strong>Saved favorites</strong><span>Fans can save favorite artists locally to make the MVP feel more like an app.</span></div>
+              <div class="feature"><strong>Premium presentation</strong><span>Artist pages and release layout stay polished and entertainment-focused.</span></div>
+              <div class="feature"><strong>Expandable foundation</strong><span>Later add real artwork, streaming links, profiles, sign-ins, and notifications without rebuilding the whole thing.</span></div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h3>Join the Email List</h3>
+            <p>Start collecting audience interest from day one.</p>
+            <form id="emailForm">
+              <div class="form-row">
+                <div class="field">
+                  <label for="nameInput">Name</label>
+                  <input id="nameInput" type="text" placeholder="Your name">
+                </div>
+                <div class="field">
+                  <label for="emailInput">Email</label>
+                  <input id="emailInput" type="email" placeholder="Your email address">
+                </div>
+              </div>
               <div class="field">
-                <label for="followInterest">Updates</label>
-                <select id="followInterest">
+                <label for="interestInput">What do you want updates about?</label>
+                <select id="interestInput">
                   <option value="New releases">New releases</option>
                   <option value="Artist news">Artist news</option>
                   <option value="Visual drops">Visual drops</option>
                   <option value="Everything Ultra Music Group">Everything Ultra Music Group</option>
                 </select>
               </div>
-            </div>
+              <button class="btn primary" type="submit">Subscribe</button>
+              <div id="emailStatus" class="status">No signup saved yet.</div>
+            </form>
+          </div>
+        </div>
 
-            <div class="field">
-              <label for="followMessage">Message</label>
-              <textarea id="followMessage" placeholder="Tell us what you want to hear more about."></textarea>
-            </div>
+        <div class="two-col">
+          <div class="panel">
+            <h3>Create Fan Profile</h3>
+            <p>This saves locally in the browser for now so the app already has a working profile layer.</p>
+            <form id="profileForm">
+              <div class="form-row">
+                <div class="field">
+                  <label for="profileName">Display Name</label>
+                  <input id="profileName" type="text" placeholder="Display name">
+                </div>
+                <div class="field">
+                  <label for="profileEmail">Email</label>
+                  <input id="profileEmail" type="email" placeholder="Email address">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="field">
+                  <label for="profileCity">City</label>
+                  <input id="profileCity" type="text" placeholder="Los Angeles">
+                </div>
+                <div class="field">
+                  <label for="profileFavorite">Favorite Artist</label>
+                  <select id="profileFavorite">
+                    <option value="">Select one</option>
+                    <option value="Juan Pablo">Juan Pablo</option>
+                    <option value="Lily Heart">Lily Heart</option>
+                    <option value="Neon Euphoria">Neon Euphoria</option>
+                    <option value="Ángel Valentín">Ángel Valentín</option>
+                    <option value="Elena Star">Elena Star</option>
+                    <option value="Niko Soul">Niko Soul</option>
+                    <option value="Fabian Ray">Fabian Ray</option>
+                    <option value="V Heart">V Heart</option>
+                    <option value="Midnight Romance">Midnight Romance</option>
+                    <option value="Aura Skye">Aura Skye</option>
+                  </select>
+                </div>
+              </div>
+              <div class="field">
+                <label for="profileBio">Short Fan Bio</label>
+                <textarea id="profileBio" placeholder="Say what music you love or what you want early access to."></textarea>
+              </div>
+              <button class="btn primary" type="submit">Save Profile</button>
+              <div id="profileStatus" class="status">No profile saved yet.</div>
+            </form>
+          </div>
 
-            <button class="btn btn-light" type="submit">Submit</button>
-            <div class="status" id="followStatus">No submission yet.</div>
-          </form>
+          <div class="panel">
+            <h3>Saved Favorites</h3>
+            <p>Favorites you save from artist pages appear here.</p>
+            <div id="favoritesList" class="saved-list">
+              <div class="saved-item"><span>No favorites saved yet.</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- ARTIST PAGES -->
+
+  <section id="artist-juan-pablo" class="artist-page">
+    <div class="wrap">
+      <div class="back-link" onclick="goHome()">← Back to home</div>
+      <div class="artist-layout">
+        <div class="artist-hero jp">
+          <div class="artist-hero-inner">
+            <div class="artist-badge">Founder Artist</div>
+            <h1>Juan Pablo</h1>
+            <p>Pop artist, songwriter, producer, and founder building music, identity, and a larger creative platform at the same time.</p>
+          </div>
+        </div>
+        <div class="artist-content">
+          <h2>Artist Bio</h2>
+          <p>Juan Pablo is a pop artist, songwriter, producer, and creative founder whose work is driven by vision, scale, and long-term identity. He does not approach music as a random collection of disconnected singles. He approaches it as a complete world where the songs, the visuals, the presentation, and the artist positioning all reinforce one another. That mindset shapes both his individual releases and the overall direction of Ultra Music Group.</p>
+          <p>His sound is rooted in polished pop, strong melodic framing, and records designed to feel cinematic, memorable, and emotionally direct. He is focused on creating songs that listeners can return to, songs that feel built with intention rather than impulse. That means paying attention not only to the sound of a release, but also to how it fits into a broader artistic identity that can grow over time.</p>
+          <p>As the founder of the label, Juan Pablo also represents the structure behind the platform. He is helping define how artists are presented, how the fan experience feels, and how the catalog is introduced to the audience. His role extends beyond being just a performer. He is shaping the larger architecture of the roster so that every artist lives inside a more polished and elevated environment.</p>
+          <p>What makes Juan Pablo stand out is the combination of artistry and construction. He is not only making music. He is building a place for the music to live. That makes his work feel ambitious and grounded at the same time, with a direction focused on growth, consistency, and creative control.</p>
+          <div class="artist-meta">
+            <div class="box"><small>Role</small><strong>Artist / Founder</strong></div>
+            <div class="box"><small>Sound</small><strong>Cinematic Pop</strong></div>
+            <div class="box"><small>Focus</small><strong>Vision + Brand</strong></div>
+          </div>
+          <div class="artist-actions">
+            <button class="btn primary" type="button" onclick="saveFavorite('Juan Pablo')">Add to favorites</button>
+            <button class="btn secondary" type="button" onclick="goHome(); setTimeout(()=>document.getElementById('emailInput').focus(),60)">Join email list</button>
+          </div>
         </div>
       </div>
     </div>
+  </section>
 
-    <!-- =====================================================
-         FOOTER
-         ===================================================== -->
-    <footer class="footer">
-      <div class="wrap footer-inner">
-        <div>© 2026 Ultra Music Group</div>
-        <div>Public-facing homepage • artist discovery • featured releases</div>
+  <section id="artist-lily-heart" class="artist-page">
+    <div class="wrap">
+      <div class="back-link" onclick="goHome()">← Back to home</div>
+      <div class="artist-layout">
+        <div class="artist-hero lh">
+          <div class="artist-hero-inner">
+            <div class="artist-badge">Pop Artist</div>
+            <h1>Lily Heart</h1>
+            <p>Emotion-forward pop centered on warmth, connection, softness, and a melodic identity that stays with the listener.</p>
+          </div>
+        </div>
+        <div class="artist-content">
+          <h2>Artist Bio</h2>
+          <p>Lily Heart is a pop artist whose music is built around vulnerability, closeness, and strong melodic storytelling. Her records are designed to feel personal without losing polish, giving listeners songs that are emotionally direct while still feeling refined and replayable. That balance makes her one of the label’s strongest emotional voices.</p>
+          <p>Her artistic lane centers on love, reflection, intimacy, and the kind of moments that people carry with them long after the song is over. She does not rely on noise or overstatement. Instead, her strength comes from clarity, sincerity, and the ability to make a song feel both soft and memorable at the same time.</p>
+          <p>Within Ultra Music Group, Lily Heart expands the roster by bringing a more intimate emotional tone into the platform. She represents a lane that is gentle but not small, polished but still genuine. Her releases help show that the label can carry range without losing its premium, cohesive identity.</p>
+          <p>Lily Heart continues to shape a catalog that values emotion as much as presentation. She is the kind of artist who invites the listener inward, creating space for songs that feel honest, beautiful, and deeply connected to personal feeling.</p>
+          <div class="artist-meta">
+            <div class="box"><small>Role</small><strong>Pop Artist</strong></div>
+            <div class="box"><small>Sound</small><strong>Emotional Pop</strong></div>
+            <div class="box"><small>Focus</small><strong>Warmth + Melody</strong></div>
+          </div>
+          <div class="artist-actions">
+            <button class="btn primary" type="button" onclick="saveFavorite('Lily Heart')">Add to favorites</button>
+            <button class="btn secondary" type="button" onclick="goHome(); setTimeout(()=>document.getElementById('emailInput').focus(),60)">Join email list</button>
+          </div>
+        </div>
       </div>
-    </footer>
-  </div>
+    </div>
+  </section>
+
+  <section id="artist-neon-euphoria" class="artist-page">
+    <div class="wrap">
+      <div class="back-link" onclick="goHome()">← Back to home</div>
+      <div class="artist-layout">
+        <div class="artist-hero ne">
+          <div class="artist-hero-inner">
+            <div class="artist-badge">Electronic / Pop</div>
+            <h1>Neon Euphoria</h1>
+            <p>High-energy atmosphere, color, movement, and a sound built to feel immediate, modern, and alive.</p>
+          </div>
+        </div>
+        <div class="artist-content">
+          <h2>Artist Bio</h2>
+          <p>Neon Euphoria is a project built around motion, color, atmosphere, and polished electronic energy. The identity is designed to feel immersive and high impact, making the music feel like more than a track list. It feels like an environment. That gives the project a strong visual and sonic role within the Ultra Music Group roster.</p>
+          <p>The sound is created to lift the room, sharpen the mood, and create an immediate emotional charge. Whether through synth texture, pulse, or sonic brightness, Neon Euphoria is centered on momentum. It is not passive music. It is music built to change the temperature of the experience around it.</p>
+          <p>Inside the label, Neon Euphoria brings contrast and modernity. It helps show that Ultra Music Group is not limited to one type of presentation or emotional lane. The project expands the platform into a more design-forward, visually driven direction while still fitting under the same polished umbrella.</p>
+          <p>As the catalog grows, Neon Euphoria has room to become one of the most visually distinct artist brands on the roster. It is ideal for bold artwork, branded motion clips, and a premium digital presentation that feels sleek, colorful, and memorable.</p>
+          <div class="artist-meta">
+            <div class="box"><small>Role</small><strong>Concept Artist</strong></div>
+            <div class="box"><small>Sound</small><strong>Electronic Pop</strong></div>
+            <div class="box"><small>Focus</small><strong>Energy + Atmosphere</strong></div>
+          </div>
+          <div class="artist-actions">
+            <button class="btn primary" type="button" onclick="saveFavorite('Neon Euphoria')">Add to favorites</button>
+            <button class="btn secondary" type="button" onclick="goHome(); setTimeout(()=>document.getElementById('emailInput').focus(),60)">Join email list</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="artist-angel-valentin" class="artist-page">
+    <div class="wrap">
+      <div class="back-link" onclick="goHome()">← Back to home</div>
+      <div class="artist-layout">
+        <div class="artist-hero av">
+          <div class="artist-hero-inner">
+            <div class="artist-badge">Regional Mexican</div>
+            <h1>Ángel Valentín</h1>
+            <p>A strong regional voice carrying tradition, emotional storytelling, resilience, and cultural force.</p>
+          </div>
+        </div>
+        <div class="artist-content">
+          <h2>Artist Bio</h2>
+          <p>Ángel Valentín is a regional Mexican artist whose music is shaped by emotional power, strength, and tradition. His songs are designed to feel rooted in culture while still carrying the clean presentation and wider reach that modern artist development requires. That combination gives him a strong identity within the label.</p>
+          <p>His artistic lane is driven by voice, feeling, and conviction. The music is not simply styled around genre expectations. It is meant to communicate weight, heart, and personal truth. That makes his work feel grounded, especially for listeners who want records that carry both emotional and cultural presence.</p>
+          <p>As part of Ultra Music Group, Ángel Valentín expands the roster sonically and culturally. He shows that the platform can hold multiple audiences and still feel unified. His presence broadens the label’s emotional and stylistic reach while keeping the same overall standard of quality and presentation.</p>
+          <p>Ángel Valentín continues building a catalog that feels durable, expressive, and strong. He represents a side of the label that is proud, resilient, and deeply connected to storytelling through voice and identity.</p>
+          <div class="artist-meta">
+            <div class="box"><small>Role</small><strong>Regional Artist</strong></div>
+            <div class="box"><small>Sound</small><strong>Regional Mexican</strong></div>
+            <div class="box"><small>Focus</small><strong>Strength + Story</strong></div>
+          </div>
+          <div class="artist-actions">
+            <button class="btn primary" type="button" onclick="saveFavorite('Ángel Valentín')">Add to favorites</button>
+            <button class="btn secondary" type="button" onclick="goHome(); setTimeout(()=>document.getElementById('emailInput').focus(),60)">Join email list</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="artist-elena-star" class="artist-page">
+    <div class="wrap">
+      <div class="back-link" onclick="goHome()">← Back to home</div>
+      <div class="artist-layout">
+        <div class="artist-hero es">
+          <div class="artist-hero-inner">
+            <div class="artist-badge">Pop Artist</div>
+            <h1>Elena Star</h1>
+            <p>Bright pop glamour, bold hooks, and a visual identity designed to feel polished and immediate.</p>
+          </div>
+        </div>
+        <div class="artist-content">
+          <h2>Artist Bio</h2>
+          <p>Elena Star is a pop artist built around shine, confidence, and strong visual presence. Her identity is designed to feel glamorous and audience-facing from the start, giving the label a clear artist who can carry bright pop campaigns with polish and style.</p>
+          <p>The music lane behind Elena Star emphasizes hooks, momentum, and a presentation that feels clean, direct, and easy to connect with. She is the kind of artist who can hold a glossy visual world while still staying rooted in strong song structure and recognizable brand tone.</p>
+          <p>Within Ultra Music Group, Elena Star helps represent the more overtly polished and aspirational side of the roster. Her role in the platform is important because she reinforces the idea that the label can carry both emotional substance and visual shine without losing its identity.</p>
+          <p>As Elena Star’s catalog expands, the opportunity is to build a pop world that feels elevated, stylish, and memorable. She is well-positioned for strong artwork, branded visuals, and campaign rollouts that feel commercial without becoming generic.</p>
+          <div class="artist-meta">
+            <div class="box"><small>Role</small><strong>Pop Artist</strong></div>
+            <div class="box"><small>Sound</small><strong>Bright Pop</strong></div>
+            <div class="box"><small>Focus</small><strong>Glamour + Hooks</strong></div>
+          </div>
+          <div class="artist-actions">
+            <button class="btn primary" type="button" onclick="saveFavorite('Elena Star')">Add to favorites</button>
+            <button class="btn secondary" type="button" onclick="goHome(); setTimeout(()=>document.getElementById('emailInput').focus(),60)">Join email list</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="artist-niko-soul" class="artist-page">
+    <div class="wrap">
+      <div class="back-link" onclick="goHome()">← Back to home</div>
+      <div class="artist-layout">
+        <div class="artist-hero ns">
+          <div class="artist-hero-inner">
+            <div class="artist-badge">Soul / Pop</div>
+            <h1>Niko Soul</h1>
+            <p>Soulful delivery, emotional gravity, and polished modern production built for connection and depth.</p>
+          </div>
+        </div>
+        <div class="artist-content">
+          <h2>Artist Bio</h2>
+          <p>Niko Soul is an artist whose identity centers on vocal feeling, emotional depth, and a smooth modern sound. The name itself suggests the lane clearly: music that prioritizes feeling, presence, and a more soulful emotional connection to the listener.</p>
+          <p>His work is best understood as a balance between emotional resonance and contemporary polish. The songs are intended to feel grounded and expressive while still fitting comfortably inside a clean modern release framework. That gives the artist room to be both heartfelt and commercially presentable.</p>
+          <p>Within Ultra Music Group, Niko Soul gives the roster a different kind of emotional weight. He helps extend the label beyond bright pop and high-energy mood into something more intimate, more vocal, and more inward-facing without losing quality control.</p>
+          <p>As the platform develops, Niko Soul can become one of the roster’s anchors for listeners who want a smoother emotional lane. His strength lies in feeling, tone, and the ability to carry songs with sincerity and presence.</p>
+          <div class="artist-meta">
+            <div class="box"><small>Role</small><strong>Soul / Pop Artist</strong></div>
+            <div class="box"><small>Sound</small><strong>Soulful Modern Pop</strong></div>
+            <div class="box"><small>Focus</small><strong>Feeling + Voice</strong></div>
+          </div>
+          <div class="artist-actions">
+            <button class="btn primary" type="button" onclick="saveFavorite('Niko Soul')">Add to favorites</button>
+            <button class="btn secondary" type="button" onclick="goHome(); setTimeout(()=>document.getElementById('emailInput').focus(),60)">Join email list</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="artist-fabian-ray" class="artist-page">
+    <div class="wrap">
+      <div class="back-link" onclick="goHome()">← Back to home</div>
+      <div class="artist-layout">
+        <div class="artist-hero fr">
+          <div class="artist-hero-inner">
+            <div class="artist-badge">Pop Artist</div>
+            <h1>Fabian Ray</h1>
+            <p>Performance energy, charisma, and a clean pop identity shaped around star presence and confidence.</p>
+          </div>
+        </div>
+        <div class="artist-content">
+          <h2>Artist Bio</h2>
+          <p>Fabian Ray is built around performance energy, star presence, and a polished pop identity that feels made for visibility. His lane is defined by movement, confidence, and the kind of artist presentation that naturally supports strong visual rollout and larger audience-facing branding.</p>
+          <p>The appeal of Fabian Ray lies in clarity. The image, the energy, and the music can work together in a direct way that makes the artist easy to position and easy to market. That is valuable because premium presentation depends not only on sound, but on how quickly an artist feels recognizable and coherent to the viewer.</p>
+          <p>Within Ultra Music Group, Fabian Ray adds a more visibly performance-led angle to the roster. He helps balance the platform by giving it an artist presence tied strongly to confidence, movement, and visual charisma, which can be especially effective in campaigns built around clips, teasers, and image-first promotion.</p>
+          <p>Fabian Ray has the potential to become one of the more outward-facing artist identities in the lineup. His role is to carry momentum and star energy while still fitting inside the same polished label ecosystem that holds the rest of the roster together.</p>
+          <div class="artist-meta">
+            <div class="box"><small>Role</small><strong>Pop Artist</strong></div>
+            <div class="box"><small>Sound</small><strong>Performance Pop</strong></div>
+            <div class="box"><small>Focus</small><strong>Image + Energy</strong></div>
+          </div>
+          <div class="artist-actions">
+            <button class="btn primary" type="button" onclick="saveFavorite('Fabian Ray')">Add to favorites</button>
+            <button class="btn secondary" type="button" onclick="goHome(); setTimeout(()=>document.getElementById('emailInput').focus(),60)">Join email list</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="artist-v-heart" class="artist-page">
+    <div class="wrap">
+      <div class="back-link" onclick="goHome()">← Back to home</div>
+      <div class="artist-layout">
+        <div class="artist-hero vh">
+          <div class="artist-hero-inner">
+            <div class="artist-badge">Pop Artist</div>
+            <h1>V Heart</h1>
+            <p>Soft emotional pop with intimacy, melody, and a close-listener connection built into the identity.</p>
+          </div>
+        </div>
+        <div class="artist-content">
+          <h2>Artist Bio</h2>
+          <p>V Heart is an artist identity rooted in emotional closeness, softness, and melodic sincerity. The name itself supports a lane centered on feeling, intimacy, and songs that invite the listener inward rather than only pushing outward with volume or attitude.</p>
+          <p>The music direction behind V Heart is meant to feel personal and replayable. That means focusing on songs that are emotionally accessible, polished, and warm enough to create strong attachment. It is a lane built around connection and subtle strength rather than spectacle alone.</p>
+          <p>Within Ultra Music Group, V Heart helps deepen the emotional side of the roster. The artist adds another layer of feeling-based material to the platform while still fitting inside the same premium release environment. That helps the label feel wider emotionally without becoming inconsistent.</p>
+          <p>As the project grows, V Heart has strong potential as a repeat-listen artist identity for fans who want music that feels tender, melodic, and emotionally dependable. The strength lies in direct feeling, simple clarity, and a tone that can stay with the audience.</p>
+          <div class="artist-meta">
+            <div class="box"><small>Role</small><strong>Pop Artist</strong></div>
+            <div class="box"><small>Sound</small><strong>Soft Emotional Pop</strong></div>
+            <div class="box"><small>Focus</small><strong>Closeness + Melody</strong></div>
+          </div>
+          <div class="artist-actions">
+            <button class="btn primary" type="button" onclick="saveFavorite('V Heart')">Add to favorites</button>
+            <button class="btn secondary" type="button" onclick="goHome(); setTimeout(()=>document.getElementById('emailInput').focus(),60)">Join email list</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="artist-midnight-romance" class="artist-page">
+    <div class="wrap">
+      <div class="back-link" onclick="goHome()">← Back to home</div>
+      <div class="artist-layout">
+        <div class="artist-hero mr">
+          <div class="artist-hero-inner">
+            <div class="artist-badge">Pop / Mood</div>
+            <h1>Midnight Romance</h1>
+            <p>Night-driven emotion, atmosphere, cinematic texture, and romantic mood with strong visual potential.</p>
+          </div>
+        </div>
+        <div class="artist-content">
+          <h2>Artist Bio</h2>
+          <p>Midnight Romance is an artist identity built around atmosphere, longing, and emotional tension. The name naturally suggests a late-night mood, and that direction can shape everything from the music to the artwork to the way the artist is framed inside the platform.</p>
+          <p>The core appeal here is mood. Songs under this identity are meant to feel intimate, cinematic, and emotionally charged, giving the listener something immersive rather than generic. That makes the project especially useful for strong visual presentation and world-building across the app and beyond it.</p>
+          <p>Within Ultra Music Group, Midnight Romance adds another kind of emotional tone to the roster, one that leans into atmosphere, romantic texture, and the nighttime aesthetic without losing the premium structure of the platform. It helps diversify the label while keeping the same polished standard.</p>
+          <p>As the catalog expands, Midnight Romance can become a strong identity for fans who want mood, emotional depth, and a darker romantic edge. The strength of the project lies in tone, aesthetic coherence, and the ability to create a memorable emotional environment around the music.</p>
+          <div class="artist-meta">
+            <div class="box"><small>Role</small><strong>Mood Artist</strong></div>
+            <div class="box"><small>Sound</small><strong>Cinematic Pop Mood</strong></div>
+            <div class="box"><small>Focus</small><strong>Atmosphere + Romance</strong></div>
+          </div>
+          <div class="artist-actions">
+            <button class="btn primary" type="button" onclick="saveFavorite('Midnight Romance')">Add to favorites</button>
+            <button class="btn secondary" type="button" onclick="goHome(); setTimeout(()=>document.getElementById('emailInput').focus(),60)">Join email list</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="artist-aura-skye" class="artist-page">
+    <div class="wrap">
+      <div class="back-link" onclick="goHome()">← Back to home</div>
+      <div class="artist-layout">
+        <div class="artist-hero as">
+          <div class="artist-hero-inner">
+            <div class="artist-badge">Pop / Dance</div>
+            <h1>Aura Skye</h1>
+            <p>Glossy confident pop energy with modern momentum, shine, and a strong upward-facing identity.</p>
+          </div>
+        </div>
+        <div class="artist-content">
+          <h2>Artist Bio</h2>
+          <p>Aura Skye is an artist identity designed around polish, confidence, and a pop-forward energy that feels elevated and immediate. The name suggests aspiration, brightness, and movement, which makes it a strong fit for a modern artist built around clean hooks and visible branding.</p>
+          <p>The sound lane behind Aura Skye can carry both accessibility and style. It is meant to feel current and audience-facing while still leaving room for strong identity. That makes the project useful as a flexible roster artist who can support high-energy campaigns, visual rollout, and clear commercial positioning.</p>
+          <p>Inside Ultra Music Group, Aura Skye helps round out the roster by giving it another polished pop identity with a more upward, energetic, and glossy tone. That gives the app another distinct card and page that still feels like it belongs in the same premium environment.</p>
+          <p>As Aura Skye develops, the opportunity is to build a highly presentable pop artist whose campaigns can feel sleek, motivational, and visually clean. The strength lies in clarity, brightness, and a strong sense of modern momentum.</p>
+          <div class="artist-meta">
+            <div class="box"><small>Role</small><strong>Pop / Dance Artist</strong></div>
+            <div class="box"><small>Sound</small><strong>Glossy Modern Pop</strong></div>
+            <div class="box"><small>Focus</small><strong>Confidence + Shine</strong></div>
+          </div>
+          <div class="artist-actions">
+            <button class="btn primary" type="button" onclick="saveFavorite('Aura Skye')">Add to favorites</button>
+            <button class="btn secondary" type="button" onclick="goHome(); setTimeout(()=>document.getElementById('emailInput').focus(),60)">Join email list</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <script>
-    /* =========================================================
-       DATA
-       ========================================================= */
+    const homeScreen = document.getElementById('homeScreen');
+    const artistPages = Array.from(document.querySelectorAll('.artist-page'));
 
-    const artists = [
-      {
-        slug: "juan-pablo",
-        name: "Juan Pablo",
-        initials: "JP",
-        tag: "Founder / Pop",
-        role: "Artist / Founder",
-        sound: "Cinematic Pop",
-        focus: "Vision + Brand",
-        heroClass: "jp",
-        tagline: "Pop artist, songwriter, producer, and founder building music, identity, and a larger creative platform at the same time.",
-        cardText: "Founder, songwriter, producer, and central creative force behind the Ultra Music Group vision.",
-        bio: [
-          "Juan Pablo is a pop artist, songwriter, producer, and creative founder whose work is driven by vision, scale, and long-term identity. He does not approach music as a random collection of disconnected singles. He approaches it as a complete world where the songs, the visuals, the presentation, and the artist positioning all reinforce one another. That mindset shapes both his individual releases and the overall direction of Ultra Music Group.",
-          "His sound is rooted in polished pop, strong melodic framing, and records designed to feel cinematic, memorable, and emotionally direct. He is focused on creating songs that listeners can return to, songs that feel built with intention rather than impulse. That means paying attention not only to the sound of a release, but also to how it fits into a broader artistic identity that can grow over time.",
-          "As the founder of the label, Juan Pablo also represents the structure behind the platform. He is helping define how artists are presented, how the fan experience feels, and how the catalog is introduced to the audience. His role extends beyond being just a performer. He is shaping the larger architecture of the roster so that every artist lives inside a more polished and elevated environment.",
-          "What makes Juan Pablo stand out is the combination of artistry and construction. He is not only making music. He is building a place for the music to live. That makes his work feel ambitious and grounded at the same time, with a direction focused on growth, consistency, and creative control."
-        ]
-      },
-      {
-        slug: "lily-heart",
-        name: "Lily Heart",
-        initials: "LH",
-        tag: "Pop",
-        role: "Pop Artist",
-        sound: "Emotional Pop",
-        focus: "Warmth + Melody",
-        heroClass: "lh",
-        tagline: "Emotion-forward pop centered on warmth, connection, softness, and a melodic identity that stays with the listener.",
-        cardText: "Emotion-forward pop with warmth, melody, vulnerability, and polished presentation.",
-        bio: [
-          "Lily Heart is a pop artist whose music is built around vulnerability, closeness, and strong melodic storytelling. Her records are designed to feel personal without losing polish, giving listeners songs that are emotionally direct while still feeling refined and replayable. That balance makes her one of the label’s strongest emotional voices.",
-          "Her artistic lane centers on love, reflection, intimacy, and the kind of moments that people carry with them long after the song is over. She does not rely on noise or overstatement. Instead, her strength comes from clarity, sincerity, and the ability to make a song feel both soft and memorable at the same time.",
-          "Within Ultra Music Group, Lily Heart expands the roster by bringing a more intimate emotional tone into the platform. She represents a lane that is gentle but not small, polished but still genuine. Her releases help show that the label can carry range without losing its premium, cohesive identity.",
-          "Lily Heart continues to shape a catalog that values emotion as much as presentation. She is the kind of artist who invites the listener inward, creating space for songs that feel honest, beautiful, and deeply connected to personal feeling."
-        ]
-      },
-      {
-        slug: "neon-euphoria",
-        name: "Neon Euphoria",
-        initials: "NE",
-        tag: "Electronic / Pop",
-        role: "Concept Artist",
-        sound: "Electronic Pop",
-        focus: "Energy + Atmosphere",
-        heroClass: "ne",
-        tagline: "High-energy atmosphere, color, movement, and a sound built to feel immediate, modern, and alive.",
-        cardText: "High-energy color, movement, atmosphere, and bold electronic identity.",
-        bio: [
-          "Neon Euphoria is a project built around motion, color, atmosphere, and polished electronic energy. The identity is designed to feel immersive and high impact, making the music feel like more than a track list. It feels like an environment. That gives the project a strong visual and sonic role within the Ultra Music Group roster.",
-          "The sound is created to lift the room, sharpen the mood, and create an immediate emotional charge. Whether through synth texture, pulse, or sonic brightness, Neon Euphoria is centered on momentum. It is not passive music. It is music built to change the temperature of the experience around it.",
-          "Inside the label, Neon Euphoria brings contrast and modernity. It helps show that Ultra Music Group is not limited to one type of presentation or emotional lane. The project expands the platform into a more design-forward, visually driven direction while still fitting under the same polished umbrella.",
-          "As the catalog grows, Neon Euphoria has room to become one of the most visually distinct artist brands on the roster. It is ideal for bold artwork, branded motion clips, and a premium digital presentation that feels sleek, colorful, and memorable."
-        ]
-      },
-      {
-        slug: "angel-valentin",
-        name: "Ángel Valentín",
-        initials: "AV",
-        tag: "Regional Mexican",
-        role: "Regional Artist",
-        sound: "Regional Mexican",
-        focus: "Strength + Story",
-        heroClass: "av",
-        tagline: "A strong regional voice carrying tradition, emotional storytelling, resilience, and cultural force.",
-        cardText: "Tradition, strength, and emotional storytelling with regional force and character.",
-        bio: [
-          "Ángel Valentín is a regional Mexican artist whose music is shaped by emotional power, strength, and tradition. His songs are designed to feel rooted in culture while still carrying the clean presentation and wider reach that modern artist development requires. That combination gives him a strong identity within the label.",
-          "His artistic lane is driven by voice, feeling, and conviction. The music is not simply styled around genre expectations. It is meant to communicate weight, heart, and personal truth. That makes his work feel grounded, especially for listeners who want records that carry both emotional and cultural presence.",
-          "As part of Ultra Music Group, Ángel Valentín expands the roster sonically and culturally. He shows that the platform can hold multiple audiences and still feel unified. His presence broadens the label’s emotional and stylistic reach while keeping the same overall standard of quality and presentation.",
-          "Ángel Valentín continues building a catalog that feels durable, expressive, and strong. He represents a side of the label that is proud, resilient, and deeply connected to storytelling through voice and identity."
-        ]
-      },
-      {
-        slug: "elena-star",
-        name: "Elena Star",
-        initials: "ES",
-        tag: "Pop",
-        role: "Pop Artist",
-        sound: "Bright Pop",
-        focus: "Glamour + Hooks",
-        heroClass: "es",
-        tagline: "Bright pop glamour, bold hooks, and a visual identity designed to feel polished and immediate.",
-        cardText: "Bright pop glamour, bold hooks, and a visual identity built to feel polished and immediate.",
-        bio: [
-          "Elena Star is a pop artist built around shine, confidence, and strong visual presence. Her identity is designed to feel glamorous and audience-facing from the start, giving the label a clear artist who can carry bright pop campaigns with polish and style.",
-          "The music lane behind Elena Star emphasizes hooks, momentum, and a presentation that feels clean, direct, and easy to connect with. She is the kind of artist who can hold a glossy visual world while still staying rooted in strong song structure and recognizable brand tone.",
-          "Within Ultra Music Group, Elena Star helps represent the more overtly polished and aspirational side of the roster. Her role in the platform is important because she reinforces the idea that the label can carry both emotional substance and visual shine without losing its identity.",
-          "As Elena Star’s catalog expands, the opportunity is to build a pop world that feels elevated, stylish, and memorable. She is well-positioned for strong artwork, branded visuals, and campaign rollouts that feel commercial without becoming generic."
-        ]
-      },
-      {
-        slug: "niko-soul",
-        name: "Niko Soul",
-        initials: "NS",
-        tag: "Soul / Pop",
-        role: "Soul / Pop Artist",
-        sound: "Soulful Modern Pop",
-        focus: "Feeling + Voice",
-        heroClass: "ns",
-        tagline: "Soulful delivery, emotional gravity, and polished modern production built for connection and depth.",
-        cardText: "Soulful delivery, emotional resonance, and polished modern production built for connection and depth.",
-        bio: [
-          "Niko Soul is an artist whose identity centers on vocal feeling, emotional depth, and a smooth modern sound. The name itself suggests the lane clearly: music that prioritizes feeling, presence, and a more soulful emotional connection to the listener.",
-          "His work is best understood as a balance between emotional resonance and contemporary polish. The songs are intended to feel grounded and expressive while still fitting comfortably inside a clean modern release framework. That gives the artist room to be both heartfelt and commercially presentable.",
-          "Within Ultra Music Group, Niko Soul gives the roster a different kind of emotional weight. He helps extend the label beyond bright pop and high-energy mood into something more intimate, more vocal, and more inward-facing without losing quality control.",
-          "As the platform develops, Niko Soul can become one of the roster’s anchors for listeners who want a smoother emotional lane. His strength lies in feeling, tone, and the ability to carry songs with sincerity and presence."
-        ]
-      },
-      {
-        slug: "fabian-ray",
-        name: "Fabian Ray",
-        initials: "FR",
-        tag: "Pop",
-        role: "Pop Artist",
-        sound: "Performance Pop",
-        focus: "Image + Energy",
-        heroClass: "fr",
-        tagline: "Performance energy, charisma, and a clean pop identity shaped around star presence and confidence.",
-        cardText: "Performance energy, charisma, and a clean pop identity shaped around star presence and confidence.",
-        bio: [
-          "Fabian Ray is built around performance energy, star presence, and a polished pop identity that feels made for visibility. His lane is defined by movement, confidence, and the kind of artist presentation that naturally supports strong visual rollout and larger audience-facing branding.",
-          "The appeal of Fabian Ray lies in clarity. The image, the energy, and the music can work together in a direct way that makes the artist easy to position and easy to market. That is valuable because premium presentation depends not only on sound, but on how quickly an artist feels recognizable and coherent to the viewer.",
-          "Within Ultra Music Group, Fabian Ray adds a more visibly performance-led angle to the roster. He helps balance the platform by giving it an artist presence tied strongly to confidence, movement, and visual charisma, which can be especially effective in campaigns built around clips, teasers, and image-first promotion.",
-          "Fabian Ray has the potential to become one of the more outward-facing artist identities in the lineup. His role is to carry momentum and star energy while still fitting inside the same polished label ecosystem that holds the rest of the roster together."
-        ]
-      },
-      {
-        slug: "v-heart",
-        name: "V Heart",
-        initials: "VH",
-        tag: "Pop",
-        role: "Pop Artist",
-        sound: "Soft Emotional Pop",
-        focus: "Closeness + Melody",
-        heroClass: "vh",
-        tagline: "Soft emotional pop with intimacy, melody, and a close-listener connection built into the identity.",
-        cardText: "Soft emotional pop with intimacy, melody, and a close-listener connection built into the identity.",
-        bio: [
-          "V Heart is an artist identity rooted in emotional closeness, softness, and melodic sincerity. The name itself supports a lane centered on feeling, intimacy, and songs that invite the listener inward rather than only pushing outward with volume or attitude.",
-          "The music direction behind V Heart is meant to feel personal and replayable. That means focusing on songs that are emotionally accessible, polished, and warm enough to create strong attachment. It is a lane built around connection and subtle strength rather than spectacle alone.",
-          "Within Ultra Music Group, V Heart helps deepen the emotional side of the roster. The artist adds another layer of feeling-based material to the platform while still fitting inside the same premium release environment. That helps the label feel wider emotionally without becoming inconsistent.",
-          "As the project grows, V Heart has strong potential as a repeat-listen artist identity for fans who want music that feels tender, melodic, and emotionally dependable. The strength lies in direct feeling, simple clarity, and a tone that can stay with the audience."
-        ]
-      },
-      {
-        slug: "midnight-romance",
-        name: "Midnight Romance",
-        initials: "MR",
-        tag: "Pop / Mood",
-        role: "Mood Artist",
-        sound: "Cinematic Pop Mood",
-        focus: "Atmosphere + Romance",
-        heroClass: "mr",
-        tagline: "Night-driven emotion, atmosphere, cinematic texture, and romantic mood with strong visual potential.",
-        cardText: "Night-driven emotion, atmosphere, cinematic texture, and romantic mood with strong visual potential.",
-        bio: [
-          "Midnight Romance is an artist identity built around atmosphere, longing, and emotional tension. The name naturally suggests a late-night mood, and that direction can shape everything from the music to the artwork to the way the artist is framed inside the platform.",
-          "The core appeal here is mood. Songs under this identity are meant to feel intimate, cinematic, and emotionally charged, giving the listener something immersive rather than generic. That makes the project especially useful for strong visual presentation and world-building across the app and beyond it.",
-          "Within Ultra Music Group, Midnight Romance adds another kind of emotional tone to the roster, one that leans into atmosphere, romantic texture, and the nighttime aesthetic without losing the premium structure of the platform. It helps diversify the label while keeping the same polished standard.",
-          "As the catalog expands, Midnight Romance can become a strong identity for fans who want mood, emotional depth, and a darker romantic edge. The strength of the project lies in tone, aesthetic coherence, and the ability to create a memorable emotional environment around the music."
-        ]
-      },
-      {
-        slug: "aura-skye",
-        name: "Aura Skye",
-        initials: "AS",
-        tag: "Pop / Dance",
-        role: "Pop / Dance Artist",
-        sound: "Glossy Modern Pop",
-        focus: "Confidence + Shine",
-        heroClass: "as",
-        tagline: "Glossy confident pop energy with modern momentum, shine, and a strong upward-facing identity.",
-        cardText: "Glossy confident pop energy with modern momentum, shine, and a strong upward-facing identity.",
-        bio: [
-          "Aura Skye is an artist identity designed around polish, confidence, and a pop-forward energy that feels elevated and immediate. The name suggests aspiration, brightness, and movement, which makes it a strong fit for a modern artist built around clean hooks and visible branding.",
-          "The sound lane behind Aura Skye can carry both accessibility and style. It is meant to feel current and audience-facing while still leaving room for strong identity. That makes the project useful as a flexible roster artist who can support high-energy campaigns, visual rollout, and clear commercial positioning.",
-          "Inside Ultra Music Group, Aura Skye helps round out the roster by giving it another polished pop identity with a more upward, energetic, and glossy tone. That gives the app another distinct card and page that still feels like it belongs in the same premium environment.",
-          "As Aura Skye develops, the opportunity is to build a highly presentable pop artist whose campaigns can feel sleek, motivational, and visually clean. The strength lies in clarity, brightness, and a strong sense of modern momentum."
-        ]
+    function goHome(){
+      homeScreen.classList.add('active');
+      artistPages.forEach(page => page.classList.remove('active'));
+      window.scrollTo({top:0, behavior:'smooth'});
+    }
+
+    function openArtist(slug){
+      homeScreen.classList.remove('active');
+      artistPages.forEach(page => page.classList.remove('active'));
+      const target = document.getElementById('artist-' + slug);
+      if(target){
+        target.classList.add('active');
+        window.scrollTo({top:0, behavior:'smooth'});
       }
-    ];
+    }
 
-    const releases = [
-      {
-        title: "Hearts on the Highway",
-        artist: "Juan Pablo",
-        type: "Pop Single",
-        cover: "HEARTS ON<br>THE HIGHWAY",
-        description: "A polished pop statement built around movement, ambition, melody, and cinematic scale.",
-        artistSlug: "juan-pablo"
-      },
-      {
-        title: "Saturday Morning Crush",
-        artist: "Lily Heart",
-        type: "Pop Single",
-        cover: "SATURDAY<br>MORNING CRUSH",
-        description: "Warm melodic pop built around softness, memory, emotional clarity, and listener connection.",
-        artistSlug: "lily-heart"
-      },
-      {
-        title: "Corazón de Acero",
-        artist: "Ángel Valentín",
-        type: "Regional Mexican",
-        cover: "CORAZÓN<br>DE ACERO",
-        description: "A bold emotional record driven by resilience, strength, and powerful vocal character.",
-        artistSlug: "angel-valentin"
-      },
-      {
-        title: "Angel of the Night",
-        artist: "Elena Star",
-        type: "Pop Single",
-        cover: "ANGEL OF<br>THE NIGHT",
-        description: "Glamorous pop energy with shine, motion, and a bold visual identity built for attention.",
-        artistSlug: "elena-star"
+    function placeholderLink(){
+      alert('Replace this button action with your real Spotify, Apple Music, YouTube, or website URL.');
+    }
+
+    function getStoredArray(key){
+      try{
+        const raw = localStorage.getItem(key);
+        return raw ? JSON.parse(raw) : [];
+      }catch(e){
+        return [];
       }
-    ];
-
-    /* =========================================================
-       ELEMENTS
-       ========================================================= */
-
-    const homeScreen = document.getElementById("homeScreen");
-    const artistScreen = document.getElementById("artistScreen");
-
-    const artistGrid = document.getElementById("artistGrid");
-    const releaseGrid = document.getElementById("releaseGrid");
-
-    const detailHero = document.getElementById("detailHero");
-    const detailBadge = document.getElementById("detailBadge");
-    const detailName = document.getElementById("detailName");
-    const detailTagline = document.getElementById("detailTagline");
-    const detailBio = document.getElementById("detailBio");
-    const detailRole = document.getElementById("detailRole");
-    const detailSound = document.getElementById("detailSound");
-    const detailFocus = document.getElementById("detailFocus");
-
-    const followModal = document.getElementById("followModal");
-    const followForm = document.getElementById("followForm");
-    const followArtist = document.getElementById("followArtist");
-    const followStatus = document.getElementById("followStatus");
-
-    /* =========================================================
-       RENDER ARTISTS
-       ========================================================= */
-
-    function renderArtists() {
-      artistGrid.innerHTML = artists.map(artist => `
-        <article class="artist-card" onclick="openArtist('${artist.slug}')">
-          <div class="artist-visual">
-            <div class="artist-tag">${artist.tag}</div>
-            <div class="artist-initial">${artist.initials}</div>
-          </div>
-          <div class="artist-body">
-            <h3>${artist.name}</h3>
-            <p>${artist.cardText}</p>
-          </div>
-        </article>
-      `).join("");
     }
 
-    /* =========================================================
-       RENDER RELEASES
-       ========================================================= */
-
-    function renderReleases() {
-      releaseGrid.innerHTML = releases.map(release => `
-        <article class="release-card">
-          <div class="release-cover">${release.cover}</div>
-          <div class="release-body">
-            <h3>${release.title}</h3>
-            <div class="release-meta">${release.artist} • ${release.type}</div>
-            <p>${release.description}</p>
-            <div class="release-actions">
-              <button class="mini-btn light" type="button" onclick="placeholderLink()">Listen</button>
-              <button class="mini-btn dark" type="button" onclick="openArtist('${release.artistSlug}')">Artist Page</button>
-            </div>
-          </div>
-        </article>
-      `).join("");
+    function setStoredArray(key, value){
+      localStorage.setItem(key, JSON.stringify(value));
     }
 
-    /* =========================================================
-       RENDER FOLLOW ARTIST OPTIONS
-       ========================================================= */
+    function renderFavorites(){
+      const list = document.getElementById('favoritesList');
+      const favorites = getStoredArray('umgFavorites');
 
-    function renderFollowArtistOptions() {
-      followArtist.innerHTML = [
-        `<option value="">Select one</option>`,
-        ...artists.map(artist => `<option value="${artist.name}">${artist.name}</option>`)
-      ].join("");
-    }
-
-    /* =========================================================
-       HELPERS
-       ========================================================= */
-
-    function scrollToId(id) {
-      goHome();
-      setTimeout(() => {
-        const el = document.getElementById(id);
-        if (el) {
-          el.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
-      }, 70);
-    }
-
-    function goHome() {
-      homeScreen.classList.add("active");
-      artistScreen.classList.remove("active");
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-
-    function openArtist(slug) {
-      const artist = artists.find(item => item.slug === slug);
-      if (!artist) return;
-
-      detailHero.className = "artist-hero " + artist.heroClass;
-      detailBadge.textContent = artist.tag;
-      detailName.textContent = artist.name;
-      detailTagline.textContent = artist.tagline;
-      detailRole.textContent = artist.role;
-      detailSound.textContent = artist.sound;
-      detailFocus.textContent = artist.focus;
-
-      detailBio.innerHTML = artist.bio.map(paragraph => `<p>${paragraph}</p>`).join("");
-
-      homeScreen.classList.remove("active");
-      artistScreen.classList.add("active");
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-
-    function placeholderLink() {
-      alert("Replace this button with your real Spotify, Apple Music, YouTube, or website URL.");
-    }
-
-    /* =========================================================
-       MODAL
-       ========================================================= */
-
-    function openModal() {
-      followModal.classList.add("open");
-    }
-
-    function closeModal() {
-      followModal.classList.remove("open");
-    }
-
-    followModal.addEventListener("click", (event) => {
-      if (event.target === followModal) {
-        closeModal();
-      }
-    });
-
-    /* =========================================================
-       FORM
-       ========================================================= */
-
-    followForm.addEventListener("submit", (event) => {
-      event.preventDefault();
-
-      const name = document.getElementById("followName").value.trim();
-      const email = document.getElementById("followEmail").value.trim();
-      const favoriteArtist = document.getElementById("followArtist").value.trim();
-      const interest = document.getElementById("followInterest").value.trim();
-      const message = document.getElementById("followMessage").value.trim();
-
-      if (!name || !email) {
-        followStatus.textContent = "Name and email are required.";
-        followStatus.className = "status error";
+      if(!favorites.length){
+        list.innerHTML = '<div class="saved-item"><span>No favorites saved yet.</span></div>';
         return;
       }
 
-      const payload = {
-        name,
-        email,
-        favoriteArtist,
-        interest,
-        message,
-        createdAt: new Date().toISOString()
-      };
+      list.innerHTML = favorites.map(name => `
+        <div class="saved-item">
+          <span>${name}</span>
+          <button class="mini dark" type="button" onclick="removeFavorite('${name.replace(/'/g, "\\'")}')">Remove</button>
+        </div>
+      `).join('');
+    }
 
-      const existing = JSON.parse(localStorage.getItem("ultraMusicFollowers") || "[]");
-      existing.push(payload);
-      localStorage.setItem("ultraMusicFollowers", JSON.stringify(existing));
-
-      followStatus.textContent = "Saved successfully.";
-      followStatus.className = "status success";
-      followForm.reset();
-    });
-
-    /* =========================================================
-       OPTIONAL LOGO PLACEHOLDER
-       Replace this with your real logo path later if you want.
-       ========================================================= */
-
-    function setLogoImageIfNeeded() {
-      const logoPath = "";
-      if (logoPath) {
-        document.getElementById("brandMark").innerHTML = `<img src="${logoPath}" alt="Ultra Music Group logo">`;
+    function saveFavorite(name){
+      const favorites = getStoredArray('umgFavorites');
+      if(!favorites.includes(name)){
+        favorites.push(name);
+        setStoredArray('umgFavorites', favorites);
+        renderFavorites();
+        alert(name + ' added to favorites.');
+      } else {
+        alert(name + ' is already in favorites.');
       }
     }
 
-    /* =========================================================
-       INIT
-       ========================================================= */
+    function removeFavorite(name){
+      const favorites = getStoredArray('umgFavorites').filter(item => item !== name);
+      setStoredArray('umgFavorites', favorites);
+      renderFavorites();
+    }
 
-    renderArtists();
-    renderReleases();
-    renderFollowArtistOptions();
-    setLogoImageIfNeeded();
+    document.getElementById('emailForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const name = document.getElementById('nameInput').value.trim();
+      const email = document.getElementById('emailInput').value.trim();
+      const interest = document.getElementById('interestInput').value;
+      const status = document.getElementById('emailStatus');
+
+      if(!email){
+        status.textContent = 'Email is required.';
+        status.className = 'status error';
+        return;
+      }
+
+      const signups = getStoredArray('umgSignups');
+      signups.push({name, email, interest, createdAt:new Date().toISOString()});
+      setStoredArray('umgSignups', signups);
+
+      status.textContent = 'Signup saved successfully.';
+      status.className = 'status success';
+      this.reset();
+    });
+
+    document.getElementById('profileForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const status = document.getElementById('profileStatus');
+      const data = {
+        name: document.getElementById('profileName').value.trim(),
+        email: document.getElementById('profileEmail').value.trim(),
+        city: document.getElementById('profileCity').value.trim(),
+        favoriteArtist: document.getElementById('profileFavorite').value,
+        bio: document.getElementById('profileBio').value.trim()
+      };
+
+      if(!data.name || !data.email){
+        status.textContent = 'Display name and email are required.';
+        status.className = 'status error';
+        return;
+      }
+
+      localStorage.setItem('umgProfile', JSON.stringify(data));
+      status.textContent = 'Profile saved successfully.';
+      status.className = 'status success';
+    });
+
+    renderFavorites();
   </script>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <div>© 2026 Ultra Music Group</div>
+      <div>10 artists • premium MVP • discovery • fan connection</div>
+    </div>
+  </footer>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ultra Music Group</title>
+  <style>
+    :root{
+      --bg:#070708;
+      --bg2:#0d0f12;
+      --panel:#121418;
+      --panel2:#171a20;
+      --line:rgba(255,255,255,.08);
+      --line2:rgba(255,255,255,.14);
+      --text:#ffffff;
+      --muted:#b8c0cb;
+      --soft:#dce2ea;
+      --shadow:0 16px 40px rgba(0,0,0,.35);
+      --radius:24px;
+      --radius-sm:16px;
+      --max:1380px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,.05), transparent 22%),
+        radial-gradient(circle at top right, rgba(255,255,255,.04), transparent 20%),
+        linear-gradient(180deg, #080809 0%, #060607 100%);
+    }
+
+    a{color:inherit;text-decoration:none}
+    button,input,select,textarea{font:inherit}
+    .hidden{display:none !important}
+
+    .wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:0 22px;
+    }
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      backdrop-filter:blur(18px);
+      background:rgba(7,7,8,.84);
+      border-bottom:1px solid var(--line);
+    }
+
+    .topbar-inner{
+      min-height:82px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      min-width:0;
+    }
+
+    .brand-mark{
+      width:44px;
+      height:44px;
+      border-radius:14px;
+      display:grid;
+      place-items:center;
+      color:#000;
+      background:linear-gradient(135deg,#fff 0%,#bfc6cf 100%);
+      font-weight:700;
+      letter-spacing:.08em;
+      box-shadow:var(--shadow);
+      flex:0 0 auto;
+    }
+
+    .brand-copy{min-width:0}
+    .brand-title{
+      font-size:18px;
+      font-weight:700;
+      letter-spacing:.12em;
+      white-space:nowrap;
+    }
+    .brand-sub{
+      font-size:12px;
+      color:var(--muted);
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      margin-top:3px;
+    }
+
+    .nav{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .nav a,
+    .nav button{
+      border:none;
+      background:transparent;
+      color:#eef2f6;
+      padding:10px 14px;
+      border-radius:999px;
+      cursor:pointer;
+      transition:.2s ease;
+    }
+
+    .nav a:hover,
+    .nav button:hover{
+      background:rgba(255,255,255,.05);
+    }
+
+    .nav .cta{
+      background:#fff;
+      color:#000;
+      font-weight:700;
+    }
+
+    .nav .cta:hover{
+      background:#e9edf2;
+    }
+
+    .screen{
+      display:none;
+      padding:28px 0 56px;
+      animation:fadeIn .22s ease;
+    }
+
+    .screen.active{display:block}
+
+    @keyframes fadeIn{
+      from{opacity:0;transform:translateY(6px)}
+      to{opacity:1;transform:translateY(0)}
+    }
+
+    .hero{
+      position:relative;
+      min-height:560px;
+      border-radius:32px;
+      overflow:hidden;
+      background:
+        linear-gradient(105deg, rgba(0,0,0,.84) 0%, rgba(0,0,0,.58) 42%, rgba(0,0,0,.18) 100%),
+        linear-gradient(135deg, #1e232c 0%, #0f1116 44%, #27303b 100%);
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:22px;
+      align-items:stretch;
+    }
+
+    .hero:after{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:
+        radial-gradient(circle at 82% 16%, rgba(255,255,255,.14), transparent 18%),
+        radial-gradient(circle at 72% 72%, rgba(255,255,255,.10), transparent 26%);
+    }
+
+    .hero-left{
+      position:relative;
+      z-index:2;
+      padding:54px 38px 38px;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-end;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      width:max-content;
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:999px;
+      padding:10px 14px;
+      font-size:12px;
+      color:#eff4f8;
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      margin-bottom:18px;
+    }
+
+    .hero h1{
+      margin:0 0 16px;
+      font-size:clamp(40px,6vw,82px);
+      line-height:.94;
+      letter-spacing:-.05em;
+      max-width:780px;
+    }
+
+    .hero p{
+      margin:0 0 26px;
+      color:#d7dde5;
+      line-height:1.7;
+      font-size:18px;
+      max-width:700px;
+    }
+
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+      margin-bottom:26px;
+    }
+
+    .btn{
+      border:none;
+      border-radius:999px;
+      padding:14px 20px;
+      font-weight:700;
+      cursor:pointer;
+      transition:.2s ease;
+    }
+
+    .btn.primary{
+      background:#fff;
+      color:#000;
+    }
+
+    .btn.secondary{
+      background:rgba(255,255,255,.08);
+      color:#fff;
+      border:1px solid rgba(255,255,255,.08);
+    }
+
+    .btn:hover{transform:translateY(-1px)}
+
+    .hero-stats{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:12px;
+    }
+
+    .stat{
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:18px;
+      padding:16px;
+      min-height:94px;
+    }
+
+    .stat-label{
+      color:#c9d1db;
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      margin-bottom:8px;
+    }
+
+    .stat-value{
+      font-size:20px;
+      font-weight:700;
+      line-height:1.25;
+    }
+
+    .hero-right{
+      position:relative;
+      z-index:2;
+      padding:28px 28px 28px 0;
+      display:flex;
+      align-items:flex-end;
+    }
+
+    .hero-stack{
+      width:100%;
+      display:grid;
+      gap:14px;
+    }
+
+    .stack-card{
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:20px;
+      padding:18px;
+      backdrop-filter:blur(8px);
+    }
+
+    .stack-kicker{
+      color:#cfd6de;
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      margin-bottom:8px;
+    }
+
+    .stack-card strong{
+      display:block;
+      font-size:22px;
+      margin-bottom:8px;
+    }
+
+    .stack-card p{
+      margin:0;
+      font-size:14px;
+      color:#d4dbe3;
+      line-height:1.6;
+    }
+
+    .section{
+      margin-top:34px;
+    }
+
+    .section-head{
+      display:flex;
+      align-items:end;
+      justify-content:space-between;
+      gap:18px;
+      margin-bottom:18px;
+      flex-wrap:wrap;
+    }
+
+    .section-head h2{
+      margin:0;
+      font-size:30px;
+      letter-spacing:-.04em;
+    }
+
+    .section-head p{
+      margin:8px 0 0;
+      color:var(--muted);
+      line-height:1.65;
+      max-width:760px;
+      font-size:15px;
+    }
+
+    .chip{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      border-radius:999px;
+      padding:10px 14px;
+      color:#e4ebf2;
+      font-size:13px;
+      white-space:nowrap;
+    }
+
+    .artist-grid{
+      display:grid;
+      grid-template-columns:repeat(5,minmax(0,1fr));
+      gap:16px;
+    }
+
+    .artist-card{
+      border:1px solid var(--line);
+      background:linear-gradient(180deg,#171a20 0%, #101216 100%);
+      border-radius:24px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      cursor:pointer;
+      transition:.25s ease;
+      min-height:332px;
+    }
+
+    .artist-card:hover{
+      transform:translateY(-5px);
+      border-color:var(--line2);
+    }
+
+    .artist-visual{
+      height:220px;
+      position:relative;
+      background:
+        radial-gradient(circle at top right, rgba(255,255,255,.18), transparent 24%),
+        linear-gradient(135deg, #2a303a 0%, #171b22 48%, #101217 100%);
+      border-bottom:1px solid var(--line);
+      display:flex;
+      align-items:flex-end;
+      justify-content:flex-start;
+      padding:18px;
+    }
+
+    .artist-initial{
+      width:58px;
+      height:58px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.10);
+      font-size:19px;
+      font-weight:700;
+      color:#fff;
+    }
+
+    .artist-tag{
+      position:absolute;
+      top:14px;
+      left:14px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(0,0,0,.34);
+      color:#eef3f8;
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+    }
+
+    .artist-body{
+      padding:16px;
+    }
+
+    .artist-body h3{
+      margin:0 0 8px;
+      font-size:22px;
+      letter-spacing:-.03em;
+    }
+
+    .artist-body p{
+      margin:0;
+      color:#ccd5df;
+      line-height:1.6;
+      font-size:14px;
+    }
+
+    .release-grid{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:16px;
+    }
+
+    .release-card{
+      border:1px solid var(--line);
+      border-radius:24px;
+      overflow:hidden;
+      background:linear-gradient(180deg,#16191e 0%,#0f1114 100%);
+      box-shadow:var(--shadow);
+      transition:.25s ease;
+    }
+
+    .release-card:hover{
+      transform:translateY(-4px);
+      border-color:var(--line2);
+    }
+
+    .release-cover{
+      height:250px;
+      border-bottom:1px solid var(--line);
+      display:grid;
+      place-items:center;
+      text-align:center;
+      font-size:28px;
+      font-weight:700;
+      letter-spacing:.10em;
+      padding:18px;
+      background:
+        radial-gradient(circle at top right, rgba(255,255,255,.16), transparent 22%),
+        linear-gradient(135deg,#27303a 0%, #13171d 55%, #1b1f27 100%);
+    }
+
+    .release-body{
+      padding:16px;
+    }
+
+    .release-body h3{
+      margin:0 0 8px;
+      font-size:23px;
+      letter-spacing:-.03em;
+    }
+
+    .release-meta{
+      color:#d6dde5;
+      font-size:14px;
+      margin-bottom:10px;
+    }
+
+    .release-body p{
+      margin:0 0 14px;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:14px;
+    }
+
+    .release-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
+    .mini{
+      border:none;
+      border-radius:999px;
+      padding:10px 14px;
+      cursor:pointer;
+      font-weight:700;
+    }
+
+    .mini.light{
+      background:#fff;
+      color:#000;
+    }
+
+    .mini.dark{
+      background:rgba(255,255,255,.08);
+      color:#fff;
+      border:1px solid rgba(255,255,255,.08);
+    }
+
+    .two-col{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:18px;
+      margin-top:18px;
+    }
+
+    .panel{
+      border:1px solid var(--line);
+      border-radius:26px;
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      box-shadow:var(--shadow);
+      padding:24px;
+    }
+
+    .panel h3{
+      margin:0 0 10px;
+      font-size:28px;
+      letter-spacing:-.03em;
+    }
+
+    .panel p{
+      margin:0 0 16px;
+      color:var(--muted);
+      line-height:1.7;
+      font-size:15px;
+    }
+
+    .feature-list{
+      display:grid;
+      gap:12px;
+      margin-top:18px;
+    }
+
+    .feature{
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:rgba(255,255,255,.04);
+      padding:14px;
+    }
+
+    .feature strong{
+      display:block;
+      margin-bottom:6px;
+      font-size:16px;
+    }
+
+    .feature span{
+      color:#ccd4de;
+      font-size:14px;
+      line-height:1.6;
+    }
+
+    form{
+      display:grid;
+      gap:12px;
+    }
+
+    .form-row{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    .field{
+      display:grid;
+      gap:7px;
+    }
+
+    .field label{
+      font-size:13px;
+      color:#e8edf2;
+      font-weight:700;
+    }
+
+    .field input,
+    .field select,
+    .field textarea{
+      width:100%;
+      border:1px solid var(--line);
+      border-radius:16px;
+      background:rgba(255,255,255,.05);
+      color:#fff;
+      padding:14px 14px;
+      outline:none;
+    }
+
+    .field textarea{
+      min-height:110px;
+      resize:vertical;
+    }
+
+    .field input::placeholder,
+    .field textarea::placeholder{
+      color:#97a1ad;
+    }
+
+    .status{
+      font-size:13px;
+      color:var(--muted);
+      line-height:1.5;
+      margin-top:4px;
+    }
+
+    .status.success{color:#8df0ab}
+    .status.error{color:#ff9e9e}
+
+    .saved-list{
+      display:grid;
+      gap:10px;
+      margin-top:12px;
+    }
+
+    .saved-item{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      border:1px solid var(--line);
+      border-radius:16px;
+      background:rgba(255,255,255,.04);
+      padding:12px 14px;
+    }
+
+    .saved-item span{
+      color:#f0f5fa;
+      font-size:14px;
+    }
+
+    .artist-page{
+      display:none;
+      padding:28px 0 56px;
+      animation:fadeIn .22s ease;
+    }
+
+    .artist-page.active{display:block}
+
+    .back-link{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      border-radius:999px;
+      color:#edf2f7;
+      cursor:pointer;
+      margin-bottom:18px;
+    }
+
+    .artist-layout{
+      display:grid;
+      grid-template-columns:.95fr 1.05fr;
+      gap:20px;
+      align-items:start;
+    }
+
+    .artist-hero{
+      min-height:580px;
+      border:1px solid var(--line);
+      border-radius:30px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      position:relative;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)),
+        linear-gradient(135deg,#28303a 0%, #13171e 58%, #1b2129 100%);
+    }
+
+    .artist-hero.jp{background:
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)),
+        linear-gradient(135deg,#2b323d 0%, #14181f 58%, #1d232c 100%);}
+    .artist-hero.lh{background:
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)),
+        linear-gradient(135deg,#3d2d37 0%, #17131a 58%, #231821 100%);}
+    .artist-hero.ne{background:
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)),
+        linear-gradient(135deg,#243349 0%, #111722 58%, #172132 100%);}
+    .artist-hero.av{background:
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)),
+        linear-gradient(135deg,#4a351f 0%, #18120d 58%, #291d12 100%);}
+    .artist-hero.es{background:
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)),
+        linear-gradient(135deg,#4b2742 0%, #1c1020 58%, #2a1827 100%);}
+    .artist-hero.ns{background:
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)),
+        linear-gradient(135deg,#21333b 0%, #11181c 58%, #18252a 100%);}
+    .artist-hero.fr{background:
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)),
+        linear-gradient(135deg,#2e2f44 0%, #12131a 58%, #1d1e2b 100%);}
+    .artist-hero.vh{background:
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)),
+        linear-gradient(135deg,#392d4a 0%, #171220 58%, #24192f 100%);}
+    .artist-hero.mr{background:
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)),
+        linear-gradient(135deg,#433423 0%, #19140e 58%, #271d13 100%);}
+    .artist-hero.as{background:
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)),
+        linear-gradient(135deg,#41262b 0%, #181013 58%, #2a181c 100%);}
+
+    .artist-hero-inner{
+      position:absolute;
+      inset:0;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-end;
+      padding:28px;
+      background:linear-gradient(180deg, rgba(0,0,0,.06), rgba(0,0,0,.58) 72%, rgba(0,0,0,.78) 100%);
+    }
+
+    .artist-badge{
+      display:inline-flex;
+      width:max-content;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.10);
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      margin-bottom:16px;
+    }
+
+    .artist-hero h1{
+      margin:0 0 10px;
+      font-size:58px;
+      line-height:.94;
+      letter-spacing:-.05em;
+    }
+
+    .artist-hero p{
+      margin:0;
+      color:#e0e6ec;
+      line-height:1.7;
+      font-size:17px;
+      max-width:520px;
+    }
+
+    .artist-content{
+      border:1px solid var(--line);
+      border-radius:30px;
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      box-shadow:var(--shadow);
+      padding:26px;
+    }
+
+    .artist-content h2{
+      margin:0 0 14px;
+      font-size:34px;
+      letter-spacing:-.03em;
+    }
+
+    .artist-content p{
+      margin:0 0 18px;
+      color:#d8e0e8;
+      line-height:1.85;
+      font-size:16px;
+    }
+
+    .artist-meta{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:12px;
+      margin-top:18px;
+    }
+
+    .artist-meta .box{
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:rgba(255,255,255,.04);
+      padding:16px;
+    }
+
+    .artist-meta .box small{
+      display:block;
+      color:#c8d0da;
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      margin-bottom:8px;
+    }
+
+    .artist-meta .box strong{
+      display:block;
+      font-size:20px;
+      line-height:1.3;
+    }
+
+    .artist-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:20px;
+    }
+
+    .footer{
+      border-top:1px solid var(--line);
+      padding:18px 0 30px;
+      color:#a8b2bd;
+      font-size:13px;
+    }
+
+    .footer-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    @media (max-width:1220px){
+      .artist-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+      .release-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .two-col,
+      .artist-layout,
+      .hero{grid-template-columns:1fr}
+      .hero-right{padding:0 24px 24px}
+    }
+
+    @media (max-width:760px){
+      .wrap{padding:0 14px}
+      .hero-left{padding:34px 18px 20px}
+      .hero h1{font-size:44px}
+      .hero p{font-size:16px}
+      .hero-stats,
+      .artist-meta,
+      .form-row{grid-template-columns:1fr}
+      .artist-grid,
+      .release-grid{grid-template-columns:1fr}
+      .artist-hero h1{font-size:42px}
+      .panel,
+      .artist-content{padding:18px}
+      .section-head h2{font-size:26px}
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <div class="brand">
+        <div class="brand-mark">UM</div>
+        <div class="brand-copy">
+          <div class="brand-title">ULTRA MUSIC GROUP</div>
+          <div class="brand-sub">Premium Fan Experience</div>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a href="#" onclick="goHome(); return false;">Home</a>
+        <a href="#" onclick="goHome(); setTimeout(()=>document.getElementById('artists').scrollIntoView({behavior:'smooth'}),60); return false;">Artists</a>
+        <a href="#" onclick="goHome(); setTimeout(()=>document.getElementById('releases').scrollIntoView({behavior:'smooth'}),60); return false;">Releases</a>
+        <a href="#" onclick="goHome(); setTimeout(()=>document.getElementById('fanhub').scrollIntoView({behavior:'smooth'}),60); return false;">Fan Hub</a>
+        <button class="cta" type="button" onclick="goHome(); setTimeout(()=>document.getElementById('emailInput').focus(),60)">Join Email List</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="homeScreen" class="screen active">
+    <div class="wrap">
+      <section class="hero">
+        <div class="hero-left">
+          <div class="eyebrow">A New Era of Independent Music</div>
+          <h1>The home of Ultra Music Group</h1>
+          <p>
+            This is a clean premium label app experience: artist discovery, release highlights, fan sign-up, saved favorites, and artist pages that feel cinematic and polished without trying to rebuild Spotify.
+          </p>
+          <div class="hero-actions">
+            <button class="btn primary" type="button" onclick="document.getElementById('artists').scrollIntoView({behavior:'smooth'})">Explore Artists</button>
+            <button class="btn secondary" type="button" onclick="document.getElementById('emailInput').focus()">Get Early Access</button>
+          </div>
+          <div class="hero-stats">
+            <div class="stat">
+              <div class="stat-label">Roster</div>
+              <div class="stat-value">10 Artists</div>
+            </div>
+            <div class="stat">
+              <div class="stat-label">Purpose</div>
+              <div class="stat-value">Discovery + Fan Connection</div>
+            </div>
+            <div class="stat">
+              <div class="stat-label">Build</div>
+              <div class="stat-value">Premium MVP Foundation</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="hero-stack">
+            <div class="stack-card">
+              <div class="stack-kicker">Artist Pages</div>
+              <strong>Full long-form bios</strong>
+              <p>Every artist has a dedicated page with a premium header, complete biography, and quick actions.</p>
+            </div>
+            <div class="stack-card">
+              <div class="stack-kicker">Fan Hub</div>
+              <strong>Email capture and favorites</strong>
+              <p>Fans can join the email list now and save favorite artists locally for a more app-like experience.</p>
+            </div>
+            <div class="stack-card">
+              <div class="stack-kicker">Release Forward</div>
+              <strong>Built to link out</strong>
+              <p>Use this as the home base while Spotify, Apple Music, and YouTube keep handling playback.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="artists">
+        <div class="section-head">
+          <div>
+            <h2>Artists</h2>
+            <p>Tap any card to open the artist page. This keeps the premium layout while giving each artist their own long-form section.</p>
+          </div>
+          <div class="chip">10 artist roster</div>
+        </div>
+
+        <div class="artist-grid">
+          <article class="artist-card" onclick="openArtist('juan-pablo')">
+            <div class="artist-visual"><div class="artist-tag">Founder / Pop</div><div class="artist-initial">JP</div></div>
+            <div class="artist-body"><h3>Juan Pablo</h3><p>Founder, songwriter, producer, and central creative force behind the Ultra Music Group vision.</p></div>
+          </article>
+
+          <article class="artist-card" onclick="openArtist('lily-heart')">
+            <div class="artist-visual"><div class="artist-tag">Pop</div><div class="artist-initial">LH</div></div>
+            <div class="artist-body"><h3>Lily Heart</h3><p>Emotion-forward pop with warmth, melody, vulnerability, and polished presentation.</p></div>
+          </article>
+
+          <article class="artist-card" onclick="openArtist('neon-euphoria')">
+            <div class="artist-visual"><div class="artist-tag">Electronic / Pop</div><div class="artist-initial">NE</div></div>
+            <div class="artist-body"><h3>Neon Euphoria</h3><p>High-energy color, movement, atmosphere, and bold electronic identity.</p></div>
+          </article>
+
+          <article class="artist-card" onclick="openArtist('angel-valentin')">
+            <div class="artist-visual"><div class="artist-tag">Regional Mexican</div><div class="artist-initial">AV</div></div>
+            <div class="artist-body"><h3>Ángel Valentín</h3><p>Tradition, strength, and emotional storytelling with regional force and character.</p></div>
+          </article>
+
+          <article class="artist-card" onclick="openArtist('elena-star')">
+            <div class="artist-visual"><div class="artist-tag">Pop</div><div class="artist-initial">ES</div></div>
+            <div class="artist-body"><h3>Elena Star</h3><p>Bright pop energy with a glamorous image, strong hooks, and wide-audience appeal.</p></div>
+          </article>
+
+          <article class="artist-card" onclick="openArtist('niko-soul')">
+            <div class="artist-visual"><div class="artist-tag">Soul / Pop</div><div class="artist-initial">NS</div></div>
+            <div class="artist-body"><h3>Niko Soul</h3><p>Soulful delivery, emotional resonance, and polished modern production.</p></div>
+          </article>
+
+          <article class="artist-card" onclick="openArtist('fabian-ray')">
+            <div class="artist-visual"><div class="artist-tag">Pop</div><div class="artist-initial">FR</div></div>
+            <div class="artist-body"><h3>Fabian Ray</h3><p>Charisma, performance energy, and clean pop presentation tied to strong identity.</p></div>
+          </article>
+
+          <article class="artist-card" onclick="openArtist('v-heart')">
+            <div class="artist-visual"><div class="artist-tag">Pop</div><div class="artist-initial">VH</div></div>
+            <div class="artist-body"><h3>V Heart</h3><p>Melodic pop emotion with softness, intimacy, and replay value.</p></div>
+          </article>
+
+          <article class="artist-card" onclick="openArtist('midnight-romance')">
+            <div class="artist-visual"><div class="artist-tag">Pop / Mood</div><div class="artist-initial">MR</div></div>
+            <div class="artist-body"><h3>Midnight Romance</h3><p>Night-driven mood, romance, atmosphere, and cinematic emotional texture.</p></div>
+          </article>
+
+          <article class="artist-card" onclick="openArtist('aura-skye')">
+            <div class="artist-visual"><div class="artist-tag">Pop / Dance</div><div class="artist-initial">AS</div></div>
+            <div class="artist-body"><h3>Aura Skye</h3><p>Confident, elevated pop energy designed to feel glossy, modern, and immediate.</p></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="releases">
+        <div class="section-head">
+          <div>
+            <h2>Featured Releases</h2>
+            <p>This section holds key singles and can later point directly to Spotify, Apple Music, YouTube, or anywhere else you want fans to go.</p>
+          </div>
+          <div class="chip">Release-forward MVP</div>
+        </div>
+
+        <div class="release-grid">
+          <article class="release-card">
+            <div class="release-cover">HEARTS ON<br>THE HIGHWAY</div>
+            <div class="release-body">
+              <h3>Hearts on the Highway</h3>
+              <div class="release-meta">Juan Pablo • Pop Single</div>
+              <p>A polished pop statement built around movement, ambition, melody, and cinematic scale.</p>
+              <div class="release-actions">
+                <button class="mini light" type="button" onclick="placeholderLink()">Listen</button>
+                <button class="mini dark" type="button" onclick="openArtist('juan-pablo')">Artist Page</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="release-card">
+            <div class="release-cover">SATURDAY<br>MORNING CRUSH</div>
+            <div class="release-body">
+              <h3>Saturday Morning Crush</h3>
+              <div class="release-meta">Lily Heart • Pop Single</div>
+              <p>Warm melodic pop built around softness, memory, emotional clarity, and listener connection.</p>
+              <div class="release-actions">
+                <button class="mini light" type="button" onclick="placeholderLink()">Listen</button>
+                <button class="mini dark" type="button" onclick="openArtist('lily-heart')">Artist Page</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="release-card">
+            <div class="release-cover">CORAZÓN<br>DE ACERO</div>
+            <div class="release-body">
+              <h3>Corazón de Acero</h3>
+              <div class="release-meta">Ángel Valentín • Regional Mexican</div>
+              <p>A bold emotional record driven by resilience, strength, and powerful vocal character.</p>
+              <div class="release-actions">
+                <button class="mini light" type="button" onclick="placeholderLink()">Listen</button>
+                <button class="mini dark" type="button" onclick="openArtist('angel-valentin')">Artist Page</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="release-card">
+            <div class="release-cover">ANGEL OF<br>THE NIGHT</div>
+            <div class="release-body">
+              <h3>Angel of the Night</h3>
+              <div class="release-meta">Elena Star • Pop Single</div>
+              <p>Glamorous pop energy with shine, motion, and a bold visual identity built for attention.</p>
+              <div class="release-actions">
+                <button class="mini light" type="button" onclick="placeholderLink()">Listen</button>
+                <button class="mini dark" type="button" onclick="openArtist('elena-star')">Artist Page</button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="fanhub">
+        <div class="two-col">
+          <div class="panel">
+            <h3>Fan Hub</h3>
+            <p>This gives the app interactivity right now without needing a full backend first.</p>
+            <div class="feature-list">
+              <div class="feature"><strong>Email list capture</strong><span>Collect names and emails now, then connect it to a real email service later.</span></div>
+              <div class="feature"><strong>Saved favorites</strong><span>Fans can save favorite artists locally to make the MVP feel more like an app.</span></div>
+              <div class="feature"><strong>Premium presentation</strong><span>Artist pages and release layout stay polished and entertainment-focused.</span></div>
+              <div class="feature"><strong>Expandable foundation</strong><span>Later add real artwork, streaming links, profiles, sign-ins, and notifications without rebuilding the whole thing.</span></div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h3>Join the Email List</h3>
+            <p>Start collecting audience interest from day one.</p>
+            <form id="emailForm">
+              <div class="form-row">
+                <div class="field">
+                  <label for="nameInput">Name</label>
+                  <input id="nameInput" type="text" placeholder="Your name">
+                </div>
+                <div class="field">
+                  <label for="emailInput">Email</label>
+                  <input id="emailInput" type="email" placeholder="Your email address">
+                </div>
+              </div>
+              <div class="field">
+                <label for="interestInput">What do you want updates about?</label>
+                <select id="interestInput">
+                  <option value="New releases">New releases</option>
+                  <option value="Artist news">Artist news</option>
+                  <option value="Visual drops">Visual drops</option>
+                  <option value="Everything Ultra Music Group">Everything Ultra Music Group</option>
+                </select>
+              </div>
+              <button class="btn primary" type="submit">Subscribe</button>
+              <div id="emailStatus" class="status">No signup saved yet.</div>
+            </form>
+          </div>
+        </div>
+
+        <div class="two-col">
+          <div class="panel">
+            <h3>Create Fan Profile</h3>
+            <p>This saves locally in the browser for now so the app already has a working profile layer.</p>
+            <form id="profileForm">
+              <div class="form-row">
+                <div class="field">
+                  <label for="profileName">Display Name</label>
+                  <input id="profileName" type="text" placeholder="Display name">
+                </div>
+                <div class="field">
+                  <label for="profileEmail">Email</label>
+                  <input id="profileEmail" type="email" placeholder="Email address">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="field">
+                  <label for="profileCity">City</label>
+                  <input id="profileCity" type="text" placeholder="Los Angeles">
+                </div>
+                <div class="field">
+                  <label for="profileFavorite">Favorite Artist</label>
+                  <select id="profileFavorite">
+                    <option value="">Select one</option>
+                    <option value="Juan Pablo">Juan Pablo</option>
+                    <option value="Lily Heart">Lily Heart</option>
+                    <option value="Neon Euphoria">Neon Euphoria</option>
+                    <option value="Ángel Valentín">Ángel Valentín</option>
+                    <option value="Elena Star">Elena Star</option>
+                    <option value="Niko Soul">Niko Soul</option>
+                    <option value="Fabian Ray">Fabian Ray</option>
+                    <option value="V Heart">V Heart</option>
+                    <option value="Midnight Romance">Midnight Romance</option>
+                    <option value="Aura Skye">Aura Skye</option>
+                  </select>
+                </div>
+              </div>
+              <div class="field">
+                <label for="profileBio">Short Fan Bio</label>
+                <textarea id="profileBio" placeholder="Say what music you love or what you want early access to."></textarea>
+              </div>
+              <button class="btn primary" type="submit">Save Profile</button>
+              <div id="profileStatus" class="status">No profile saved yet.</div>
+            </form>
+          </div>
+
+          <div class="panel">
+            <h3>Saved Favorites</h3>
+            <p>Favorites you save from artist pages appear here.</p>
+            <div id="favoritesList" class="saved-list">
+              <div class="saved-item"><span>No favorites saved yet.</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- ARTIST PAGES -->
+
+  <section id="artist-juan-pablo" class="artist-page">
+    <div class="wrap">
+      <div class="back-link" onclick="goHome()">← Back to home</div>
+      <div class="artist-layout">
+        <div class="artist-hero jp">
+          <div class="artist-hero-inner">
+            <div class="artist-badge">Founder Artist</div>
+            <h1>Juan Pablo</h1>
+            <p>Pop artist, songwriter, producer, and founder building music, identity, and a larger creative platform at the same time.</p>
+          </div>
+        </div>
+        <div class="artist-content">
+          <h2>Artist Bio</h2>
+          <p>Juan Pablo is a pop artist, songwriter, producer, and creative founder whose work is driven by vision, scale, and long-term identity. He does not approach music as a random collection of disconnected singles. He approaches it as a complete world where the songs, the visuals, the presentation, and the artist positioning all reinforce one another. That mindset shapes both his individual releases and the overall direction of Ultra Music Group.</p>
+          <p>His sound is rooted in polished pop, strong melodic framing, and records designed to feel cinematic, memorable, and emotionally direct. He is focused on creating songs that listeners can return to, songs that feel built with intention rather than impulse. That means paying attention not only to the sound of a release, but also to how it fits into a broader artistic identity that can grow over time.</p>
+          <p>As the founder of the label, Juan Pablo also represents the structure behind the platform. He is helping define how artists are presented, how the fan experience feels, and how the catalog is introduced to the audience. His role extends beyond being just a performer. He is shaping the larger architecture of the roster so that every artist lives inside a more polished and elevated environment.</p>
+          <p>What makes Juan Pablo stand out is the combination of artistry and construction. He is not only making music. He is building a place for the music to live. That makes his work feel ambitious and grounded at the same time, with a direction focused on growth, consistency, and creative control.</p>
+          <div class="artist-meta">
+            <div class="box"><small>Role</small><strong>Artist / Founder</strong></div>
+            <div class="box"><small>Sound</small><strong>Cinematic Pop</strong></div>
+            <div class="box"><small>Focus</small><strong>Vision + Brand</strong></div>
+          </div>
+          <div class="artist-actions">
+            <button class="btn primary" type="button" onclick="saveFavorite('Juan Pablo')">Add to favorites</button>
+            <button class="btn secondary" type="button" onclick="goHome(); setTimeout(()=>document.getElementById('emailInput').focus(),60)">Join email list</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="artist-lily-heart" class="artist-page">
+    <div class="wrap">
+      <div class="back-link" onclick="goHome()">← Back to home</div>
+      <div class="artist-layout">
+        <div class="artist-hero lh">
+          <div class="artist-hero-inner">
+            <div class="artist-badge">Pop Artist</div>
+            <h1>Lily Heart</h1>
+            <p>Emotion-forward pop centered on warmth, connection, softness, and a melodic identity that stays with the listener.</p>
+          </div>
+        </div>
+        <div class="artist-content">
+          <h2>Artist Bio</h2>
+          <p>Lily Heart is a pop artist whose music is built around vulnerability, closeness, and strong melodic storytelling. Her records are designed to feel personal without losing polish, giving listeners songs that are emotionally direct while still feeling refined and replayable. That balance makes her one of the label’s strongest emotional voices.</p>
+          <p>Her artistic lane centers on love, reflection, intimacy, and the kind of moments that people carry with them long after the song is over. She does not rely on noise or overstatement. Instead, her strength comes from clarity, sincerity, and the ability to make a song feel both soft and memorable at the same time.</p>
+          <p>Within Ultra Music Group, Lily Heart expands the roster by bringing a more intimate emotional tone into the platform. She represents a lane that is gentle but not small, polished but still genuine. Her releases help show that the label can carry range without losing its premium, cohesive identity.</p>
+          <p>Lily Heart continues to shape a catalog that values emotion as much as presentation. She is the kind of artist who invites the listener inward, creating space for songs that feel honest, beautiful, and deeply connected to personal feeling.</p>
+          <div class="artist-meta">
+            <div class="box"><small>Role</small><strong>Pop Artist</strong></div>
+            <div class="box"><small>Sound</small><strong>Emotional Pop</strong></div>
+            <div class="box"><small>Focus</small><strong>Warmth + Melody</strong></div>
+          </div>
+          <div class="artist-actions">
+            <button class="btn primary" type="button" onclick="saveFavorite('Lily Heart')">Add to favorites</button>
+            <button class="btn secondary" type="button" onclick="goHome(); setTimeout(()=>document.getElementById('emailInput').focus(),60)">Join email list</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="artist-neon-euphoria" class="artist-page">
+    <div class="wrap">
+      <div class="back-link" onclick="goHome()">← Back to home</div>
+      <div class="artist-layout">
+        <div class="artist-hero ne">
+          <div class="artist-hero-inner">
+            <div class="artist-badge">Electronic / Pop</div>
+            <h1>Neon Euphoria</h1>
+            <p>High-energy atmosphere, color, movement, and a sound built to feel immediate, modern, and alive.</p>
+          </div>
+        </div>
+        <div class="artist-content">
+          <h2>Artist Bio</h2>
+          <p>Neon Euphoria is a project built around motion, color, atmosphere, and polished electronic energy. The identity is designed to feel immersive and high impact, making the music feel like more than a track list. It feels like an environment. That gives the project a strong visual and sonic role within the Ultra Music Group roster.</p>
+          <p>The sound is created to lift the room, sharpen the mood, and create an immediate emotional charge. Whether through synth texture, pulse, or sonic brightness, Neon Euphoria is centered on momentum. It is not passive music. It is music built to change the temperature of the experience around it.</p>
+          <p>Inside the label, Neon Euphoria brings contrast and modernity. It helps show that Ultra Music Group is not limited to one type of presentation or emotional lane. The project expands the platform into a more design-forward, visually driven direction while still fitting under the same polished umbrella.</p>
+          <p>As the catalog grows, Neon Euphoria has room to become one of the most visually distinct artist brands on the roster. It is ideal for bold artwork, branded motion clips, and a premium digital presentation that feels sleek, colorful, and memorable.</p>
+          <div class="artist-meta">
+            <div class="box"><small>Role</small><strong>Concept Artist</strong></div>
+            <div class="box"><small>Sound</small><strong>Electronic Pop</strong></div>
+            <div class="box"><small>Focus</small><strong>Energy + Atmosphere</strong></div>
+          </div>
+          <div class="artist-actions">
+            <button class="btn primary" type="button" onclick="saveFavorite('Neon Euphoria')">Add to favorites</button>
+            <button class="btn secondary" type="button" onclick="goHome(); setTimeout(()=>document.getElementById('emailInput').focus(),60)">Join email list</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="artist-angel-valentin" class="artist-page">
+    <div class="wrap">
+      <div class="back-link" onclick="goHome()">← Back to home</div>
+      <div class="artist-layout">
+        <div class="artist-hero av">
+          <div class="artist-hero-inner">
+            <div class="artist-badge">Regional Mexican</div>
+            <h1>Ángel Valentín</h1>
+            <p>A strong regional voice carrying tradition, emotional storytelling, resilience, and cultural force.</p>
+          </div>
+        </div>
+        <div class="artist-content">
+          <h2>Artist Bio</h2>
+          <p>Ángel Valentín is a regional Mexican artist whose music is shaped by emotional power, strength, and tradition. His songs are designed to feel rooted in culture while still carrying the clean presentation and wider reach that modern artist development requires. That combination gives him a strong identity within the label.</p>
+          <p>His artistic lane is driven by voice, feeling, and conviction. The music is not simply styled around genre expectations. It is meant to communicate weight, heart, and personal truth. That makes his work feel grounded, especially for listeners who want records that carry both emotional and cultural presence.</p>
+          <p>As part of Ultra Music Group, Ángel Valentín expands the roster sonically and culturally. He shows that the platform can hold multiple audiences and still feel unified. His presence broadens the label’s emotional and stylistic reach while keeping the same overall standard of quality and presentation.</p>
+          <p>Ángel Valentín continues building a catalog that feels durable, expressive, and strong. He represents a side of the label that is proud, resilient, and deeply connected to storytelling through voice and identity.</p>
+          <div class="artist-meta">
+            <div class="box"><small>Role</small><strong>Regional Artist</strong></div>
+            <div class="box"><small>Sound</small><strong>Regional Mexican</strong></div>
+            <div class="box"><small>Focus</small><strong>Strength + Story</strong></div>
+          </div>
+          <div class="artist-actions">
+            <button class="btn primary" type="button" onclick="saveFavorite('Ángel Valentín')">Add to favorites</button>
+            <button class="btn secondary" type="button" onclick="goHome(); setTimeout(()=>document.getElementById('emailInput').focus(),60)">Join email list</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="artist-elena-star" class="artist-page">
+    <div class="wrap">
+      <div class="back-link" onclick="goHome()">← Back to home</div>
+      <div class="artist-layout">
+        <div class="artist-hero es">
+          <div class="artist-hero-inner">
+            <div class="artist-badge">Pop Artist</div>
+            <h1>Elena Star</h1>
+            <p>Bright pop glamour, bold hooks, and a visual identity designed to feel polished and immediate.</p>
+          </div>
+        </div>
+        <div class="artist-content">
+          <h2>Artist Bio</h2>
+          <p>Elena Star is a pop artist built around shine, confidence, and strong visual presence. Her identity is designed to feel glamorous and audience-facing from the start, giving the label a clear artist who can carry bright pop campaigns with polish and style.</p>
+          <p>The music lane behind Elena Star emphasizes hooks, momentum, and a presentation that feels clean, direct, and easy to connect with. She is the kind of artist who can hold a glossy visual world while still staying rooted in strong song structure and recognizable brand tone.</p>
+          <p>Within Ultra Music Group, Elena Star helps represent the more overtly polished and aspirational side of the roster. Her role in the platform is important because she reinforces the idea that the label can carry both emotional substance and visual shine without losing its identity.</p>
+          <p>As Elena Star’s catalog expands, the opportunity is to build a pop world that feels elevated, stylish, and memorable. She is well-positioned for strong artwork, branded visuals, and campaign rollouts that feel commercial without becoming generic.</p>
+          <div class="artist-meta">
+            <div class="box"><small>Role</small><strong>Pop Artist</strong></div>
+            <div class="box"><small>Sound</small><strong>Bright Pop</strong></div>
+            <div class="box"><small>Focus</small><strong>Glamour + Hooks</strong></div>
+          </div>
+          <div class="artist-actions">
+            <button class="btn primary" type="button" onclick="saveFavorite('Elena Star')">Add to favorites</button>
+            <button class="btn secondary" type="button" onclick="goHome(); setTimeout(()=>document.getElementById('emailInput').focus(),60)">Join email list</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="artist-niko-soul" class="artist-page">
+    <div class="wrap">
+      <div class="back-link" onclick="goHome()">← Back to home</div>
+      <div class="artist-layout">
+        <div class="artist-hero ns">
+          <div class="artist-hero-inner">
+            <div class="artist-badge">Soul / Pop</div>
+            <h1>Niko Soul</h1>
+            <p>Soulful delivery, emotional gravity, and polished modern production built for connection and depth.</p>
+          </div>
+        </div>
+        <div class="artist-content">
+          <h2>Artist Bio</h2>
+          <p>Niko Soul is an artist whose identity centers on vocal feeling, emotional depth, and a smooth modern sound. The name itself suggests the lane clearly: music that prioritizes feeling, presence, and a more soulful emotional connection to the listener.</p>
+          <p>His work is best understood as a balance between emotional resonance and contemporary polish. The songs are intended to feel grounded and expressive while still fitting comfortably inside a clean modern release framework. That gives the artist room to be both heartfelt and commercially presentable.</p>
+          <p>Within Ultra Music Group, Niko Soul gives the roster a different kind of emotional weight. He helps extend the label beyond bright pop and high-energy mood into something more intimate, more vocal, and more inward-facing without losing quality control.</p>
+          <p>As the platform develops, Niko Soul can become one of the roster’s anchors for listeners who want a smoother emotional lane. His strength lies in feeling, tone, and the ability to carry songs with sincerity and presence.</p>
+          <div class="artist-meta">
+            <div class="box"><small>Role</small><strong>Soul / Pop Artist</strong></div>
+            <div class="box"><small>Sound</small><strong>Soulful Modern Pop</strong></div>
+            <div class="box"><small>Focus</small><strong>Feeling + Voice</strong></div>
+          </div>
+          <div class="artist-actions">
+            <button class="btn primary" type="button" onclick="saveFavorite('Niko Soul')">Add to favorites</button>
+            <button class="btn secondary" type="button" onclick="goHome(); setTimeout(()=>document.getElementById('emailInput').focus(),60)">Join email list</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="artist-fabian-ray" class="artist-page">
+    <div class="wrap">
+      <div class="back-link" onclick="goHome()">← Back to home</div>
+      <div class="artist-layout">
+        <div class="artist-hero fr">
+          <div class="artist-hero-inner">
+            <div class="artist-badge">Pop Artist</div>
+            <h1>Fabian Ray</h1>
+            <p>Performance energy, charisma, and a clean pop identity shaped around star presence and confidence.</p>
+          </div>
+        </div>
+        <div class="artist-content">
+          <h2>Artist Bio</h2>
+          <p>Fabian Ray is built around performance energy, star presence, and a polished pop identity that feels made for visibility. His lane is defined by movement, confidence, and the kind of artist presentation that naturally supports strong visual rollout and larger audience-facing branding.</p>
+          <p>The appeal of Fabian Ray lies in clarity. The image, the energy, and the music can work together in a direct way that makes the artist easy to position and easy to market. That is valuable because premium presentation depends not only on sound, but on how quickly an artist feels recognizable and coherent to the viewer.</p>
+          <p>Within Ultra Music Group, Fabian Ray adds a more visibly performance-led angle to the roster. He helps balance the platform by giving it an artist presence tied strongly to confidence, movement, and visual charisma, which can be especially effective in campaigns built around clips, teasers, and image-first promotion.</p>
+          <p>Fabian Ray has the potential to become one of the more outward-facing artist identities in the lineup. His role is to carry momentum and star energy while still fitting inside the same polished label ecosystem that holds the rest of the roster together.</p>
+          <div class="artist-meta">
+            <div class="box"><small>Role</small><strong>Pop Artist</strong></div>
+            <div class="box"><small>Sound</small><strong>Performance Pop</strong></div>
+            <div class="box"><small>Focus</small><strong>Image + Energy</strong></div>
+          </div>
+          <div class="artist-actions">
+            <button class="btn primary" type="button" onclick="saveFavorite('Fabian Ray')">Add to favorites</button>
+            <button class="btn secondary" type="button" onclick="goHome(); setTimeout(()=>document.getElementById('emailInput').focus(),60)">Join email list</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="artist-v-heart" class="artist-page">
+    <div class="wrap">
+      <div class="back-link" onclick="goHome()">← Back to home</div>
+      <div class="artist-layout">
+        <div class="artist-hero vh">
+          <div class="artist-hero-inner">
+            <div class="artist-badge">Pop Artist</div>
+            <h1>V Heart</h1>
+            <p>Soft emotional pop with intimacy, melody, and a close-listener connection built into the identity.</p>
+          </div>
+        </div>
+        <div class="artist-content">
+          <h2>Artist Bio</h2>
+          <p>V Heart is an artist identity rooted in emotional closeness, softness, and melodic sincerity. The name itself supports a lane centered on feeling, intimacy, and songs that invite the listener inward rather than only pushing outward with volume or attitude.</p>
+          <p>The music direction behind V Heart is meant to feel personal and replayable. That means focusing on songs that are emotionally accessible, polished, and warm enough to create strong attachment. It is a lane built around connection and subtle strength rather than spectacle alone.</p>
+          <p>Within Ultra Music Group, V Heart helps deepen the emotional side of the roster. The artist adds another layer of feeling-based material to the platform while still fitting inside the same premium release environment. That helps the label feel wider emotionally without becoming inconsistent.</p>
+          <p>As the project grows, V Heart has strong potential as a repeat-listen artist identity for fans who want music that feels tender, melodic, and emotionally dependable. The strength lies in direct feeling, simple clarity, and a tone that can stay with the audience.</p>
+          <div class="artist-meta">
+            <div class="box"><small>Role</small><strong>Pop Artist</strong></div>
+            <div class="box"><small>Sound</small><strong>Soft Emotional Pop</strong></div>
+            <div class="box"><small>Focus</small><strong>Closeness + Melody</strong></div>
+          </div>
+          <div class="artist-actions">
+            <button class="btn primary" type="button" onclick="saveFavorite('V Heart')">Add to favorites</button>
+            <button class="btn secondary" type="button" onclick="goHome(); setTimeout(()=>document.getElementById('emailInput').focus(),60)">Join email list</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="artist-midnight-romance" class="artist-page">
+    <div class="wrap">
+      <div class="back-link" onclick="goHome()">← Back to home</div>
+      <div class="artist-layout">
+        <div class="artist-hero mr">
+          <div class="artist-hero-inner">
+            <div class="artist-badge">Pop / Mood</div>
+            <h1>Midnight Romance</h1>
+            <p>Night-driven emotion, atmosphere, cinematic texture, and romantic mood with strong visual potential.</p>
+          </div>
+        </div>
+        <div class="artist-content">
+          <h2>Artist Bio</h2>
+          <p>Midnight Romance is an artist identity built around atmosphere, longing, and emotional tension. The name naturally suggests a late-night mood, and that direction can shape everything from the music to the artwork to the way the artist is framed inside the platform.</p>
+          <p>The core appeal here is mood. Songs under this identity are meant to feel intimate, cinematic, and emotionally charged, giving the listener something immersive rather than generic. That makes the project especially useful for strong visual presentation and world-building across the app and beyond it.</p>
+          <p>Within Ultra Music Group, Midnight Romance adds another kind of emotional tone to the roster, one that leans into atmosphere, romantic texture, and the nighttime aesthetic without losing the premium structure of the platform. It helps diversify the label while keeping the same polished standard.</p>
+          <p>As the catalog expands, Midnight Romance can become a strong identity for fans who want mood, emotional depth, and a darker romantic edge. The strength of the project lies in tone, aesthetic coherence, and the ability to create a memorable emotional environment around the music.</p>
+          <div class="artist-meta">
+            <div class="box"><small>Role</small><strong>Mood Artist</strong></div>
+            <div class="box"><small>Sound</small><strong>Cinematic Pop Mood</strong></div>
+            <div class="box"><small>Focus</small><strong>Atmosphere + Romance</strong></div>
+          </div>
+          <div class="artist-actions">
+            <button class="btn primary" type="button" onclick="saveFavorite('Midnight Romance')">Add to favorites</button>
+            <button class="btn secondary" type="button" onclick="goHome(); setTimeout(()=>document.getElementById('emailInput').focus(),60)">Join email list</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="artist-aura-skye" class="artist-page">
+    <div class="wrap">
+      <div class="back-link" onclick="goHome()">← Back to home</div>
+      <div class="artist-layout">
+        <div class="artist-hero as">
+          <div class="artist-hero-inner">
+            <div class="artist-badge">Pop / Dance</div>
+            <h1>Aura Skye</h1>
+            <p>Glossy confident pop energy with modern momentum, shine, and a strong upward-facing identity.</p>
+          </div>
+        </div>
+        <div class="artist-content">
+          <h2>Artist Bio</h2>
+          <p>Aura Skye is an artist identity designed around polish, confidence, and a pop-forward energy that feels elevated and immediate. The name suggests aspiration, brightness, and movement, which makes it a strong fit for a modern artist built around clean hooks and visible branding.</p>
+          <p>The sound lane behind Aura Skye can carry both accessibility and style. It is meant to feel current and audience-facing while still leaving room for strong identity. That makes the project useful as a flexible roster artist who can support high-energy campaigns, visual rollout, and clear commercial positioning.</p>
+          <p>Inside Ultra Music Group, Aura Skye helps round out the roster by giving it another polished pop identity with a more upward, energetic, and glossy tone. That gives the app another distinct card and page that still feels like it belongs in the same premium environment.</p>
+          <p>As Aura Skye develops, the opportunity is to build a highly presentable pop artist whose campaigns can feel sleek, motivational, and visually clean. The strength lies in clarity, brightness, and a strong sense of modern momentum.</p>
+          <div class="artist-meta">
+            <div class="box"><small>Role</small><strong>Pop / Dance Artist</strong></div>
+            <div class="box"><small>Sound</small><strong>Glossy Modern Pop</strong></div>
+            <div class="box"><small>Focus</small><strong>Confidence + Shine</strong></div>
+          </div>
+          <div class="artist-actions">
+            <button class="btn primary" type="button" onclick="saveFavorite('Aura Skye')">Add to favorites</button>
+            <button class="btn secondary" type="button" onclick="goHome(); setTimeout(()=>document.getElementById('emailInput').focus(),60)">Join email list</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const homeScreen = document.getElementById('homeScreen');
+    const artistPages = Array.from(document.querySelectorAll('.artist-page'));
+
+    function goHome(){
+      homeScreen.classList.add('active');
+      artistPages.forEach(page => page.classList.remove('active'));
+      window.scrollTo({top:0, behavior:'smooth'});
+    }
+
+    function openArtist(slug){
+      homeScreen.classList.remove('active');
+      artistPages.forEach(page => page.classList.remove('active'));
+      const target = document.getElementById('artist-' + slug);
+      if(target){
+        target.classList.add('active');
+        window.scrollTo({top:0, behavior:'smooth'});
+      }
+    }
+
+    function placeholderLink(){
+      alert('Replace this button action with your real Spotify, Apple Music, YouTube, or website URL.');
+    }
+
+    function getStoredArray(key){
+      try{
+        const raw = localStorage.getItem(key);
+        return raw ? JSON.parse(raw) : [];
+      }catch(e){
+        return [];
+      }
+    }
+
+    function setStoredArray(key, value){
+      localStorage.setItem(key, JSON.stringify(value));
+    }
+
+    function renderFavorites(){
+      const list = document.getElementById('favoritesList');
+      const favorites = getStoredArray('umgFavorites');
+
+      if(!favorites.length){
+        list.innerHTML = '<div class="saved-item"><span>No favorites saved yet.</span></div>';
+        return;
+      }
+
+      list.innerHTML = favorites.map(name => `
+        <div class="saved-item">
+          <span>${name}</span>
+          <button class="mini dark" type="button" onclick="removeFavorite('${name.replace(/'/g, "\\'")}')">Remove</button>
+        </div>
+      `).join('');
+    }
+
+    function saveFavorite(name){
+      const favorites = getStoredArray('umgFavorites');
+      if(!favorites.includes(name)){
+        favorites.push(name);
+        setStoredArray('umgFavorites', favorites);
+        renderFavorites();
+        alert(name + ' added to favorites.');
+      } else {
+        alert(name + ' is already in favorites.');
+      }
+    }
+
+    function removeFavorite(name){
+      const favorites = getStoredArray('umgFavorites').filter(item => item !== name);
+      setStoredArray('umgFavorites', favorites);
+      renderFavorites();
+    }
+
+    document.getElementById('emailForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const name = document.getElementById('nameInput').value.trim();
+      const email = document.getElementById('emailInput').value.trim();
+      const interest = document.getElementById('interestInput').value;
+      const status = document.getElementById('emailStatus');
+
+      if(!email){
+        status.textContent = 'Email is required.';
+        status.className = 'status error';
+        return;
+      }
+
+      const signups = getStoredArray('umgSignups');
+      signups.push({name, email, interest, createdAt:new Date().toISOString()});
+      setStoredArray('umgSignups', signups);
+
+      status.textContent = 'Signup saved successfully.';
+      status.className = 'status success';
+      this.reset();
+    });
+
+    document.getElementById('profileForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const status = document.getElementById('profileStatus');
+      const data = {
+        name: document.getElementById('profileName').value.trim(),
+        email: document.getElementById('profileEmail').value.trim(),
+        city: document.getElementById('profileCity').value.trim(),
+        favoriteArtist: document.getElementById('profileFavorite').value,
+        bio: document.getElementById('profileBio').value.trim()
+      };
+
+      if(!data.name || !data.email){
+        status.textContent = 'Display name and email are required.';
+        status.className = 'status error';
+        return;
+      }
+
+      localStorage.setItem('umgProfile', JSON.stringify(data));
+      status.textContent = 'Profile saved successfully.';
+      status.className = 'status success';
+    });
+
+    renderFavorites();
+  </script>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <div>© 2026 Ultra Music Group</div>
+      <div>10 artists • premium MVP • discovery • fan connection</div>
+    </div>
+  </footer>
 </body>
 </html>
 

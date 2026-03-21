@@ -8,12 +8,14 @@
     * {
       box-sizing: border-box;
     }
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       background: #050505;
       color: white;
     }
+
     .header {
       display: flex;
       align-items: center;
@@ -22,6 +24,7 @@
       border-bottom: 1px solid rgba(255,255,255,0.08);
       background: #000;
     }
+
     .header-logo {
       width: 56px;
       height: 56px;
@@ -29,17 +32,20 @@
       border-radius: 10px;
       flex-shrink: 0;
     }
+
     .logo {
       margin: 0;
       font-size: 28px;
       font-weight: 700;
       letter-spacing: 1px;
     }
+
     .sublogo {
       margin-top: 4px;
       color: #b8b8b8;
       font-size: 14px;
     }
+
     .hero {
       padding: 56px 24px;
       text-align: center;
@@ -47,12 +53,14 @@
         linear-gradient(to right, rgba(0,0,0,0.82), rgba(0,0,0,0.35)),
         linear-gradient(135deg, #1d0036, #001c4a, #050505);
     }
+
     .hero-logo {
       width: min(320px, 80%);
       display: block;
       margin: 0 auto 24px auto;
       object-fit: contain;
     }
+
     .hero-tag {
       display: inline-block;
       background: rgba(255,255,255,0.12);
@@ -64,6 +72,7 @@
       text-transform: uppercase;
       margin-bottom: 18px;
     }
+
     .hero h1 {
       margin: 0 0 12px 0;
       font-size: 56px;
@@ -72,6 +81,7 @@
       margin-left: auto;
       margin-right: auto;
     }
+
     .hero p {
       margin: 0 auto;
       max-width: 820px;
@@ -79,15 +89,46 @@
       font-size: 20px;
       line-height: 1.5;
     }
+
+    .about-section,
     .player-section,
     .section {
       padding: 40px 24px 10px;
     }
+
     .section h2,
-    .player-section h2 {
+    .player-section h2,
+    .about-section h2 {
       margin: 0 0 20px 0;
       font-size: 24px;
     }
+
+    .about-box {
+      max-width: 980px;
+      margin: 0 auto;
+      background: #101010;
+      border-radius: 18px;
+      padding: 28px;
+      border: 1px solid rgba(255,255,255,0.05);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.28);
+    }
+
+    .about-box p {
+      margin: 0 0 16px 0;
+      color: #c8c8c8;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .about-box p:last-child {
+      margin-bottom: 0;
+    }
+
+    .about-credit {
+      color: #9b9b9b;
+      font-size: 14px;
+    }
+
     .player-box {
       display: flex;
       align-items: center;
@@ -98,6 +139,7 @@
       border: 1px solid rgba(255,255,255,0.05);
       box-shadow: 0 10px 24px rgba(0,0,0,0.28);
     }
+
     .player-box img {
       width: 110px;
       height: 110px;
@@ -105,18 +147,22 @@
       border-radius: 12px;
       flex-shrink: 0;
     }
+
     .player-info h3 {
       margin: 0 0 6px 0;
       font-size: 28px;
     }
+
     .player-info p {
       margin: 0 0 14px 0;
       color: #b8b8b8;
       font-size: 16px;
     }
+
     .player-info audio {
       width: min(520px, 100%);
     }
+
     .scroll-row {
       display: flex;
       gap: 20px;
@@ -124,13 +170,16 @@
       padding-bottom: 14px;
       scroll-behavior: smooth;
     }
+
     .scroll-row::-webkit-scrollbar {
       height: 10px;
     }
+
     .scroll-row::-webkit-scrollbar-thumb {
       background: #2c2c2c;
       border-radius: 999px;
     }
+
     .card {
       flex: 0 0 260px;
       min-width: 260px;
@@ -141,6 +190,7 @@
       border: 1px solid rgba(255,255,255,0.05);
       box-shadow: 0 10px 24px rgba(0,0,0,0.28);
     }
+
     .card img {
       width: 100%;
       aspect-ratio: 1 / 1;
@@ -148,15 +198,18 @@
       display: block;
       background: #1e1e1e;
     }
+
     .card-body {
       padding: 16px;
     }
+
     .card-title {
       margin: 0 0 6px 0;
       font-size: 16px;
       font-weight: 700;
       line-height: 1.25;
     }
+
     .card-subtitle {
       margin: 0 0 14px 0;
       color: #b8b8b8;
@@ -164,11 +217,13 @@
       line-height: 1.35;
       min-height: 36px;
     }
+
     .links {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
     }
+
     .links a,
     .links button {
       text-decoration: none;
@@ -182,34 +237,42 @@
       border: none;
       cursor: pointer;
     }
+
     .play-button {
       margin-bottom: 10px;
       width: 100%;
       text-align: center;
       font-weight: 600;
     }
+
     .footer {
       padding: 40px 24px 60px;
       color: #8f8f8f;
       font-size: 13px;
     }
+
     @media (max-width: 900px) {
       .hero h1 {
         font-size: 42px;
       }
+
       .hero p {
         font-size: 17px;
       }
+
       .player-box {
         flex-direction: column;
         align-items: flex-start;
       }
+
       .player-info audio {
         width: 100%;
       }
+
       .header {
         align-items: flex-start;
       }
+
       .header-logo {
         width: 48px;
         height: 48px;
@@ -218,6 +281,7 @@
   </style>
 </head>
 <body>
+
   <div class="header">
     <img src="logo.png" alt="Ultra Music Group Logo" class="header-logo">
     <div>
@@ -225,6 +289,7 @@
       <div class="sublogo">Official artist roster</div>
     </div>
   </div>
+
   <section class="hero">
     <img src="logo.png" alt="Ultra Music Group Logo" class="hero-logo">
     <div class="hero-tag">Now Streaming Worldwide</div>
@@ -234,6 +299,22 @@
       followed by the full roster and current worldwide releases.
     </p>
   </section>
+
+  <section class="about-section">
+    <div class="about-box">
+      <h2>About Ultra Music Group</h2>
+      <p>
+        Ultra Music Group is an independent record label built to develop original artists, release new music, and create a unified world of sound, visuals, and identity. The label brings together a growing roster across pop, Latin, electronic, and crossover music with a focus on strong songwriting, memorable characters, and cinematic presentation.
+      </p>
+      <p>
+        Every release is part of a larger creative vision — from the music itself to the visuals, branding, artist development, and digital experience. Ultra Music Group is designed as a next-generation independent label built from the ground up with ambition, consistency, and long-term world-building at its core.
+      </p>
+      <p class="about-credit">
+        Independent label concept, music development, and creative direction by Juan Pablo Ochoa.
+      </p>
+    </div>
+  </section>
+
   <section class="player-section">
     <h2>Now Playing</h2>
     <div class="player-box">
@@ -248,9 +329,11 @@
       </div>
     </div>
   </section>
+
   <section class="section">
     <h2>Featured Artists</h2>
     <div class="scroll-row">
+
       <div class="card">
         <img src="juan.jpg" alt="Juan Pablo">
         <div class="card-body">
@@ -266,6 +349,7 @@
           </div>
         </div>
       </div>
+
       <div class="card">
         <img src="aria.jpg" alt="Aria Nova">
         <div class="card-body">
@@ -281,6 +365,7 @@
           </div>
         </div>
       </div>
+
       <div class="card">
         <img src="lily.jpg" alt="Lily Hart">
         <div class="card-body">
@@ -296,6 +381,7 @@
           </div>
         </div>
       </div>
+
       <div class="card">
         <img src="elena.jpg" alt="Elena Star">
         <div class="card-body">
@@ -311,6 +397,7 @@
           </div>
         </div>
       </div>
+
       <div class="card">
         <img src="favian.jpg" alt="Favian Rey">
         <div class="card-body">
@@ -326,6 +413,7 @@
           </div>
         </div>
       </div>
+
       <div class="card">
         <img src="angel.jpg" alt="Ángel Valentín">
         <div class="card-body">
@@ -341,6 +429,7 @@
           </div>
         </div>
       </div>
+
       <div class="card">
         <img src="luca.jpg" alt="Luca Valley">
         <div class="card-body">
@@ -356,6 +445,7 @@
           </div>
         </div>
       </div>
+
       <div class="card">
         <img src="niko.jpg" alt="Niko Sol">
         <div class="card-body">
@@ -371,6 +461,7 @@
           </div>
         </div>
       </div>
+
       <div class="card">
         <img src="jax.jpg" alt="Jax Monroe">
         <div class="card-body">
@@ -386,6 +477,7 @@
           </div>
         </div>
       </div>
+
       <div class="card">
         <img src="neon.jpg" alt="Neon Euphoria">
         <div class="card-body">
@@ -401,11 +493,14 @@
           </div>
         </div>
       </div>
+
     </div>
   </section>
+
   <section class="section">
     <h2>Latest Releases</h2>
     <div class="scroll-row">
+
       <div class="card">
         <img src="juan-single.jpg" alt="Hearts on the Highway">
         <div class="card-body">
@@ -420,6 +515,7 @@
           </div>
         </div>
       </div>
+
       <div class="card">
         <img src="aria-single.jpg" alt="Hearts on the Highway">
         <div class="card-body">
@@ -434,6 +530,7 @@
           </div>
         </div>
       </div>
+
       <div class="card">
         <img src="lily-single.jpg" alt="Cherry Soda">
         <div class="card-body">
@@ -448,6 +545,7 @@
           </div>
         </div>
       </div>
+
       <div class="card">
         <img src="elena-single.jpg" alt="Ángel de Neón">
         <div class="card-body">
@@ -462,6 +560,7 @@
           </div>
         </div>
       </div>
+
       <div class="card">
         <img src="favian-single.jpg" alt="Baila Conmigo">
         <div class="card-body">
@@ -476,6 +575,7 @@
           </div>
         </div>
       </div>
+
       <div class="card">
         <img src="angel-single.jpg" alt="Corazón de Acero">
         <div class="card-body">
@@ -490,6 +590,7 @@
           </div>
         </div>
       </div>
+
       <div class="card">
         <img src="luca-single.jpg" alt="When We Say I Do">
         <div class="card-body">
@@ -504,6 +605,7 @@
           </div>
         </div>
       </div>
+
       <div class="card">
         <img src="niko-single.jpg" alt="Global Heartbeat">
         <div class="card-body">
@@ -518,6 +620,7 @@
           </div>
         </div>
       </div>
+
       <div class="card">
         <img src="jax-single.jpg" alt="Electric Blue Heart">
         <div class="card-body">
@@ -532,6 +635,7 @@
           </div>
         </div>
       </div>
+
       <div class="card">
         <img src="neon-single.jpg" alt="Electric Afterglow">
         <div class="card-body">
@@ -546,11 +650,14 @@
           </div>
         </div>
       </div>
+
     </div>
   </section>
+
   <div class="footer">
     Ultra Music Group © 2026
   </div>
+
   <script>
     function changeSong(cover, title, artist, mp3) {
       const playerCover = document.getElementById('player-cover');
@@ -558,14 +665,16 @@
       const playerArtist = document.getElementById('player-artist');
       const player = document.getElementById('main-player');
       const source = document.getElementById('player-source');
+
       playerCover.src = cover;
       playerTitle.textContent = title;
       playerArtist.textContent = artist;
       source.src = mp3;
+
       player.load();
       player.play();
     }
   </script>
+
 </body>
 </html>
-

@@ -3,184 +3,159 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ultra Music Group V2</title>
+<title>Ultra Music Group</title>
+
 <style>
-body {
-  margin: 0;
-  background: #050505;
-  color: white;
-  font-family: Arial, sans-serif;
-}
-.header {
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-.header img {
-  width: 50px;
-}
-.hero {
-  padding: 60px 20px;
-  text-align: center;
-  background: linear-gradient(135deg,#0d0d0d,#1a0033,#000);
-}
-.hero h1 {
-  font-size: 48px;
-  margin: 0;
-}
-.hero p {
-  color: #bbb;
-}
-.section {
-  padding: 30px 20px;
-}
-.scroll-row {
-  display: flex;
-  gap: 20px;
-  overflow-x: auto;
-}
-.card {
-  background: #111;
-  border-radius: 16px;
-  width: 260px;
-  flex-shrink: 0;
-  padding-bottom: 10px;
-}
-.card img {
-  width: 100%;
-  border-radius: 16px 16px 0 0;
-}
-.card-body {
-  padding: 14px;
-}
-.card-title {
-  font-weight: bold;
-}
-.card-sub {
-  color: #aaa;
-  font-size: 14px;
-}
-.links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 10px;
-}
-.links button, .links a {
-  background: #222;
-  color: white;
-  border: none;
-  padding: 6px 8px;
-  border-radius: 8px;
-  font-size: 12px;
-  cursor: pointer;
-}
-.newsletter {
-  padding: 40px;
-  text-align: center;
-  background: #0d0d0d;
-}
-input, select {
-  padding: 10px;
-  margin: 6px;
-  border-radius: 6px;
-  border: none;
-}
-button.submit {
-  background: gold;
-  color: black;
-  padding: 10px 16px;
-}
+body{margin:0;background:#0b0b0b;color:#fff;font-family:Arial;}
+.header{padding:20px;font-weight:bold;}
+.hero{text-align:center;padding:60px;background:linear-gradient(135deg,#1a0033,#000);}
+.row{display:flex;gap:20px;overflow-x:auto;padding:20px;}
+.card{min-width:240px;background:#111;border-radius:12px;overflow:hidden;}
+.card img{width:100%;}
+.content{padding:12px;}
+.btn{display:inline-block;margin:4px;padding:6px 10px;background:#222;border-radius:6px;font-size:12px;cursor:pointer;}
+.gold{background:gold;color:#000;}
+.player{margin:20px;background:#111;padding:20px;border-radius:12px;}
+.modal{position:fixed;top:0;left:0;width:100%;height:100%;display:none;background:rgba(0,0,0,0.8);align-items:center;justify-content:center;}
+.modal-content{background:#111;padding:20px;border-radius:10px;max-width:400px;text-align:center;}
 </style>
 </head>
+
 <body>
-<div class="header">
-<img src="logo.png">
-<h2>ULTRA MUSIC GROUP</h2>
-</div>
-<section class="hero">
+
+<div class="header">ULTRA MUSIC GROUP</div>
+
+<div class="hero">
 <h1>Ultra Music Group</h1>
 <p>Artist-driven music experience</p>
-</section>
-<!-- ROW 1 -->
-<section class="section">
-<h2>Featured Artists</h2>
-<div class="scroll-row">
-<!-- JUAN -->
+</div>
+
+<div class="player">
+<b id="now-title">Now Playing: Juan Pablo</b><br>
+<audio id="audio" controls src="juan.mp3"></audio>
+</div>
+
+<h2 style="padding-left:20px;">Featured Artists</h2>
+
+<div class="row">
+
 <div class="card">
 <img src="juan.jpg">
-<div class="card-body">
-<div class="card-title">Juan Pablo</div>
-<div class="card-sub">Hearts on the Highway</div>
-<div class="links">
-<button>Play Here</button>
-<button>About Artist</button>
-<a>Spotify</a>
-<a>Apple</a>
-<a>YouTube</a>
-<a>Audiomack</a>
-<a>Amazon</a>
-<a>Pandora</a>
-</div>
-</div>
-</div>
-<!-- ARIA -->
+<div class="content">
+<b>Juan Pablo</b><br>Hearts on the Highway<br>
+<div class="btn" onclick="play('juan.mp3','Juan Pablo')">Play</div>
+<div class="btn gold" onclick="bio('Juan Pablo','Pop artist and founder of Ultra Music Group')">About</div>
+<div class="btn">Spotify</div><div class="btn">Apple</div><div class="btn">YouTube</div>
+<div class="btn">Audiomack</div><div class="btn">Amazon</div><div class="btn">Pandora</div>
+</div></div>
+
 <div class="card">
 <img src="aria.jpg">
-<div class="card-body">
-<div class="card-title">Aria Nova</div>
-<div class="card-sub">Hearts on the Highway</div>
-<div class="links">
-<button>Play Here</button>
-<button>About Artist</button>
-<a>Spotify</a>
-<a>Apple</a>
-<a>YouTube</a>
-<a>Audiomack</a>
-<a>Amazon</a>
-<a>Pandora</a>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- ROW 2 -->
-<section class="section">
-<h2>Now Streaming</h2>
-<div class="scroll-row">
+<div class="content">
+<b>Aria Nova</b><br>Hearts on the Highway<br>
+<div class="btn" onclick="play('aria.mp3','Aria Nova')">Play</div>
+<div class="btn gold" onclick="bio('Aria Nova','Cinematic pop artist with neon visuals')">About</div>
+<div class="btn">Spotify</div><div class="btn">Apple</div><div class="btn">YouTube</div>
+<div class="btn">Audiomack</div><div class="btn">Amazon</div><div class="btn">Pandora</div>
+</div></div>
+
 <div class="card">
-<img src="juan-single.jpg">
-<div class="card-body">
-<div class="card-title">Hearts on the Highway</div>
-<div class="card-sub">Juan Pablo</div>
-<div class="links">
-<a>Spotify</a>
-<a>Apple</a>
-<a>YouTube</a>
-<a>Audiomack</a>
-<a>Amazon</a>
-<a>Pandora</a>
+<img src="lily.jpg">
+<div class="content">
+<b>Lily Hart</b><br>Cherry Soda<br>
+<div class="btn" onclick="play('lily.mp3','Lily Hart')">Play</div>
+<div class="btn gold" onclick="bio('Lily Hart','Pop artist with colorful aesthetic')">About</div>
+<div class="btn">Spotify</div><div class="btn">Apple</div><div class="btn">YouTube</div>
+<div class="btn">Audiomack</div><div class="btn">Amazon</div><div class="btn">Pandora</div>
+</div></div>
+
+<div class="card">
+<img src="elena.jpg">
+<div class="content">
+<b>Elena Star</b><br>Ángel de Neón<br>
+<div class="btn" onclick="play('elena.mp3','Elena Star')">Play</div>
+<div class="btn gold" onclick="bio('Elena Star','Latin pop star with cinematic style')">About</div>
+<div class="btn">Spotify</div><div class="btn">Apple</div><div class="btn">YouTube</div>
+<div class="btn">Audiomack</div><div class="btn">Amazon</div><div class="btn">Pandora</div>
+</div></div>
+
+<div class="card">
+<img src="favian.jpg">
+<div class="content">
+<b>Favian Rey</b><br>Baila Conmigo<br>
+<div class="btn" onclick="play('favian.mp3','Favian Rey')">Play</div>
+<div class="btn gold" onclick="bio('Favian Rey','Latin dance artist with romantic vibes')">About</div>
+<div class="btn">Spotify</div><div class="btn">Apple</div><div class="btn">YouTube</div>
+<div class="btn">Audiomack</div><div class="btn">Amazon</div><div class="btn">Pandora</div>
+</div></div>
+
+<div class="card">
+<img src="angel.jpg">
+<div class="content">
+<b>Ángel Valentín</b><br>Corazón de Acero<br>
+<div class="btn" onclick="play('angel.mp3','Angel Valentin')">Play</div>
+<div class="btn gold" onclick="bio('Ángel Valentín','Regional Mexican artist with strong storytelling')">About</div>
+<div class="btn">Spotify</div><div class="btn">Apple</div><div class="btn">YouTube</div>
+<div class="btn">Audiomack</div><div class="btn">Amazon</div><div class="btn">Pandora</div>
+</div></div>
+
+<div class="card">
+<img src="jax.jpg">
+<div class="content">
+<b>Jax Monroe</b><br>Electric Blue Heart<br>
+<div class="btn" onclick="play('jax.mp3','Jax Monroe')">Play</div>
+<div class="btn gold" onclick="bio('Jax Monroe','Electronic pop artist with neon sound')">About</div>
+<div class="btn">Spotify</div><div class="btn">Apple</div><div class="btn">YouTube</div>
+<div class="btn">Audiomack</div><div class="btn">Amazon</div><div class="btn">Pandora</div>
+</div></div>
+
+</div>
+
+<h2 style="padding-left:20px;">Current Singles</h2>
+
+<div class="row">
+
+<div class="card">
+<img src="lily-single.jpg">
+<div class="content">
+<b>Cherry Soda</b><br>Lily Hart<br>
+<div class="btn">Spotify</div><div class="btn">Apple</div><div class="btn">YouTube</div>
+<div class="btn">Audiomack</div><div class="btn">Amazon</div><div class="btn">Pandora</div>
+</div></div>
+
+<div class="card">
+<img src="elena-single.jpg">
+<div class="content">
+<b>Ángel de Neón</b><br>Elena Star<br>
+<div class="btn">Spotify</div><div class="btn">Apple</div><div class="btn">YouTube</div>
+<div class="btn">Audiomack</div><div class="btn">Amazon</div><div class="btn">Pandora</div>
+</div></div>
+
+</div>
+
+<div id="bioModal" class="modal" onclick="closeBio()">
+<div class="modal-content">
+<h2 id="bioName"></h2>
+<p id="bioText"></p>
 </div>
 </div>
-</div>
-</div>
-</section>
-<!-- MAILING LIST -->
-<section class="newsletter">
-<h2>Join Ultra Music Group</h2>
-<input type="email" placeholder="Email">
-<select>
-<option>Select Favorite Artist</option>
-<option>Juan Pablo</option>
-<option>Aria Nova</option>
-<option>Lily Hart</option>
-<option>Elena Star</option>
-</select>
-<br>
-<button class="submit">Join</button>
-</section>
+
+<script>
+function play(file,name){
+document.getElementById('audio').src=file;
+document.getElementById('now-title').innerText="Now Playing: "+name;
+}
+
+function bio(name,text){
+document.getElementById('bioName').innerText=name;
+document.getElementById('bioText').innerText=text;
+document.getElementById('bioModal').style.display="flex";
+}
+
+function closeBio(){
+document.getElementById('bioModal').style.display="none";
+}
+</script>
+
 </body>
 </html>
-
